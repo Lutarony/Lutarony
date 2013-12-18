@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- 
+	author Dimitri Dean DARSEYNE (D3), 
+   	published by Short-Circuit under Creative Commons (CC) Licensing: 
+ 	Authorship/Paternity, NO Commercial Use, NO Derivative
+ 	please check for more informations:
+ 	http://creativecommons.org/licenses/by-nc-nd/2.0/
+ 
+ 	auteur Dimitri Dean DARSEYNE (D3),
+ 	publié par Short-Circuit sous license Creative Commons (CC):
+ 	Paternité, PAS d'Utilisation Commerciale, pas de Dérivés/Modifications
+ 	Pour plus d'informations, se rendre sur:
+ 	http://creativecommons.org/licenses/by-nc-nd/2.0/fr/ 
+ 
+ 	since Short-Circuit 1999
+-->
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" template="/template.xhtml">
+	<ui:param name="param" value="Wrestlers list" />
+
+	<ui:define name="body">
+		<h3>Wrestlers test</h3>
+		<h:form>
+			<p:dataTable var="wrestler" value="#{wrestlerBean.wrestlersList}">
+				<p:column headerText="Firstname">
+					<h:outputText value="#{wrestler.firstname}" />
+				</p:column>
+				<p:column headerText="Lastanme">
+					<h:outputText value="#{wrestler.lastname}" />
+				</p:column>
+				<p:column headerText="Birthday">
+					<h:outputText value="#{wrestler.birthDay}" />
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+
+<!-- <?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	template="includes/template/ui.xhtml">
+	<ui:define name="body">
+		<h3>Welcome to JSF Lab</h3>
+		<p:dataTable var="wrestler" value="#{wrestlerBean.wrestlersList}">
+			<p:column headerText="Firstname">
+				<h:outputText value="#{wrestler.firstname}"></h:outputText>
+			</p:column>
+
+			<p:column headerText="Lastname">
+				<h:outputText value="#{wrestler.lastname}"></h:outputText>
+			</p:column>
+
+			<p:column headerText="Birthday">
+				<h:outputText value="#{wrestler.birthDay}"></h:outputText>
+			</p:column>
+		</p:dataTable>
+
+		<h:form>
+			<p:dataTable var="car" value="#{tableBean.carsSmall}">
+				<p:column headerText="Model">
+					<h:outputText value="#{car.model}" />
+				</p:column>
+				<p:column headerText="Year">
+					<h:outputText value="#{car.year}" />
+				</p:column>
+				<p:column headerText="Manufacturer">
+					<h:outputText value="#{car.manufacturer}" />
+				</p:column>
+				<p:column headerText="Color">
+					<h:outputText value="#{car.color}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+
+	</ui:define>
+</ui:composition> -->
