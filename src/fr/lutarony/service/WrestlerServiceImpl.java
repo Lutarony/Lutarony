@@ -21,6 +21,7 @@ public class WrestlerServiceImpl implements WrestlerService{
 		sessionFactory.getCurrentSession().save(wrestler);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Wrestler> findAll() {
 		return sessionFactory.getCurrentSession().createQuery("from Wrestler").list();
