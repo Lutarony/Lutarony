@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<!-- @Patryk : unused because we use JPA annotations in models, that is specified in context/appContext-data in session factory bean , note : if we don't use annotation we have to indicate the path of this Hibernate Map file, in context/appContext-data  -->
+<hibernate-mapping>
+	<class name="fr.shortcircuit.model.Wrestler" table="wrestler"
+		schema="lutarony">
+
+		<id name="id" column="id" type="java.lang.Integer" unsaved-value="null">
+			<generator class="increment" />
+		</id>
+
+		<property name="firstname" type="java.lang.String" update="true"
+			insert="true" column="firstname" />
+		<property name="lastname" type="java.lang.String" update="true"
+			insert="true" column="lastname" />
+	</class>
+
+</hibernate-mapping>
+        
