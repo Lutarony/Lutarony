@@ -10,8 +10,8 @@ import javax.faces.bean.RequestScoped;
 
 import org.springframework.dao.DataAccessException;
 
+import fr.lutarony.business.definition.IUserBO;
 import fr.lutarony.model.User;
-import fr.lutarony.service.IUserService;
 
 
 @ManagedBean(name = "userMB")
@@ -23,13 +23,15 @@ public class UserManagedBean implements Serializable {
 	private static final String ERROR = "error";
 
 	@ManagedProperty(value = "#{UserService}")
-	IUserService userService;
+	IUserBO userService;
 
 	List<User> userList;
 
 	private int id;
 	private String name;
 	private String surname;
+	private String username;
+	private String password;
 
 	public String addUser() {
 		try {
@@ -59,11 +61,11 @@ public class UserManagedBean implements Serializable {
 		return userList;
 	}
 
-	public IUserService getUserService() {
+	public IUserBO getUserService() {
 		return userService;
 	}
 
-	public void setUserService(IUserService userService) {
+	public void setUserService(IUserBO userService) {
 		this.userService = userService;
 	}
 
@@ -98,5 +100,23 @@ public class UserManagedBean implements Serializable {
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	
 
 }

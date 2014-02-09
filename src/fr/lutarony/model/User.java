@@ -12,6 +12,8 @@ public class User {
 	private int id;
 	private String name;
 	private String surname;
+	private String username;
+	private String password;
 
 	@Id
 	@Column(name = "ID", unique = true, nullable = false)
@@ -36,10 +38,29 @@ public class User {
 	public String getSurname() {
 		return surname;
 	}
-
+	
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
+	
+	@Column(name = "USERNAME", unique = true, nullable = false)
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+	@Column(name = "PASSWORD", unique = true, nullable = false)
+	public String getPassword() {
+		return username;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
 
 	@Override
 	public String toString() {
@@ -47,6 +68,7 @@ public class User {
 		strBuff.append("id : ").append(getId());
 		strBuff.append(", name : ").append(getName());
 		strBuff.append(", surname : ").append(getSurname());
+		strBuff.append(", login : ").append(getUsername());
 		return strBuff.toString();
 	}
 }
