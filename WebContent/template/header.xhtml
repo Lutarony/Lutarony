@@ -10,7 +10,11 @@
 
 <h:body>
 	<ui:composition>
-		<nav class="navbar navbar-default" data-role="navigation">
+	
+		<!-- PARAMS -->
+		<ui:param name="viewId" value="#{view.viewId}" />
+	
+		<nav class="navbar navbar-inverse navbar-fixed-top" data-role="navigation">
 			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
@@ -27,37 +31,30 @@
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">#{msg['admin.title']}</a></li>
-						<li><a href="#">#{msg['weighing.title']}</a></li>
+						<li class="#{viewId == '/index.xhtml' ? 'active' : '' }"><a href="index.xhtml">#{msg['lutarony.navbar.home']}</a></li>
+						<li class="#{viewId == '/admin.xhtml' ? 'active' : '' }"><a href="admin.xhtml">#{msg['lutarony.navbar.admin']}</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<form class="navbar-form navbar-left" data-role="search">
+								<div class="form-group">
+									<input type="text" class="form-control" placeholder="Search" />
+								</div>
+								<!--  <button type="submit" class="btn btn-default">Submit</button>-->
+							</form>
+						</li>
+						<li><a href="#">Link</a></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+							data-toggle="dropdown">#{msg['lutarony.navbar.settings']}<b
+								class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a href="#">Action</a></li>
+								<li><a href="#"></a></li>
 								<li><a href="#">Another action</a></li>
 								<li><a href="#">Something else here</a></li>
 								<li class="divider"></li>
 								<li><a href="#">Separated link</a></li>
 								<li class="divider"></li>
 								<li><a href="#">One more separated link</a></li>
-							</ul></li>
-					</ul>
-
-					<form class="navbar-form navbar-left" data-role="search">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Search" />
-						</div>
-						<button type="submit" class="btn btn-default">Submit</button>
-					</form>
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">Link</a></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Action</a></li>
-								<li><a href="#">Another action</a></li>
-								<li><a href="#">Something else here</a></li>
-								<li class="divider"></li>
-								<li><a href="#">Separated link</a></li>
 							</ul></li>
 					</ul>
 				</div>

@@ -11,35 +11,38 @@
 
 	<title><ui:insert name="title"></ui:insert></title>
 
-	<!-- Latest compiled and minified CSS -->
+	<!-- Boostrap -->
 	<link rel="stylesheet"
-		href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" />
-	<!-- Optional theme -->
+		href="resources/bootstrap/dist/css/bootstrap.min.css" />
 	<link rel="stylesheet"
-		href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css" />
+		href="resources/bootstrap/dist/css/bootstrap-theme.min.css" />
+
+	<!-- Uikit -->
+	<link rel="stylesheet" href="resources/uikit/css/uikit.min.css" />
 
 
-	<link rel="stylesheet" href="resources/css/uikit.min.css" />
-	<link rel="stylesheet" href="resources/css/style.css" />
+	<!-- My style -->
+	<link rel="stylesheet" href="resources/style.css" />
 	<script src="jquery.js"></script>
-	<script src="resources/js/uikit.min.js"></script>
+
 
 </h:head>
 
 <h:body>
 
-	<div id="page">
 
-		<div id="header">
-			<ui:insert name="header">
-				<ui:include src="/template/header.xhtml" />
-			</ui:insert>
-		</div>
 
-		<div id="content">
+	<ui:insert name="header">
+		<ui:include src="/template/header.xhtml" />
+	</ui:insert>
+
+
+	<div class="container-fluid">
+		<div class="row">
+
 			<ol class="breadcrumb">
+				<li><a href="#">#{msg['lutarony.navbar.home']}</a></li>
 				<ui:insert name="breadcrumb">
-					<li><a href="#">Home</a></li>
 					<li class="active">Welcome</li>
 				</ui:insert>
 			</ol>
@@ -53,11 +56,10 @@
 				<ui:include src="/template/footer.xhtml" />
 			</ui:insert>
 		</div>
-
 	</div>
 
-	<script src="https://code.jquery.com/jquery.js"></script>
-	<script
-		src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery.js" />
+	<script src="resources/bootstrap/dist/js/bootstrap.min.js" />
+	<script src="resources/uikit/js/uikit.min.js" />
 </h:body>
 </h:html>

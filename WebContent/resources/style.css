@@ -1,0 +1,10 @@
+@CHARSET "US-ASCII";
+
+body{
+    padding-top: 70px;
+}
+
+.lutarony-navbar {
+	height: 70px;
+	background-color: #000;
+}
