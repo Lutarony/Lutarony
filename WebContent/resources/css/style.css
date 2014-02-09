@@ -1,5 +1,9 @@
 @CHARSET "US-ASCII";
 
+body{
+	background-color: #ededed;
+}
+
 .lutarony-navbar {
 	height: 70px;
 	background-color: #000;
