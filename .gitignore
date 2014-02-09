@@ -9,9 +9,11 @@
 .DS_Store
 */.DS_Store
 */**/.DS_Store
+*~
 
 # Package Files #
 *.jar
 *.war
 *.ear
-target/
+/target/m2e-wtp/web-resources/META-INF/maven/Lutarony/Lutarony/pom.properties
+/target
