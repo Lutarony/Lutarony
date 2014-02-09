@@ -1,10 +1,25 @@
 @CHARSET "US-ASCII";
 
-body{
-    padding-top: 70px;
+body {
+	padding-top: 70px;
 }
 
 .lutarony-navbar {
 	height: 70px;
 	background-color: #000;
+}
+
+.lutarony-sidebar {
+	color: white;
+	background-color: #444444;
+	padding-left: 50px;
+	height: 350px;
+}
+
+.lutarony-sidebar a {
+	color: white;
+}
+
+.lutarony-sidebar a:HOVER {
+	color: #444444;
 }

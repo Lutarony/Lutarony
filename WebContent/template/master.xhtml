@@ -30,31 +30,39 @@
 
 <h:body>
 
+	<div class="wrapper">
+		<div class="box">
 
+			<ui:insert name="header">
+				<ui:include src="/template/header.xhtml" />
+			</ui:insert>
 
-	<ui:insert name="header">
-		<ui:include src="/template/header.xhtml" />
-	</ui:insert>
+			<div class="row row-offcanvas row-offcanvas-left">
 
+				<div class="column col-sm-2 col-xs-1 sidebar-offcanvas lutarony-sidebar">
+					<ui:insert name="sidebar">
+					</ui:insert>
+				</div>
 
-	<div class="container-fluid">
-		<div class="row">
+				<div class="column col-sm-10 col-xs-11">
+					<ol class="breadcrumb">
+						<li><a href="#">#{msg['lutarony.navbar.home']}</a></li>
+						<ui:insert name="breadcrumb">
+							<li class="active">Welcome</li>
+						</ui:insert>
+					</ol>
+					<ui:insert name="content">
 
-			<ol class="breadcrumb">
-				<li><a href="#">#{msg['lutarony.navbar.home']}</a></li>
-				<ui:insert name="breadcrumb">
-					<li class="active">Welcome</li>
+					</ui:insert>
+
+				</div>
+			</div>
+
+			<div id="footer">
+				<ui:insert name="footer">
+					<ui:include src="/template/footer.xhtml" />
 				</ui:insert>
-			</ol>
-			<ui:insert name="content">
-
-			</ui:insert>
-		</div>
-
-		<div id="footer">
-			<ui:insert name="footer">
-				<ui:include src="/template/footer.xhtml" />
-			</ui:insert>
+			</div>
 		</div>
 	</div>
 
