@@ -38,11 +38,11 @@ public class User {
 	public String getSurname() {
 		return surname;
 	}
-	
+
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
-	
+
 	@Column(name = "USERNAME", unique = true, nullable = false)
 	public String getUsername() {
 		return username;
@@ -51,16 +51,15 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
+
 	@Column(name = "PASSWORD", unique = true, nullable = false)
 	public String getPassword() {
-		return username;
+		return password;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
 
 	@Override
 	public String toString() {
