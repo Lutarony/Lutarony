@@ -1,0 +1,38 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Create new user</h3>
+		</div>
+		<div class="panel-body">
+			<h:form id="form">
+		
+				Name : 
+				<h:outputText id="name" value="#{userBean.name}" class="form-control"/>	
+				<br />
+				Surname : 
+				<h:outputText id="surname" value="#{userBean.surname}" class="form-control" />	
+				<br />
+		       E-mail : 
+				<div class="input-group">
+					<span class="input-group-addon">@</span>
+					<h:outputText id="email" value="#{userBean.email}" class="form-control" placeholder="Email" />
+				</div>
+		
+				<br />
+				<h:inputText id="in" value="#{userBean.email}" autocomplete="off">
+					<f:ajax event="keyup" render="name"
+						listener="#{userBean.checkName}" />
+				</h:inputText>
+
+			</h:form>
+		</div>
+	</div>
+
+
+</ui:composition>

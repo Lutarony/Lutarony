@@ -27,8 +27,9 @@
 			</ul>
 
 			<ul class="nav hidden-xs" id="lg-menu">
-				<li class="active"><a href="#featured"><i
-						class="glyphicon glyphicon-list-alt"></i>New tournament</a></li>
+				<li class="active"><a href="#featured"> <i
+						class="glyphicon glyphicon-list-alt"></i> New tournament
+				</a></li>
 				<li><a href="#stories"><i class="glyphicon glyphicon-list"></i>
 						Stories</a></li>
 				<li><a href="#"><i class="glyphicon glyphicon-paperclip"></i>
@@ -36,7 +37,7 @@
 				<li><a href="#"><i class="glyphicon glyphicon-refresh"></i>
 						Refresh</a></li>
 			</ul>
-	
+
 			<!-- tiny only nav-->
 			<ul class="nav visible-xs" id="xs-menu">
 				<li><a href="#featured" class="text-center"><i
@@ -49,14 +50,14 @@
 						class="glyphicon glyphicon-refresh"></i></a></li>
 			</ul>
 
-			
+
 
 		</ui:define>
 
 		<ui:define name="content">
-			This is admin page
 			
-		
+			<ui:include src="admin-users.xhtml" />
+
 		</ui:define>
 
 	</ui:composition>
