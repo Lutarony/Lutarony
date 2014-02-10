@@ -11,19 +11,21 @@
 		</div>
 		<div class="panel-body">
 			<h:form id="form">
-		
-				Name : 
-				<h:outputText id="name" value="#{userBean.name}" class="form-control"/>	
+
+				<h:outputLabel value="Name :" for="name"></h:outputLabel>
+				<h:inputText id="name" value="#{userBean.name}" class="form-control" />
 				<br />
 				Surname : 
-				<h:outputText id="surname" value="#{userBean.surname}" class="form-control" />	
+				<h:inputText id="surname" value="#{userBean.surname}"
+					class="form-control" />
 				<br />
 		       E-mail : 
 				<div class="input-group">
 					<span class="input-group-addon">@</span>
-					<h:outputText id="email" value="#{userBean.email}" class="form-control" placeholder="Email" />
+					<h:inputText id="email" value="#{userBean.email}"
+						class="form-control" placeholder="Email" />
 				</div>
-		
+
 				<br />
 				<h:inputText id="in" value="#{userBean.email}" autocomplete="off">
 					<f:ajax event="keyup" render="name"
