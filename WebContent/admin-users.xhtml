@@ -3,28 +3,59 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://xmlns.jcp.org/jsf/passthrough">
 
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h3 class="panel-title">Create new user</h3>
 		</div>
 		<div class="panel-body">
+
+			<form class="uk-form">
+
+				<fieldset data-uk-margin="">
+
+					<h:outputLabel value="Name :" for="name" />
+					<h:inputText id="name" value="#{userBean.name}"
+						class="form-control" required="true"
+						requiredMessage="Please enter name" t:placeholder="name">
+						<f:ajax event="keyup" render="nameMsg"
+							listener="#{userBean.checkName}" />
+					</h:inputText>
+
+					<h:message id="nameMsg" for="name" style="color: red;" />
+
+
+
+					<br />
+
+					<h:outputLabel value="Surname :" for="surname"></h:outputLabel>
+					<h:inputText id="surname" value="#{userBean.surname}"
+						class="form-control" required="true"
+						requiredMessage="Please enter surname" />
+					<h:message for="surname" style="color: red;" />
+
+					<br />
+					<button class="uk-button">lili</button>
+
+				</fieldset>
+
+			</form>
+
+
 			<h:form id="form">
 
-				<h:outputLabel value="Name :" for="name"></h:outputLabel>
-				<h:inputText id="name" value="#{userBean.name}" class="form-control" />
-				<br />
-				Surname : 
-				<h:inputText id="surname" value="#{userBean.surname}"
-					class="form-control" />
-				<br />
-		       E-mail : 
+
+
+				<h:outputLabel value="E-mail :" for="email"></h:outputLabel>
 				<div class="input-group">
 					<span class="input-group-addon">@</span>
 					<h:inputText id="email" value="#{userBean.email}"
-						class="form-control" placeholder="Email" />
+						class="form-control" required="true"
+						requiredMessage="Please enter surname" />
 				</div>
+				<h:message for="surname" style="color: red;" />
 
 				<br />
 
