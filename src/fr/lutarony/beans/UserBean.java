@@ -19,7 +19,7 @@ import fr.lutarony.model.User;
 public class UserBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private static final String SUCCESS = "success";
+	private static final String SUCCESS = "admin";
 	private static final String ERROR = "error";
 
 	@ManagedProperty(value = "#{UserBO}")
@@ -40,6 +40,7 @@ public class UserBean implements Serializable {
 			user.setId(getId());
 			user.setName(getName());
 			user.setSurname(getSurname());
+			user.setEmail(getEmail());
 			getUserBO().addUser(user);
 			return SUCCESS;
 		} catch (DataAccessException e) {
@@ -130,6 +131,7 @@ public class UserBean implements Serializable {
 	}
 
 	public void checkName(AjaxBehaviorEvent event) {
+		this.name += "patryk";
 	}
-
+	
 }

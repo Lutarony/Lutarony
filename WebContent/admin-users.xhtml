@@ -27,11 +27,10 @@
 				</div>
 
 				<br />
-				<h:inputText id="in" value="#{userBean.email}" autocomplete="off">
-					<f:ajax event="keyup" render="name"
-						listener="#{userBean.checkName}" />
-				</h:inputText>
 
+				<h:commandButton value="Create" action="#{userBean.addUser}">
+					<f:ajax execute="@form" render="name" />
+				</h:commandButton>
 			</h:form>
 		</div>
 	</div>
