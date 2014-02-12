@@ -30,44 +30,45 @@
 
 <h:body>
 
-	<div class="wrapper">
-		<div class="box">
+	<ui:insert name="header">
+		<ui:include src="/template/header.xhtml" />
+	</ui:insert>
 
-			<ui:insert name="header">
-				<ui:include src="/template/header.xhtml" />
-			</ui:insert>
+	<h:panelGroup layout="block" id="wrapper">
 
-			<div class="row row-offcanvas row-offcanvas-left">
+		<!-- Sidebar -->
+		<h:panelGroup layout="block" id="sidebar-wrapper">
+			<ui:insert name="sidebar" />
+		</h:panelGroup>
 
-				<div class="column col-sm-2 col-xs-1 sidebar-offcanvas lutarony-sidebar">
-					<ui:insert name="sidebar">
+		<!-- Page content -->
+		<h:panelGroup layout="block" id="page-content-wrapper">
+
+			<!-- Keep all page content within the page-content inset div! -->
+			<h:panelGroup layout="block" class="page-content inset">
+
+				<ol class="breadcrumb">
+					<li><a href="#">#{msg['lutarony.navbar.home']}</a></li>
+					<ui:insert name="breadcrumb">
+						<li class="active">Welcome</li>
 					</ui:insert>
-				</div>
+				</ol>
 
-				<div class="column col-sm-10 col-xs-11">
-					<ol class="breadcrumb">
-						<li><a href="#">#{msg['lutarony.navbar.home']}</a></li>
-						<ui:insert name="breadcrumb">
-							<li class="active">Welcome</li>
-						</ui:insert>
-					</ol>
-					<ui:insert name="content">
+				<ui:insert name="content" />
+			</h:panelGroup>
+		</h:panelGroup>
 
-					</ui:insert>
+	</h:panelGroup>
 
-				</div>
-			</div>
-
-			<div id="footer">
-				<ui:insert name="footer">
-					<ui:include src="/template/footer.xhtml" />
-				</ui:insert>
-			</div>
-		</div>
-	</div>
+	<h:panelGroup layout="block" id="footer">
+		<ui:insert name="footer">
+			<ui:include src="/template/footer.xhtml" />
+		</ui:insert>
+	</h:panelGroup>
 
 	<script src="https://code.jquery.com/jquery.js" />
 	<script src="resources/bootstrap/dist/js/bootstrap.min.js" />
 	<script src="resources/uikit/js/uikit.min.js" />
+
 </h:body>
 </h:html>

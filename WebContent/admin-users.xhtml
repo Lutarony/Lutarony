@@ -6,65 +6,44 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:t="http://xmlns.jcp.org/jsf/passthrough">
 
-	<div class="panel panel-default">
-		<div class="panel-heading">
+	<h:panelGroup layout="block" class="panel panel-default">
+		<h:panelGroup layout="block" class="panel-heading">
 			<h3 class="panel-title">Create new user</h3>
-		</div>
-		<div class="panel-body">
+		</h:panelGroup>
+		
+		<h:panelGroup layout="block" class="panel-body">
 
-			<form class="uk-form">
+			<h:form class="uk-form" id="form">
 
 				<fieldset data-uk-margin="">
 
 					<h:outputLabel value="Name :" for="name" />
-					<h:inputText id="name" value="#{userBean.name}"
-						class="form-control" required="true"
-						requiredMessage="Please enter name" t:placeholder="name">
-						<f:ajax event="keyup" render="nameMsg"
-							listener="#{userBean.checkName}" />
-					</h:inputText>
-
-					<h:message id="nameMsg" for="name" style="color: red;" />
-
-
+					<h:inputText id="name" value="#{userBean.name}" class="form-control" />
 
 					<br />
 
 					<h:outputLabel value="Surname :" for="surname"></h:outputLabel>
-					<h:inputText id="surname" value="#{userBean.surname}"
-						class="form-control" required="true"
-						requiredMessage="Please enter surname" />
-					<h:message for="surname" style="color: red;" />
+					<h:inputText id="surname" value="#{userBean.surname}" class="form-control" />
+					
+					<br />
+
+					<h:outputLabel value="E-mail :" for="email"></h:outputLabel>
+					<div class="input-group">
+						<span class="input-group-addon">@</span>
+						<h:inputText id="email" value="#{userBean.email}" class="form-control" />
+					</div>
 
 					<br />
-					<button class="uk-button">lili</button>
+
+					<h:commandButton value="Create" action="#{userBean.addUser}" styleClass="btn btn-info" >
+						<f:ajax execute="@form" render=":usersList @form" />
+					</h:commandButton>
 
 				</fieldset>
 
-			</form>
-
-
-			<h:form id="form">
-
-
-
-				<h:outputLabel value="E-mail :" for="email"></h:outputLabel>
-				<div class="input-group">
-					<span class="input-group-addon">@</span>
-					<h:inputText id="email" value="#{userBean.email}"
-						class="form-control" required="true"
-						requiredMessage="Please enter surname" />
-				</div>
-				<h:message for="surname" style="color: red;" />
-
-				<br />
-
-				<h:commandButton value="Create" action="#{userBean.addUser}">
-					<f:ajax execute="@form" render="name" />
-				</h:commandButton>
 			</h:form>
-		</div>
-	</div>
 
+		</h:panelGroup>
+	</h:panelGroup>
 
 </ui:composition>

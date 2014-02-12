@@ -4,13 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.component.UIComponent;
-import javax.faces.component.UIInput;
-import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
 import org.springframework.dao.DataAccessException;
@@ -46,6 +42,7 @@ public class UserBean implements Serializable {
 			user.setSurname(getSurname());
 			user.setEmail(getEmail());
 			getUserBO().addUser(user);
+			clear();
 			return SUCCESS;
 		} catch (DataAccessException e) {
 			e.printStackTrace();
@@ -136,22 +133,12 @@ public class UserBean implements Serializable {
 
 	public void checkName(AjaxBehaviorEvent event) {
 
-		FacesContext fc = FacesContext.getCurrentInstance();
-		UIComponent components = event.getComponent();
+	}
 
-		// get name
-		UIInput uiInputName = (UIInput) components.findComponent("name");
-		String name = uiInputName.getLocalValue() == null ? "" : uiInputName
-				.getLocalValue().toString();
-		String nameId = uiInputName.getClientId();
-
-		if (name.length() < 3) {
-			FacesMessage msg = new FacesMessage("Name lenght is too short");
-			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-			fc.addMessage(nameId, msg);
-			fc.renderResponse();
-		}
-
+	public void clear() {
+		this.name = "";
+		this.surname = "";
+		this.email = "";
 	}
 
 }
