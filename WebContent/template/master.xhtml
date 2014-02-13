@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <h:html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -17,54 +16,135 @@
 	<link rel="stylesheet"
 		href="resources/bootstrap/dist/css/bootstrap-theme.min.css" />
 
-	<!-- Uikit -->
-	<link rel="stylesheet" href="resources/uikit/css/uikit.min.css" />
+	<!-- Uikit
+	<link rel="stylesheet" href="resources/uikit/css/uikit.min.css" /> -->
 
 
 	<!-- My style -->
 	<link rel="stylesheet" href="resources/style.css" />
+	<link rel="stylesheet" href="resources/nav-bar.css" />
 	<script src="jquery.js"></script>
 
 
 </h:head>
 
 <h:body>
-
-	<ui:insert name="header">
-		<ui:include src="/template/header.xhtml" />
-	</ui:insert>
-
 	<h:panelGroup layout="block" id="wrapper">
 
-		<!-- Sidebar -->
+		<ui:insert name="header">
+			<ui:include src="/template/header.xhtml" />
+		</ui:insert>
+
+
+		<!-- Sidebar 
 		<h:panelGroup layout="block" id="sidebar-wrapper">
 			<ui:insert name="sidebar" />
-		</h:panelGroup>
+		</h:panelGroup>-->
+
+		<aside class="fixed skin-6">
+			<div class="slimScrollDiv"
+				style="position: relative; overflow: hidden; width: auto; height: 100%;">
+				<div class="sidebar-inner scrollable-sidebar"
+					style="overflow: hidden; width: auto; height: 100%;">
+
+					<!-- /size-toggle -->
+					<div class="size-toggle">
+						<a class="btn btn-sm" id="sizeToggle"> <span class="icon-bar"></span>
+							<span class="icon-bar"></span> <span class="icon-bar"></span>
+						</a> <a class="btn btn-sm pull-right logoutConfirm_open"
+							href="#logoutConfirm" data-popup-ordinal="1" id="open_65149879">
+							<i class="glyphicon glyphicon-off"></i>
+						</a>
+					</div>
+
+					<!-- User -->
+					<div class="user-block clearfix">
+						<img src="resources/pictures/avatar/koala.jpg" alt="User Avatar" />
+						<div class="detail">
+							<strong>Koala Panda</strong><span
+								class="badge badge-danger m-left-xs bounceIn animation-delay4">4</span>
+							<ul class="list-inline">
+								<li><a href="profile.html">Profile</a></li>
+								<li class=""><a href="inbox.html" class="no-margin">Inbox</a></li>
+							</ul>
+						</div>
+					</div>
+
+					<!-- Search -->
+					<div class="search-block">
+						<div class="input-group">
+							<input type="text" class="form-control input-sm"
+								placeholder="search here..." /><span class="input-group-btn">
+								<button class="btn btn-default btn-sm" type="button">
+									<i class="glyphicon glyphicon-search"></i>
+								</button>
+							</span>
+						</div>
+						<!-- /input-group -->
+					</div>
+
+					<div class="main-menu">
+
+						<ul>
+							<li class="active"><a href="admin.xhtml"> <span
+									class="menu-icon"> <i class="glyphicon glyphicon-user"></i>
+								</span> <span class="text"> Admin </span> <span class="menu-hover"></span>
+							</a></li>
+							<li><a href="weighing.xhtml"> <span class="menu-icon">
+										<i class="glyphicon glyphicon-leaf"></i>
+								</span> <span class="text"> Weighing </span> <span class="menu-hover"></span>
+							</a></li>
+							<li><a href="#"> <span class="menu-icon"> <i
+										class="glyphicon glyphicon-wrench"></i>
+								</span> <span class="text"> Settings </span> <span class="menu-hover"></span>
+							</a></li>
+						</ul>
+
+						<div class="alert alert-info">Coucou mon chat :)</div>
+					</div>
+
+				</div>
+			</div>
+		</aside>
+		<!-- end sidebar -->
 
 		<!-- Page content -->
-		<h:panelGroup layout="block" id="page-content-wrapper">
+		<h:panelGroup layout="block" id="main-container">
 
-			<!-- Keep all page content within the page-content inset div! -->
-			<h:panelGroup layout="block" class="page-content inset">
-
-				<ol class="breadcrumb">
-					<li><a href="#">#{msg['lutarony.navbar.home']}</a></li>
+			<div id="breadcrumb">
+				<ul class="breadcrumb">
+					<li><i class="glyphicon glyphicon-home"></i>
+						 <a href="index.xhtml">#{msg['lutarony.navbar.home']}</a></li>
 					<ui:insert name="breadcrumb">
 						<li class="active">Welcome</li>
 					</ui:insert>
-				</ol>
+				</ul>
+			</div>
 
+			<div class="main-header clearfix">
+				<div class="page-title">
+					<h3 class="no-margin">
+						<ui:insert name="title" />
+					</h3>
+					<span><ui:insert name="subtitle" /></span>
+				</div>
+				<!-- /page-title -->
+			</div>
+
+			<div class="grey-container shortcut-wrapper">
 				<ui:insert name="content" />
-			</h:panelGroup>
+			</div>
+
 		</h:panelGroup>
 
+		<h:panelGroup layout="block" id="footer">
+			<ui:insert name="footer">
+				<ui:include src="/template/footer.xhtml" />
+			</ui:insert>
+		</h:panelGroup>
 	</h:panelGroup>
 
-	<h:panelGroup layout="block" id="footer">
-		<ui:insert name="footer">
-			<ui:include src="/template/footer.xhtml" />
-		</ui:insert>
-	</h:panelGroup>
+
 
 	<script src="https://code.jquery.com/jquery.js" />
 	<script src="resources/bootstrap/dist/js/bootstrap.min.js" />

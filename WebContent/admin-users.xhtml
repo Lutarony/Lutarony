@@ -6,12 +6,12 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:t="http://xmlns.jcp.org/jsf/passthrough">
 
-	<h:panelGroup layout="block" class="panel panel-default">
+	<h:panelGroup layout="block" class="panel panel-default" style="text-align:left;width:500px">
 		<h:panelGroup layout="block" class="panel-heading">
 			<h3 class="panel-title">Create new user</h3>
 		</h:panelGroup>
 		
-		<h:panelGroup layout="block" class="panel-body">
+		<h:panelGroup layout="block" class="panel-body" >
 
 			<h:form class="uk-form" id="form">
 
@@ -36,7 +36,7 @@
 					<br />
 
 					<h:commandButton value="Create" action="#{userBean.addUser}" styleClass="btn btn-info" >
-						<f:ajax execute="@form" render=":usersList @form" />
+						<!--  <f:ajax execute="@form" render=":usersList @form" />-->
 					</h:commandButton>
 
 				</fieldset>
