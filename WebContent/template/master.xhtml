@@ -30,6 +30,9 @@
 
 <h:body>
 	<h:panelGroup layout="block" id="wrapper">
+	
+		<!-- PARAMS -->
+		<ui:param name="viewId" value="#{view.viewId}" />
 
 		<ui:insert name="header">
 			<ui:include src="/template/header.xhtml" />
@@ -86,15 +89,19 @@
 					<div class="main-menu">
 
 						<ul>
-							<li class="active"><a href="admin.xhtml"> <span
+							<li class="#{viewId == '/dashboard.xhtml' ? 'active' : '' }"><a href="dashboard.xhtml"> <span
+									class="menu-icon"> <i class="glyphicon glyphicon-dashboard"></i>
+								</span> <span class="text"> Dashboard </span> <span class="menu-hover"></span>
+							</a></li>
+							<li class="#{viewId == '/admin.xhtml' ? 'active' : '' }"><a href="admin.xhtml"> <span
 									class="menu-icon"> <i class="glyphicon glyphicon-user"></i>
 								</span> <span class="text"> Admin </span> <span class="menu-hover"></span>
 							</a></li>
-							<li><a href="weighing.xhtml"> <span class="menu-icon">
+							<li class="#{viewId == '/weighing.xhtml' ? 'active' : '' }"><a href="weighing.xhtml"> <span class="menu-icon">
 										<i class="glyphicon glyphicon-leaf"></i>
 								</span> <span class="text"> Weighing </span> <span class="menu-hover"></span>
 							</a></li>
-							<li><a href="#"> <span class="menu-icon"> <i
+							<li class="#{viewId == '/settings.xhtml' ? 'active' : '' }"><a href="#"> <span class="menu-icon"> <i
 										class="glyphicon glyphicon-wrench"></i>
 								</span> <span class="text"> Settings </span> <span class="menu-hover"></span>
 							</a></li>
@@ -131,9 +138,9 @@
 				<!-- /page-title -->
 			</div>
 
-			<div class="grey-container shortcut-wrapper">
-				<ui:insert name="content" />
-			</div>
+			
+			<ui:insert name="content" />
+			
 
 		</h:panelGroup>
 

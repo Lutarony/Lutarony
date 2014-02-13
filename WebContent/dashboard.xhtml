@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+
+	<ui:composition template="/template/master.xhtml">
+
+		<ui:define name="title">
+			Rosny Cup 2014
+		</ui:define>
+
+		<ui:define name="subtitle">
+			Dashboard
+		</ui:define>
+
+		<ui:define name="breadcrumb">
+			<li class="active">Dashboard</li>
+		</ui:define>
+
+		<ui:define name="content">
+
+			<div class="grey-container shortcut-wrapper">
+				<a href="#" class="shortcut-link"> <span class="shortcut-icon">
+						<i class="glyphicon glyphicon-th-large"></i>
+				</span> <span class="text">My tournaments</span>
+				</a> <a href="#" class="shortcut-link"> <span class="shortcut-icon">
+						<i class="glyphicon glyphicon-user"></i>
+				</span> <span class="text">My users</span>
+				</a> <a href="#" class="shortcut-link"> <span class="shortcut-icon">
+						<i class="glyphicon glyphicon-th-list"></i>
+				</span> <span class="text">My wrestlers</span>
+				</a> <a href="#" class="shortcut-link"> <span class="shortcut-icon">
+						<i class="glyphicon glyphicon-wrench"></i>
+				</span> <span class="text">Settings</span>
+				</a>
+
+			</div>
+
+
+			<div class="padding-md">
+
+				<div class="row">
+					<div class="col-sm-6 col-md-3">
+						<div class="panel-stat3 bg-danger">
+							<h2 class="m-top-none" id="userCount">135</h2>
+							<h5>Wrestlers</h5>
+							<i class="glyphicon glyphicon-upload"></i><span class="m-left-xs">5%
+								Higher than last year</span>
+							<div class="stat-icon">
+								<i class="glyphicon glyphicon-user"></i>
+							</div>
+							<div class="refresh-button">
+								<i class="glyphicon glyphicon-refresh"></i>
+							</div>
+							<div class="loading-overlay">
+								<i class="loading-icon fa fa-refresh fa-spin fa-lg"></i>
+							</div>
+						</div>
+					</div>
+					<!-- /.col -->
+					
+					<div class="col-sm-3 col-md-9">
+					
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-10">
+							<div class="panel panel-default">
+							<div class="panel-heading">Match Progress</div>
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th>Category</th>
+										<th>Progress</th>
+										<th>Status</th>
+										<th>Link</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Cadet</td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>&lt;55kg</td>
+										<td>
+											<div class="progress progress-striped active"
+												style="height: 8px; margin: 5px 0 0 0;">
+												<div class="progress-bar" style="width: 45%">
+													<span class="sr-only">45% Complete</span>
+												</div>
+											</div>
+										</td>
+										<td>45%</td>
+										<td><span class="badge badge-info">2hr</span></td>
+									</tr>
+									<tr>
+										<td>55 - 60kg</td>
+										<td>
+											<div class="progress progress-striped active"
+												style="height: 8px; margin: 5px 0 0 0;">
+												<div class="progress-bar progress-bar-success"
+													style="width: 100%">
+													<span class="sr-only">Complete</span>
+												</div>
+											</div>
+										</td>
+										<td>Complete</td>
+										<td><span class="shortcut-icon"> <i
+												class="glyphicon glyphicon-eye-open"></i>
+										</span></td>
+									</tr>
+									<tr>
+										<td>60 - 66kg</td>
+										<td>
+											<div class="progress progress-striped active"
+												style="height: 8px; margin: 5px 0 0 0;">
+												<div class="progress-bar progress-bar-danger"
+													style="width: 98%">
+													<span class="sr-only">Complete</span>
+												</div>
+											</div>
+										</td>
+										<td>Final</td>
+										<td><span class="badge badge-info">5m</span></td>
+									</tr>
+
+									<tr>
+										<td>Junior</td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>&lt;55kg</td>
+										<td>
+											<div class="progress progress-striped active"
+												style="height: 8px; margin: 5px 0 0 0;">
+												<div class="progress-bar" style="width: 45%">
+													<span class="sr-only">45% Complete</span>
+												</div>
+											</div>
+										</td>
+										<td>45%</td>
+										<td><span class="badge badge-info">2hr</span></td>
+									</tr>
+									<tr>
+										<td>55 - 60kg</td>
+										<td>
+											<div class="progress progress-striped active"
+												style="height: 8px; margin: 5px 0 0 0;">
+												<div class="progress-bar progress-bar-success"
+													style="width: 61%">
+													<span class="sr-only">61% Complete</span>
+												</div>
+											</div>
+										</td>
+										<td>61%</td>
+										<td><span class="badge badge-info">1hr</span></td>
+									</tr>
+									<tr>
+										<td>60 - 66kg</td>
+										<td>
+											<div class="progress progress-striped active"
+												style="height: 8px; margin: 5px 0 0 0;">
+												<div class="progress-bar progress-bar-danger"
+													style="width: 97%">
+													<span class="sr-only">97% Complete</span>
+												</div>
+											</div>
+										</td>
+										<td>97%</td>
+										<td><span class="badge badge-info">5m</span></td>
+									</tr>
+
+									<tr>
+										<td>Senior</td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>&lt;55kg</td>
+										<td>
+											<div class="progress progress-striped active"
+												style="height: 8px; margin: 5px 0 0 0;">
+												<div class="progress-bar" style="width: 45%">
+													<span class="sr-only">45% Complete</span>
+												</div>
+											</div>
+										</td>
+										<td>45%</td>
+										<td><span class="badge badge-info">2hr</span></td>
+									</tr>
+									<tr>
+										<td>55 - 60kg</td>
+										<td>
+											<div class="progress progress-striped active"
+												style="height: 8px; margin: 5px 0 0 0;">
+												<div class="progress-bar progress-bar-success"
+													style="width: 61%">
+													<span class="sr-only">61% Complete</span>
+												</div>
+											</div>
+										</td>
+										<td>61%</td>
+										<td><span class="badge badge-info">1hr</span></td>
+									</tr>
+									<tr>
+										<td>60 - 66kg</td>
+										<td>
+											<div class="progress progress-striped active"
+												style="height: 8px; margin: 5px 0 0 0;">
+												<div class="progress-bar progress-bar-danger"
+													style="width: 97%">
+													<span class="sr-only">97% Complete</span>
+												</div>
+											</div>
+										</td>
+										<td>97%</td>
+										<td><span class="badge badge-info">5m</span></td>
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+
+</html>
