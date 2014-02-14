@@ -4,7 +4,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head></h:head>
 
@@ -12,14 +13,16 @@
 	<ui:composition>
 
 		<nav id="top-nav" class="fixed default skin-6">
-			<a href="#" class="brand"> <span>Lutarony</span>
+			<a href="#" class="brand">
+				<span>Lutarony</span>
 			</a>
 		</nav>
 
 		<button type="button" class="navbar-toggle pull-left"
 			id="sidebarToggle">
-			<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-				class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
 		</button>
 
 	</ui:composition>
@@ -27,55 +30,3 @@
 </h:body>
 </h:html>
 
-
-
-<!--<div class="container-fluid">
-				
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse"
-						data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span> <span
-							class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="#">#{msg['lutarony']}</a>
-				</div>
-
-				
-				<div class="collapse navbar-collapse"
-					id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
-						<li class="#{viewId == '/index.xhtml' ? 'active' : '' }"><a
-							href="index.xhtml">#{msg['lutarony.navbar.home']}</a></li>
-						<li class="#{viewId == '/admin.xhtml' ? 'active' : '' }"><a
-							href="admin.xhtml">#{msg['lutarony.navbar.admin']}</a></li>
-						<li class="#{viewId == '/weighing.xhtml' ? 'active' : '' }"><a
-							href="weighing.xhtml">#{msg['weighing.title']}</a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li>
-							<form class="navbar-form navbar-left" data-role="search">
-								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Search" />
-								</div>
-							
-							</form>
-						</li>
-						<li><a href="#">Link</a></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">#{msg['lutarony.navbar.settings']}<b
-								class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="#"></a></li>
-								<li><a href="#">Another action</a></li>
-								<li><a href="#">Something else here</a></li>
-								<li class="divider"></li>
-								<li><a href="#">Separated link</a></li>
-								<li class="divider"></li>
-								<li><a href="#">One more separated link</a></li>
-							</ul></li>
-					</ul>
-				</div>
-				
-			</div>
-			 /.container-fluid -->

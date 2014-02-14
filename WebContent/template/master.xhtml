@@ -4,21 +4,18 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
 
-	<title><ui:insert name="title"></ui:insert></title>
+	<title><ui:insert name="title" /></title>
 
 	<!-- Boostrap -->
 	<link rel="stylesheet"
 		href="resources/bootstrap/dist/css/bootstrap.min.css" />
 	<link rel="stylesheet"
 		href="resources/bootstrap/dist/css/bootstrap-theme.min.css" />
-
-	<!-- Uikit
-	<link rel="stylesheet" href="resources/uikit/css/uikit.min.css" /> -->
-
 
 	<!-- My style -->
 	<link rel="stylesheet" href="resources/style.css" />
@@ -30,7 +27,7 @@
 
 <h:body>
 	<h:panelGroup layout="block" id="wrapper">
-	
+
 		<!-- PARAMS -->
 		<ui:param name="viewId" value="#{view.viewId}" />
 
@@ -38,109 +35,119 @@
 			<ui:include src="/template/header.xhtml" />
 		</ui:insert>
 
-
-		<!-- Sidebar 
-		<h:panelGroup layout="block" id="sidebar-wrapper">
-			<ui:insert name="sidebar" />
-		</h:panelGroup>-->
-
 		<aside class="fixed skin-6">
-			<div class="slimScrollDiv"
+			<h:panelGroup layout="block" class="slimScrollDiv"
 				style="position: relative; overflow: hidden; width: auto; height: 100%;">
-				<div class="sidebar-inner scrollable-sidebar"
+				<h:panelGroup layout="block"
+					class="sidebar-inner scrollable-sidebar"
 					style="overflow: hidden; width: auto; height: 100%;">
 
 					<!-- /size-toggle -->
-					<div class="size-toggle">
-						<a class="btn btn-sm" id="sizeToggle"> <span class="icon-bar"></span>
-							<span class="icon-bar"></span> <span class="icon-bar"></span>
-						</a> <a class="btn btn-sm pull-right logoutConfirm_open"
-							href="#logoutConfirm" data-popup-ordinal="1" id="open_65149879">
+					<h:panelGroup layout="block" class="size-toggle">
+						<h:link class="btn btn-sm" id="sizeToggle">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</h:link>
+						<h:link class="btn btn-sm pull-right logoutConfirm_open"
+							outcome="#" data-popup-ordinal="1" id="open_65149879">
 							<i class="glyphicon glyphicon-off"></i>
-						</a>
-					</div>
+						</h:link>
+					</h:panelGroup>
 
 					<!-- User -->
-					<div class="user-block clearfix">
+					<h:panelGroup layout="block" class="user-block clearfix">
 						<img src="resources/pictures/avatar/koala.jpg" alt="User Avatar" />
-						<div class="detail">
-							<strong>Koala Panda</strong><span
+						<h:panelGroup layout="block" class="detail">
+							<strong>Koala Panda</strong>
+							<span
 								class="badge badge-danger m-left-xs bounceIn animation-delay4">4</span>
 							<ul class="list-inline">
-								<li><a href="profile.html">Profile</a></li>
-								<li class=""><a href="inbox.html" class="no-margin">Inbox</a></li>
+								<li><h:link outcome="#" value="#{msg['sidebar.profile']}" />
+								</li>
+								<li><h:link outcome="#" value="#{msg['sidebar.inbox']}"
+										styleClass="no-margin" /></li>
 							</ul>
-						</div>
-					</div>
+						</h:panelGroup>
+					</h:panelGroup>
 
 					<!-- Search -->
-					<div class="search-block">
-						<div class="input-group">
-							<input type="text" class="form-control input-sm"
-								placeholder="search here..." /><span class="input-group-btn">
+					<h:panelGroup layout="block" class="search-block">
+						<h:panelGroup layout="block" class="input-group">
+							<h:inputText class="form-control input-sm"
+								t:placeholder="#{msg['sidebar.search']}" />
+							<span class="input-group-btn">
 								<button class="btn btn-default btn-sm" type="button">
 									<i class="glyphicon glyphicon-search"></i>
 								</button>
 							</span>
-						</div>
-						<!-- /input-group -->
-					</div>
+						</h:panelGroup>
+					</h:panelGroup>
 
-					<div class="main-menu">
 
+					<h:panelGroup layout="block" class="main-menu">
 						<ul>
-							<li class="#{viewId == '/dashboard.xhtml' ? 'active' : '' }"><a href="dashboard.xhtml"> <span
-									class="menu-icon"> <i class="glyphicon glyphicon-dashboard"></i>
-								</span> <span class="text"> Dashboard </span> <span class="menu-hover"></span>
+							<li class="#{viewId == '/dashboard.xhtml' ? 'active' : '' }"><a
+								href="dashboard.xhtml"> <span class="menu-icon"> <i
+										class="glyphicon glyphicon-dashboard"></i>
+								</span> <span class="text"> #{msg['sidebar.dashboard']} </span> <span
+									class="menu-hover"></span>
 							</a></li>
-							<li class="#{viewId == '/admin.xhtml' ? 'active' : '' }"><a href="admin.xhtml"> <span
-									class="menu-icon"> <i class="glyphicon glyphicon-user"></i>
-								</span> <span class="text"> Admin </span> <span class="menu-hover"></span>
+							<li class="#{viewId == '/admin.xhtml' ? 'active' : '' }"><a
+								href="admin.xhtml"> <span class="menu-icon"> <i
+										class="glyphicon glyphicon-user"></i>
+								</span> <span class="text"> #{msg['sidebar.admin']} </span> <span
+									class="menu-hover"></span>
 							</a></li>
-							<li class="#{viewId == '/weighing.xhtml' ? 'active' : '' }"><a href="weighing.xhtml"> <span class="menu-icon">
-										<i class="glyphicon glyphicon-leaf"></i>
-								</span> <span class="text"> Weighing </span> <span class="menu-hover"></span>
+							<li class="#{viewId == '/weighing.xhtml' ? 'active' : '' }"><a
+								href="weighing.xhtml"> <span class="menu-icon"> <i
+										class="glyphicon glyphicon-leaf"></i>
+								</span> <span class="text"> #{msg['sidebar.weighing']} </span> <span
+									class="menu-hover"></span>
 							</a></li>
-							<li class="#{viewId == '/settings.xhtml' ? 'active' : '' }"><a href="#"> <span class="menu-icon"> <i
+							<li class="#{viewId == '/settings.xhtml' ? 'active' : '' }"><a
+								href="#"> <span class="menu-icon"> <i
 										class="glyphicon glyphicon-wrench"></i>
-								</span> <span class="text"> Settings </span> <span class="menu-hover"></span>
+								</span> <span class="text"> #{msg['sidebar.settings']}</span> <span
+									class="menu-hover"></span>
 							</a></li>
 						</ul>
 
-						<div class="alert alert-info">Coucou mon chat :)</div>
-					</div>
-
-				</div>
-			</div>
+						<h:panelGroup layout="block" class="alert alert-info">Coucou mon chat :)</h:panelGroup>
+					</h:panelGroup>
+				</h:panelGroup>
+			</h:panelGroup>
 		</aside>
 		<!-- end sidebar -->
 
 		<!-- Page content -->
 		<h:panelGroup layout="block" id="main-container">
 
-			<div id="breadcrumb">
+			<!-- breadcrumb-->
+			<h:panelGroup layout="block" id="breadcrumb">
 				<ul class="breadcrumb">
-					<li><i class="glyphicon glyphicon-home"></i>
-						 <a href="index.xhtml">#{msg['lutarony.navbar.home']}</a></li>
+					<li><i class="glyphicon glyphicon-home"></i> <a
+						href="index.xhtml">#{msg['lutarony.home']}</a></li>
 					<ui:insert name="breadcrumb">
-						<li class="active">Welcome</li>
+						<li class="active">#{msg['breadcrumb.welcome']}</li>
 					</ui:insert>
 				</ul>
-			</div>
+			</h:panelGroup>
+			<!-- end breadcrumb -->
 
-			<div class="main-header clearfix">
-				<div class="page-title">
+			<!-- header of content -->
+			<h:panelGroup layout="block" class="main-header clearfix">
+				<h:panelGroup layout="block" class="page-title">
 					<h3 class="no-margin">
 						<ui:insert name="title" />
 					</h3>
 					<span><ui:insert name="subtitle" /></span>
-				</div>
-				<!-- /page-title -->
-			</div>
+				</h:panelGroup>
+			</h:panelGroup>
 
-			
+
 			<ui:insert name="content" />
-			
+
 
 		</h:panelGroup>
 

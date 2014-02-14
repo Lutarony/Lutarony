@@ -11,26 +11,15 @@
 	<ui:composition template="/template/master.xhtml">
 
 		<ui:define name="title">
-			Admin
+			#{msg["admin.title"]}
 		</ui:define>
-		
+
 		<ui:define name="subtitle">
-			Administrator area
+			#{msg["admin.subtitle"]}
 		</ui:define>
 
 		<ui:define name="breadcrumb">
-			<li class="active">Admin</li>
-		</ui:define>
-
-		<ui:define name="sidebar">
-
-
-			<p:dataList id="usersList" styleClass="sidebar-nav"
-				value="#{userBean.userList}" var="user" layout="simple">
-				<a href="#" rel="#">#{user.name} #{user.surname}</a>
-			</p:dataList>
-
-
+			<li class="active">#{msg["admin.title"]}</li>
 		</ui:define>
 
 		<ui:define name="content">
