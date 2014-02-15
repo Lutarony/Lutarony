@@ -4,11 +4,20 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 
+import fr.lutarony.dao.definition.DAO;
 import fr.lutarony.model.User;
 
-public class UserDAO implements IUserDAO {
+public class UserDAO extends DAO<User> {
 
-	private SessionFactory sessionFactory;
+	public UserDAO(SessionFactory sessionFactory) {
+		super(sessionFactory);
+	}
+
+	public UserDAO() {
+		super();
+	}
+
+/*	private SessionFactory sessionFactory;
 
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
@@ -18,30 +27,66 @@ public class UserDAO implements IUserDAO {
 		this.sessionFactory = sessionFactory;
 	}
 
+	
+	 * @Override public void addUser(User user) {
+	 * getSessionFactory().getCurrentSession().save(user); }
+	 * 
+	 * @Override public void deleteUser(User user) {
+	 * getSessionFactory().getCurrentSession().delete(user); }
+	 * 
+	 * @Override public void updateUser(User user) {
+	 * getSessionFactory().getCurrentSession().update(user); }
+	 * 
+	 * @Override public User getUserById(int id) { List list =
+	 * getSessionFactory().getCurrentSession()
+	 * .createQuery("from User where id=?").setParameter(0, id).list(); return
+	 * (User) list.get(0); }
+	 * 
+	 * @Override public List<User> getUsers() { List list =
+	 * getSessionFactory().getCurrentSession() .createQuery("from User").list();
+	 * return list; }
+	 */
+
 	@Override
-	public void addUser(User user) {
-		getSessionFactory().getCurrentSession().save(user);
+	public boolean create(User obj) {
+		try {
+			getSessionFactory().getCurrentSession().save(obj);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+
 	}
 
 	@Override
-	public void deleteUser(User user) {
-		getSessionFactory().getCurrentSession().delete(user);
+	public boolean delete(User obj) {
+		try {
+			getSessionFactory().getCurrentSession().delete(obj);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	@Override
-	public void updateUser(User user) {
-		getSessionFactory().getCurrentSession().update(user);
+	public boolean update(User obj) {
+		try {
+			getSessionFactory().getCurrentSession().update(obj);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	@Override
-	public User getUserById(int id) {
+	public User find(int id) {
 		List list = getSessionFactory().getCurrentSession()
 				.createQuery("from User where id=?").setParameter(0, id).list();
 		return (User) list.get(0);
 	}
 
 	@Override
-	public List<User> getUsers() {
+	public List<User> getAll() {
 		List list = getSessionFactory().getCurrentSession()
 				.createQuery("from User").list();
 		return list;

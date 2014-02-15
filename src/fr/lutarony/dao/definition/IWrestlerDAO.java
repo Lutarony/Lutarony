@@ -1,4 +1,4 @@
-package fr.lutarony.dao;
+package fr.lutarony.dao.definition;
 
 import java.util.List;
 

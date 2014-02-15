@@ -5,7 +5,8 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.lutarony.business.definition.IUserBO;
-import fr.lutarony.dao.IUserDAO;
+import fr.lutarony.dao.UserDAO;
+import fr.lutarony.dao.definition.IUserDAO;
 import fr.lutarony.model.User;
 
 /**
@@ -21,7 +22,7 @@ import fr.lutarony.model.User;
 public class UserBO implements IUserBO {
 
 	// UserDAO is injected...
-	IUserDAO userDAO;
+	UserDAO userDAO;
 
 	/**
 	 * Add User
@@ -32,7 +33,7 @@ public class UserBO implements IUserBO {
 	@Transactional(readOnly = false)
 	@Override
 	public void addUser(User user) {
-		getUserDAO().addUser(user);
+		getUserDAO().create(user);
 	}
 
 	/**
@@ -44,7 +45,7 @@ public class UserBO implements IUserBO {
 	@Transactional(readOnly = false)
 	@Override
 	public void deleteUser(User user) {
-		getUserDAO().deleteUser(user);
+		getUserDAO().delete(user);
 	}
 
 	/**
@@ -56,7 +57,7 @@ public class UserBO implements IUserBO {
 	@Transactional(readOnly = false)
 	@Override
 	public void updateUser(User user) {
-		getUserDAO().updateUser(user);
+		getUserDAO().update(user);
 	}
 
 	/**
@@ -66,7 +67,7 @@ public class UserBO implements IUserBO {
 	 */
 	@Override
 	public User getUserById(int id) {
-		return getUserDAO().getUserById(id);
+		return getUserDAO().find(id);
 	}
 
 	/**
@@ -75,7 +76,7 @@ public class UserBO implements IUserBO {
 	 */
 	@Override
 	public List<User> getUsers() {
-		return getUserDAO().getUsers();
+		return getUserDAO().getAll();
 	}
 
 	/**
@@ -83,7 +84,7 @@ public class UserBO implements IUserBO {
 	 * 
 	 * @return IUserDAO - User DAO
 	 */
-	public IUserDAO getUserDAO() {
+	public UserDAO getUserDAO() {
 		return userDAO;
 	}
 
@@ -93,7 +94,7 @@ public class UserBO implements IUserBO {
 	 * @param IUserDAO
 	 *            - User DAO
 	 */
-	public void setUserDAO(IUserDAO userDAO) {
+	public void setUserDAO(UserDAO userDAO) {
 		this.userDAO = userDAO;
 	}
 }

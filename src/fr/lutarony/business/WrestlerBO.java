@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.lutarony.business.definition.IWrestlerBO;
-import fr.lutarony.dao.IWrestlerDAO;
+import fr.lutarony.dao.WrestlerDAO;
 import fr.lutarony.model.Wrestler;
 
 /**
@@ -21,7 +21,7 @@ import fr.lutarony.model.Wrestler;
 public class WrestlerBO implements IWrestlerBO {
 
 	// WrestlerDAO is injected...
-	IWrestlerDAO wrestlerDAO;
+	WrestlerDAO wrestlerDAO;
 
 	/**
 	 * Add Wrestler
@@ -32,7 +32,7 @@ public class WrestlerBO implements IWrestlerBO {
 	@Transactional(readOnly = false)
 	@Override
 	public void addWrestler(Wrestler wrestler) {
-		getWrestlerDAO().addWrestler(wrestler);
+		getWrestlerDAO().create(wrestler);
 	}
 
 	/**
@@ -44,7 +44,7 @@ public class WrestlerBO implements IWrestlerBO {
 	@Transactional(readOnly = false)
 	@Override
 	public void deleteWrestler(Wrestler wrestler) {
-		getWrestlerDAO().deleteWrestler(wrestler);
+		getWrestlerDAO().delete(wrestler);
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class WrestlerBO implements IWrestlerBO {
 	@Transactional(readOnly = false)
 	@Override
 	public void updateWrestler(Wrestler wrestler) {
-		getWrestlerDAO().updateWrestler(wrestler);
+		getWrestlerDAO().update(wrestler);
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class WrestlerBO implements IWrestlerBO {
 	 */
 	@Override
 	public Wrestler getWrestlerById(int id) {
-		return getWrestlerDAO().getWrestlerById(id);
+		return getWrestlerDAO().find(id);
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class WrestlerBO implements IWrestlerBO {
 	 */
 	@Override
 	public List<Wrestler> getWrestlers() {
-		return getWrestlerDAO().getWrestlers();
+		return getWrestlerDAO().getAll();
 	}
 
 	/**
@@ -83,7 +83,7 @@ public class WrestlerBO implements IWrestlerBO {
 	 * 
 	 * @return IWrestlerDAO - Wrestler DAO
 	 */
-	public IWrestlerDAO getWrestlerDAO() {
+	public WrestlerDAO getWrestlerDAO() {
 		return wrestlerDAO;
 	}
 
@@ -93,7 +93,7 @@ public class WrestlerBO implements IWrestlerBO {
 	 * @param IWrestlerDAO
 	 *            - Wrestler DAO
 	 */
-	public void setWrestlerDAO(IWrestlerDAO wrestlerDAO) {
+	public void setWrestlerDAO(WrestlerDAO wrestlerDAO) {
 		this.wrestlerDAO = wrestlerDAO;
 	}
 }

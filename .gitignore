@@ -5,6 +5,7 @@
 .metadata/
 */target/
 */.settings/
+/.settings/
 */bin
 .DS_Store
 */.DS_Store
