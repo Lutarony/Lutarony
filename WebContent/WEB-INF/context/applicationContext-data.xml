@@ -21,6 +21,19 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<bean id="UserDAO" class="fr.lutarony.dao.UserDAO">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	
+	<!-- Beans Declaration -->
+	<bean id="Wrestler" class="fr.lutarony.model.Wrestler" />
+
+	<!-- User BO Declaration -->
+	<bean id="WrestlerBO" class="fr.lutarony.business.WrestlerBO">
+		<property name="wrestlerDAO" ref="WrestlerDAO" />
+	</bean>
+
+	<!-- User DAO Declaration -->
+	<bean id="WrestlerDAO" class="fr.lutarony.dao.WrestlerDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 
 	<!-- Data Source Declaration -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
@@ -41,6 +54,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 		<property name="annotatedClasses">
 			<list>
 				<value>fr.lutarony.model.User</value>
+				<value>fr.lutarony.model.Wrestler</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

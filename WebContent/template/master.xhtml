@@ -35,6 +35,8 @@
 			<ui:include src="/template/header.xhtml" />
 		</ui:insert>
 
+
+
 		<aside class="fixed skin-6">
 			<h:panelGroup layout="block" class="slimScrollDiv"
 				style="position: relative; overflow: hidden; width: auto; height: 100%;">
@@ -50,7 +52,7 @@
 							<span class="icon-bar"></span>
 						</h:link>
 						<h:link class="btn btn-sm pull-right logoutConfirm_open"
-							outcome="#" data-popup-ordinal="1" id="open_65149879">
+							data-popup-ordinal="1" id="open_65149879">
 							<i class="glyphicon glyphicon-off"></i>
 						</h:link>
 					</h:panelGroup>
@@ -63,9 +65,8 @@
 							<span
 								class="badge badge-danger m-left-xs bounceIn animation-delay4">4</span>
 							<ul class="list-inline">
-								<li><h:link outcome="#" value="#{msg['sidebar.profile']}" />
-								</li>
-								<li><h:link outcome="#" value="#{msg['sidebar.inbox']}"
+								<li><h:link value="#{msg['sidebar.profile']}" /></li>
+								<li><h:link value="#{msg['sidebar.inbox']}"
 										styleClass="no-margin" /></li>
 							</ul>
 						</h:panelGroup>
@@ -93,18 +94,21 @@
 								</span> <span class="text"> #{msg['sidebar.dashboard']} </span> <span
 									class="menu-hover"></span>
 							</a></li>
+
 							<li class="#{viewId == '/admin.xhtml' ? 'active' : '' }"><a
 								href="admin.xhtml"> <span class="menu-icon"> <i
 										class="glyphicon glyphicon-user"></i>
 								</span> <span class="text"> #{msg['sidebar.admin']} </span> <span
 									class="menu-hover"></span>
 							</a></li>
+
 							<li class="#{viewId == '/weighing.xhtml' ? 'active' : '' }"><a
 								href="weighing.xhtml"> <span class="menu-icon"> <i
 										class="glyphicon glyphicon-leaf"></i>
 								</span> <span class="text"> #{msg['sidebar.weighing']} </span> <span
 									class="menu-hover"></span>
 							</a></li>
+
 							<li class="#{viewId == '/settings.xhtml' ? 'active' : '' }"><a
 								href="#"> <span class="menu-icon"> <i
 										class="glyphicon glyphicon-wrench"></i>
