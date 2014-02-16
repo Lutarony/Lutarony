@@ -9,31 +9,50 @@ http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
 http://www.springframework.org/schema/context
 http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<!-- Beans Declaration -->
+	<!-- Models declarations -->
 	<bean id="User" class="fr.lutarony.model.User" />
+	<bean id="Wrestler" class="fr.lutarony.model.Wrestler" />
+	<bean id="Team" class="fr.lutarony.model.Team" />
+	<bean id="Event" class="fr.lutarony.model.Event" />
+	<bean id="Login" class="fr.lutarony.model.Login" />
 
-	<!-- User BO Declaration -->
+	<!-- BO declarations -->
 	<bean id="UserBO" class="fr.lutarony.business.UserBO">
 		<property name="userDAO" ref="UserDAO" />
 	</bean>
-
-	<!-- User DAO Declaration -->
-	<bean id="UserDAO" class="fr.lutarony.dao.UserDAO">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-
-	<!-- Beans Declaration -->
-	<bean id="Wrestler" class="fr.lutarony.model.Wrestler" />
-
-	<!-- User BO Declaration -->
 	<bean id="WrestlerBO" class="fr.lutarony.business.WrestlerBO">
 		<property name="wrestlerDAO" ref="WrestlerDAO" />
 	</bean>
+	<bean id="TeamBO" class="fr.lutarony.business.TeamBO">
+		<property name="teamDAO" ref="TeamDAO" />
+	</bean>
+	<bean id="EventBO" class="fr.lutarony.business.EventBO">
+		<property name="eventDAO" ref="EventDAO" />
+	</bean>
 
-	<!-- User DAO Declaration -->
+	<bean id="LoginBO" class="fr.lutarony.business.LoginBO">
+		<property name="loginDAO" ref="LoginDAO" />
+	</bean>
+
+
+	<!-- DAO declarations -->
+	<bean id="UserDAO" class="fr.lutarony.dao.UserDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 	<bean id="WrestlerDAO" class="fr.lutarony.dao.WrestlerDAO">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	<bean id="EventDAO" class="fr.lutarony.dao.EventDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="TeamDAO" class="fr.lutarony.dao.TeamDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="LoginDAO" class="fr.lutarony.dao.LoginDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+
 
 	<!-- Data Source Declaration -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"

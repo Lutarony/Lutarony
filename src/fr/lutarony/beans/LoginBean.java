@@ -11,7 +11,7 @@ import javax.persistence.Id;
 
 import org.springframework.dao.DataAccessException;
 
-import fr.lutarony.business.LoginBO;
+import fr.lutarony.business.definition.ILoginBO;
 import fr.lutarony.model.Login;
 
 @ManagedBean(name = "loginBean")
@@ -23,7 +23,7 @@ public class LoginBean implements Serializable {
 	private static final String ERROR = "error";
 
 	@ManagedProperty(value = "#{LoginBO}")
-	LoginBO loginBO;
+	ILoginBO loginBO;
 
 	List<Login> loginList;
 
@@ -45,15 +45,15 @@ public class LoginBean implements Serializable {
 
 	public List<Login> getLoginList() {
 		loginList = new ArrayList<Login>();
-		loginList.addAll(getLoginBO().getAll());
+		loginList.addAll(getLoginBO().getAllLogins());
 		return loginList;
 	}
 
-	public LoginBO getLoginBO() {
+	public ILoginBO getLoginBO() {
 		return loginBO;
 	}
 
-	public void setLoginBO(LoginBO loginBO) {
+	public void setLoginBO(ILoginBO loginBO) {
 		this.loginBO = loginBO;
 	}
 

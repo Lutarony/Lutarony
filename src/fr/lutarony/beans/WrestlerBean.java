@@ -12,7 +12,7 @@ import javax.faces.event.AjaxBehaviorEvent;
 
 import org.springframework.dao.DataAccessException;
 
-import fr.lutarony.business.WrestlerBO;
+import fr.lutarony.business.definition.IWrestlerBO;
 import fr.lutarony.model.Wrestler;
 
 @ManagedBean(name = "wrestlerBean")
@@ -24,7 +24,7 @@ public class WrestlerBean implements Serializable {
 	private static final String ERROR = "error";
 
 	@ManagedProperty(value = "#{WrestlerBO}")
-	WrestlerBO wrestlerBO;
+	IWrestlerBO wrestlerBO;
 
 	List<Wrestler> wrestlerList;
 
@@ -44,7 +44,7 @@ public class WrestlerBean implements Serializable {
 			wrestler.setSurname(getSurname());
 			wrestler.setSex(getSex());
 			wrestler.setBirthDate(getBirthDate());
-			getWrestlerBO().create(wrestler);
+			getWrestlerBO().createWrestler(wrestler);
 			clear();
 			return SUCCESS;
 		} catch (DataAccessException e) {
@@ -62,15 +62,15 @@ public class WrestlerBean implements Serializable {
 
 	public List<Wrestler> getWrestlerList() {
 		wrestlerList = new ArrayList<Wrestler>();
-		wrestlerList.addAll(getWrestlerBO().getAll());
+		wrestlerList.addAll(getWrestlerBO().getAllWrestlers());
 		return wrestlerList;
 	}
 
-	public WrestlerBO getWrestlerBO() {
+	public IWrestlerBO getWrestlerBO() {
 		return wrestlerBO;
 	}
 
-	public void setWrestlerBO(WrestlerBO wrestlerBO) {
+	public void setWrestlerBO(IWrestlerBO wrestlerBO) {
 		this.wrestlerBO = wrestlerBO;
 	}
 

@@ -4,13 +4,12 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import fr.lutarony.business.definition.BO;
+import fr.lutarony.business.definition.ILoginBO;
 import fr.lutarony.dao.LoginDAO;
 import fr.lutarony.model.Login;
 
-
 @Transactional(readOnly = true)
-public class LoginBO implements BO<Login> {
+public class LoginBO implements ILoginBO {
 
 	// LoginDAO is injected...
 	LoginDAO loginDAO;
@@ -23,7 +22,7 @@ public class LoginBO implements BO<Login> {
 	 */
 	@Transactional(readOnly = false)
 	@Override
-	public void create(Login login) {
+	public void createLogin(Login login) {
 		getLoginDAO().create(login);
 	}
 
@@ -35,7 +34,7 @@ public class LoginBO implements BO<Login> {
 	 */
 	@Transactional(readOnly = false)
 	@Override
-	public void delete(Login login) {
+	public void deleteLogin(Login login) {
 		getLoginDAO().delete(login);
 	}
 
@@ -47,7 +46,7 @@ public class LoginBO implements BO<Login> {
 	 */
 	@Transactional(readOnly = false)
 	@Override
-	public void update(Login login) {
+	public void updateLogin(Login login) {
 		getLoginDAO().update(login);
 	}
 
@@ -57,7 +56,7 @@ public class LoginBO implements BO<Login> {
 	 * @param int Login Id
 	 */
 	@Override
-	public Login find(int id) {
+	public Login findLogin(int id) {
 		return getLoginDAO().find(id);
 	}
 
@@ -66,7 +65,7 @@ public class LoginBO implements BO<Login> {
 	 * 
 	 */
 	@Override
-	public List<Login> getAll() {
+	public List<Login> getAllLogins() {
 		return getLoginDAO().getAll();
 	}
 

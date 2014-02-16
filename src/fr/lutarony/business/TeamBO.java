@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import fr.lutarony.business.definition.BO;
+import fr.lutarony.business.definition.ITeamBO;
 import fr.lutarony.dao.TeamDAO;
 import fr.lutarony.model.Team;
 
 @Transactional(readOnly = true)
-public class TeamBO implements BO<Team> {
+public class TeamBO implements ITeamBO {
 
 	// TeamDAO is injected...
 	TeamDAO teamDAO;
@@ -22,7 +22,7 @@ public class TeamBO implements BO<Team> {
 	 */
 	@Transactional(readOnly = false)
 	@Override
-	public void create(Team team) {
+	public void createTeam(Team team) {
 		getTeamDAO().create(team);
 	}
 
@@ -34,7 +34,7 @@ public class TeamBO implements BO<Team> {
 	 */
 	@Transactional(readOnly = false)
 	@Override
-	public void delete(Team team) {
+	public void deleteTeam(Team team) {
 		getTeamDAO().delete(team);
 	}
 
@@ -46,7 +46,7 @@ public class TeamBO implements BO<Team> {
 	 */
 	@Transactional(readOnly = false)
 	@Override
-	public void update(Team team) {
+	public void updateTeam(Team team) {
 		getTeamDAO().update(team);
 	}
 
@@ -56,7 +56,7 @@ public class TeamBO implements BO<Team> {
 	 * @param int Team Id
 	 */
 	@Override
-	public Team find(int id) {
+	public Team findTeam(int id) {
 		return getTeamDAO().find(id);
 	}
 
@@ -65,7 +65,7 @@ public class TeamBO implements BO<Team> {
 	 * 
 	 */
 	@Override
-	public List<Team> getAll() {
+	public List<Team> getAllTeams() {
 		return getTeamDAO().getAll();
 	}
 

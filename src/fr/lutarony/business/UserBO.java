@@ -2,9 +2,11 @@ package fr.lutarony.business;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import fr.lutarony.business.definition.BO;
+import fr.lutarony.business.definition.IUserBO;
 import fr.lutarony.dao.UserDAO;
 import fr.lutarony.model.User;
 
@@ -17,10 +19,12 @@ import fr.lutarony.model.User;
  * @version 1.0.0
  * 
  */
+@Component
 @Transactional(readOnly = true)
-public class UserBO implements BO<User> {
+public class UserBO implements IUserBO {
 
 	// UserDAO is injected...
+	@Autowired
 	UserDAO userDAO;
 
 	/**
@@ -31,7 +35,7 @@ public class UserBO implements BO<User> {
 	 */
 	@Transactional(readOnly = false)
 	@Override
-	public void create(User user) {
+	public void createUser(User user) {
 		getUserDAO().create(user);
 	}
 
@@ -43,7 +47,7 @@ public class UserBO implements BO<User> {
 	 */
 	@Transactional(readOnly = false)
 	@Override
-	public void delete(User user) {
+	public void deleteUser(User user) {
 		getUserDAO().delete(user);
 	}
 
@@ -55,7 +59,7 @@ public class UserBO implements BO<User> {
 	 */
 	@Transactional(readOnly = false)
 	@Override
-	public void update(User user) {
+	public void updateUser(User user) {
 		getUserDAO().update(user);
 	}
 
@@ -65,7 +69,7 @@ public class UserBO implements BO<User> {
 	 * @param int User Id
 	 */
 	@Override
-	public User find(int id) {
+	public User findUser(int id) {
 		return getUserDAO().find(id);
 	}
 
@@ -74,7 +78,7 @@ public class UserBO implements BO<User> {
 	 * 
 	 */
 	@Override
-	public List<User> getAll() {
+	public List<User> getAllUsers() {
 		return getUserDAO().getAll();
 	}
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import fr.lutarony.business.definition.BO;
+import fr.lutarony.business.definition.IEventBO;
 import fr.lutarony.dao.EventDAO;
 import fr.lutarony.model.Event;
 
@@ -18,7 +18,7 @@ import fr.lutarony.model.Event;
  * 
  */
 @Transactional(readOnly = true)
-public class EventBO implements BO<Event> {
+public class EventBO implements IEventBO {
 
 	// EventDAO is injected...
 	EventDAO eventDAO;
@@ -31,7 +31,7 @@ public class EventBO implements BO<Event> {
 	 */
 	@Transactional(readOnly = false)
 	@Override
-	public void create(Event event) {
+	public void createEvent(Event event) {
 		getEventDAO().create(event);
 	}
 
@@ -43,7 +43,7 @@ public class EventBO implements BO<Event> {
 	 */
 	@Transactional(readOnly = false)
 	@Override
-	public void delete(Event event) {
+	public void deleteEvent(Event event) {
 		getEventDAO().delete(event);
 	}
 
@@ -55,7 +55,7 @@ public class EventBO implements BO<Event> {
 	 */
 	@Transactional(readOnly = false)
 	@Override
-	public void update(Event event) {
+	public void updateEvent(Event event) {
 		getEventDAO().update(event);
 	}
 
@@ -65,7 +65,7 @@ public class EventBO implements BO<Event> {
 	 * @param int Event Id
 	 */
 	@Override
-	public Event find(int id) {
+	public Event findEvent(int id) {
 		return getEventDAO().find(id);
 	}
 
@@ -74,7 +74,7 @@ public class EventBO implements BO<Event> {
 	 * 
 	 */
 	@Override
-	public List<Event> getAll() {
+	public List<Event> getAllEvents() {
 		return getEventDAO().getAll();
 	}
 

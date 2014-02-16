@@ -6,19 +6,14 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.event.AjaxBehaviorEvent;
-import javax.persistence.CascadeType;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 
 import org.springframework.dao.DataAccessException;
 
-import fr.lutarony.business.UserBO;
+import fr.lutarony.business.definition.IUserBO;
 import fr.lutarony.model.User;
 
 @ManagedBean(name = "userBean")
-@RequestScoped
 public class UserBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -26,7 +21,7 @@ public class UserBean implements Serializable {
 	private static final String ERROR = "error";
 
 	@ManagedProperty(value = "#{UserBO}")
-	UserBO userBO;
+	IUserBO userBO;
 
 	List<User> userList;
 
@@ -42,7 +37,7 @@ public class UserBean implements Serializable {
 			user.setName(getName());
 			user.setSurname(getSurname());
 			user.setEmail(getEmail());
-			getUserBO().create(user);
+			getUserBO().createUser(user);
 			clear();
 			return SUCCESS;
 		} catch (DataAccessException e) {
@@ -60,15 +55,15 @@ public class UserBean implements Serializable {
 
 	public List<User> getUserList() {
 		userList = new ArrayList<User>();
-		userList.addAll(getUserBO().getAll());
+		userList.addAll(getUserBO().getAllUsers());
 		return userList;
 	}
 
-	public UserBO getUserBO() {
+	public IUserBO getUserBO() {
 		return userBO;
 	}
 
-	public void setUserBO(UserBO userBO) {
+	public void setUserBO(IUserBO userBO) {
 		this.userBO = userBO;
 	}
 

@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 
-import fr.lutarony.model.User;
-
 public abstract class DAO<T> {
 
 	protected SessionFactory sessionFactory;
@@ -32,6 +30,6 @@ public abstract class DAO<T> {
 	public abstract boolean update(T obj);
 
 	public abstract T find(int id);
-	
+
 	public abstract List<T> getAll();
 }
