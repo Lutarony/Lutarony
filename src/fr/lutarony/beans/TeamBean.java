@@ -7,11 +7,10 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.event.AjaxBehaviorEvent;
 
 import org.springframework.dao.DataAccessException;
 
-import fr.lutarony.business.definition.ITeamBO;
+import fr.lutarony.business.TeamBO;
 import fr.lutarony.model.Team;
 
 @ManagedBean(name = "teamBean")
@@ -23,7 +22,7 @@ public class TeamBean implements Serializable {
 	private static final String ERROR = "error";
 
 	@ManagedProperty(value = "#{TeamBO}")
-	ITeamBO teamBO;
+	TeamBO teamBO;
 
 	List<Team> teamList;
 
@@ -41,7 +40,7 @@ public class TeamBean implements Serializable {
 			Team team = new Team();
 			team.setId(getId());
 			team.setName(getName());
-			getTeamBO().addTeam(team);
+			getTeamBO().create(team);
 
 			return SUCCESS;
 		} catch (DataAccessException e) {
@@ -53,15 +52,15 @@ public class TeamBean implements Serializable {
 
 	public List<Team> getTeamList() {
 		teamList = new ArrayList<Team>();
-		teamList.addAll(getTeamBO().getTeams());
+		teamList.addAll(getTeamBO().getAll());
 		return teamList;
 	}
 
-	public ITeamBO getTeamBO() {
+	public TeamBO getTeamBO() {
 		return teamBO;
 	}
 
-	public void setTeamBO(ITeamBO teamBO) {
+	public void setTeamBO(TeamBO teamBO) {
 		this.teamBO = teamBO;
 	}
 

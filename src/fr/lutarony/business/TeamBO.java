@@ -4,24 +4,15 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import fr.lutarony.business.definition.ITeamBO;
-import fr.lutarony.dao.ITeamDAO;
+import fr.lutarony.business.definition.BO;
+import fr.lutarony.dao.TeamDAO;
 import fr.lutarony.model.Team;
 
-/**
- * 
- * Team Service
- * 
- * @author onlinetechvision.com
- * @since 25 Mar 2012
- * @version 1.0.0
- * 
- */
 @Transactional(readOnly = true)
-public class TeamBO implements ITeamBO {
+public class TeamBO implements BO<Team> {
 
 	// TeamDAO is injected...
-	ITeamDAO teamDAO;
+	TeamDAO teamDAO;
 
 	/**
 	 * Add Team
@@ -31,8 +22,8 @@ public class TeamBO implements ITeamBO {
 	 */
 	@Transactional(readOnly = false)
 	@Override
-	public void addTeam(Team team) {
-		getTeamDAO().addTeam(team);
+	public void create(Team team) {
+		getTeamDAO().create(team);
 	}
 
 	/**
@@ -43,8 +34,8 @@ public class TeamBO implements ITeamBO {
 	 */
 	@Transactional(readOnly = false)
 	@Override
-	public void deleteTeam(Team team) {
-		getTeamDAO().deleteTeam(team);
+	public void delete(Team team) {
+		getTeamDAO().delete(team);
 	}
 
 	/**
@@ -55,8 +46,8 @@ public class TeamBO implements ITeamBO {
 	 */
 	@Transactional(readOnly = false)
 	@Override
-	public void updateTeam(Team team) {
-		getTeamDAO().updateTeam(team);
+	public void update(Team team) {
+		getTeamDAO().update(team);
 	}
 
 	/**
@@ -65,8 +56,8 @@ public class TeamBO implements ITeamBO {
 	 * @param int Team Id
 	 */
 	@Override
-	public Team getTeamById(int id) {
-		return getTeamDAO().getTeamById(id);
+	public Team find(int id) {
+		return getTeamDAO().find(id);
 	}
 
 	/**
@@ -74,8 +65,8 @@ public class TeamBO implements ITeamBO {
 	 * 
 	 */
 	@Override
-	public List<Team> getTeams() {
-		return getTeamDAO().getTeams();
+	public List<Team> getAll() {
+		return getTeamDAO().getAll();
 	}
 
 	/**
@@ -83,7 +74,7 @@ public class TeamBO implements ITeamBO {
 	 * 
 	 * @return ITeamDAO - Team DAO
 	 */
-	public ITeamDAO getTeamDAO() {
+	public TeamDAO getTeamDAO() {
 		return teamDAO;
 	}
 
@@ -93,7 +84,7 @@ public class TeamBO implements ITeamBO {
 	 * @param ITeamDAO
 	 *            - Team DAO
 	 */
-	public void setTeamDAO(ITeamDAO teamDAO) {
+	public void setTeamDAO(TeamDAO teamDAO) {
 		this.teamDAO = teamDAO;
 	}
 }

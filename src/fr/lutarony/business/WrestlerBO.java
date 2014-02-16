@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import fr.lutarony.business.definition.IWrestlerBO;
+import fr.lutarony.business.definition.BO;
 import fr.lutarony.dao.WrestlerDAO;
 import fr.lutarony.model.Wrestler;
 
@@ -18,7 +18,7 @@ import fr.lutarony.model.Wrestler;
  * 
  */
 @Transactional(readOnly = true)
-public class WrestlerBO implements IWrestlerBO {
+public class WrestlerBO implements BO<Wrestler> {
 
 	// WrestlerDAO is injected...
 	WrestlerDAO wrestlerDAO;
@@ -31,7 +31,7 @@ public class WrestlerBO implements IWrestlerBO {
 	 */
 	@Transactional(readOnly = false)
 	@Override
-	public void addWrestler(Wrestler wrestler) {
+	public void create(Wrestler wrestler) {
 		getWrestlerDAO().create(wrestler);
 	}
 
@@ -43,7 +43,7 @@ public class WrestlerBO implements IWrestlerBO {
 	 */
 	@Transactional(readOnly = false)
 	@Override
-	public void deleteWrestler(Wrestler wrestler) {
+	public void delete(Wrestler wrestler) {
 		getWrestlerDAO().delete(wrestler);
 	}
 
@@ -55,7 +55,7 @@ public class WrestlerBO implements IWrestlerBO {
 	 */
 	@Transactional(readOnly = false)
 	@Override
-	public void updateWrestler(Wrestler wrestler) {
+	public void update(Wrestler wrestler) {
 		getWrestlerDAO().update(wrestler);
 	}
 
@@ -65,7 +65,7 @@ public class WrestlerBO implements IWrestlerBO {
 	 * @param int Wrestler Id
 	 */
 	@Override
-	public Wrestler getWrestlerById(int id) {
+	public Wrestler find(int id) {
 		return getWrestlerDAO().find(id);
 	}
 
@@ -74,7 +74,7 @@ public class WrestlerBO implements IWrestlerBO {
 	 * 
 	 */
 	@Override
-	public List<Wrestler> getWrestlers() {
+	public List<Wrestler> getAll() {
 		return getWrestlerDAO().getAll();
 	}
 

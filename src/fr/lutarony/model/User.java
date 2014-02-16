@@ -1,8 +1,11 @@
 package fr.lutarony.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,9 +16,14 @@ public class User {
 	private String name;
 	private String surname;
 	private String email;
-	private String username;
-	private String password;
 
+	@OneToOne
+	@JoinColumn(name = "ID", referencedColumnName = "LOGIN_ID", updatable = false)
+	private Login login;
+
+	
+	
+	
 	@Id
 	@Column(name = "ID", unique = true, nullable = false)
 	public int getId() {
@@ -53,22 +61,9 @@ public class User {
 		this.email = email;
 	}
 
-	@Column(name = "USERNAME", unique = true, nullable = true)
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	@Column(name = "PASSWORD", unique = true, nullable = true)
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
+	@OneToOne(cascade = CascadeType.PERSIST)
+	public void setLogin(Login login) {
+		this.login = login;
 	}
 
 	@Override
@@ -77,7 +72,6 @@ public class User {
 		strBuff.append("id : ").append(getId());
 		strBuff.append(", name : ").append(getName());
 		strBuff.append(", surname : ").append(getSurname());
-		strBuff.append(", login : ").append(getUsername());
 		return strBuff.toString();
 	}
 }

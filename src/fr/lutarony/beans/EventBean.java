@@ -7,11 +7,10 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.event.AjaxBehaviorEvent;
 
 import org.springframework.dao.DataAccessException;
 
-import fr.lutarony.business.definition.IEventBO;
+import fr.lutarony.business.EventBO;
 import fr.lutarony.model.Event;
 
 @ManagedBean(name = "eventBean")
@@ -23,7 +22,7 @@ public class EventBean implements Serializable {
 	private static final String ERROR = "error";
 
 	@ManagedProperty(value = "#{EventBO}")
-	IEventBO eventBO;
+	EventBO eventBO;
 
 	List<Event> eventList;
 
@@ -44,15 +43,15 @@ public class EventBean implements Serializable {
 
 	public List<Event> getEventList() {
 		eventList = new ArrayList<Event>();
-		eventList.addAll(getEventBO().getEvents());
+		eventList.addAll(getEventBO().getAll());
 		return eventList;
 	}
 
-	public IEventBO getEventBO() {
+	public EventBO getEventBO() {
 		return eventBO;
 	}
 
-	public void setEventBO(IEventBO eventBO) {
+	public void setEventBO(EventBO eventBO) {
 		this.eventBO = eventBO;
 	}
 
@@ -83,7 +82,5 @@ public class EventBean implements Serializable {
 	public void setTeamId(int teamId) {
 		this.teamId = teamId;
 	}
-
-
 
 }

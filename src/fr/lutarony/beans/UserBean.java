@@ -8,10 +8,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.persistence.CascadeType;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 import org.springframework.dao.DataAccessException;
 
-import fr.lutarony.business.definition.IUserBO;
+import fr.lutarony.business.UserBO;
 import fr.lutarony.model.User;
 
 @ManagedBean(name = "userBean")
@@ -23,7 +26,7 @@ public class UserBean implements Serializable {
 	private static final String ERROR = "error";
 
 	@ManagedProperty(value = "#{UserBO}")
-	IUserBO userBO;
+	UserBO userBO;
 
 	List<User> userList;
 
@@ -31,8 +34,6 @@ public class UserBean implements Serializable {
 	private String name;
 	private String surname;
 	private String email;
-	private String username;
-	private String password;
 
 	public String addUser() {
 		try {
@@ -41,7 +42,7 @@ public class UserBean implements Serializable {
 			user.setName(getName());
 			user.setSurname(getSurname());
 			user.setEmail(getEmail());
-			getUserBO().addUser(user);
+			getUserBO().create(user);
 			clear();
 			return SUCCESS;
 		} catch (DataAccessException e) {
@@ -59,15 +60,15 @@ public class UserBean implements Serializable {
 
 	public List<User> getUserList() {
 		userList = new ArrayList<User>();
-		userList.addAll(getUserBO().getUsers());
+		userList.addAll(getUserBO().getAll());
 		return userList;
 	}
 
-	public IUserBO getUserBO() {
+	public UserBO getUserBO() {
 		return userBO;
 	}
 
-	public void setUserBO(IUserBO userBO) {
+	public void setUserBO(UserBO userBO) {
 		this.userBO = userBO;
 	}
 
@@ -99,28 +100,12 @@ public class UserBean implements Serializable {
 		this.surname = surname;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
 	public String getEmail() {
 		return email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getSayWelcome() {

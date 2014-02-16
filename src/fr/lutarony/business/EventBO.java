@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import fr.lutarony.business.definition.IEventBO;
-import fr.lutarony.dao.IEventDAO;
+import fr.lutarony.business.definition.BO;
+import fr.lutarony.dao.EventDAO;
 import fr.lutarony.model.Event;
 
 /**
@@ -18,10 +18,10 @@ import fr.lutarony.model.Event;
  * 
  */
 @Transactional(readOnly = true)
-public class EventBO implements IEventBO {
+public class EventBO implements BO<Event> {
 
 	// EventDAO is injected...
-	IEventDAO eventDAO;
+	EventDAO eventDAO;
 
 	/**
 	 * Add Event
@@ -31,8 +31,8 @@ public class EventBO implements IEventBO {
 	 */
 	@Transactional(readOnly = false)
 	@Override
-	public void addEvent(Event event) {
-		getEventDAO().addEvent(event);
+	public void create(Event event) {
+		getEventDAO().create(event);
 	}
 
 	/**
@@ -43,8 +43,8 @@ public class EventBO implements IEventBO {
 	 */
 	@Transactional(readOnly = false)
 	@Override
-	public void deleteEvent(Event event) {
-		getEventDAO().deleteEvent(event);
+	public void delete(Event event) {
+		getEventDAO().delete(event);
 	}
 
 	/**
@@ -55,8 +55,8 @@ public class EventBO implements IEventBO {
 	 */
 	@Transactional(readOnly = false)
 	@Override
-	public void updateEvent(Event event) {
-		getEventDAO().updateEvent(event);
+	public void update(Event event) {
+		getEventDAO().update(event);
 	}
 
 	/**
@@ -65,8 +65,8 @@ public class EventBO implements IEventBO {
 	 * @param int Event Id
 	 */
 	@Override
-	public Event getEventById(int id) {
-		return getEventDAO().getEventById(id);
+	public Event find(int id) {
+		return getEventDAO().find(id);
 	}
 
 	/**
@@ -74,8 +74,8 @@ public class EventBO implements IEventBO {
 	 * 
 	 */
 	@Override
-	public List<Event> getEvents() {
-		return getEventDAO().getEvents();
+	public List<Event> getAll() {
+		return getEventDAO().getAll();
 	}
 
 	/**
@@ -83,7 +83,7 @@ public class EventBO implements IEventBO {
 	 * 
 	 * @return IEventDAO - Event DAO
 	 */
-	public IEventDAO getEventDAO() {
+	public EventDAO getEventDAO() {
 		return eventDAO;
 	}
 
@@ -93,7 +93,7 @@ public class EventBO implements IEventBO {
 	 * @param IEventBO
 	 *            - Event DAO
 	 */
-	public void setEventDAO(IEventDAO eventDAO) {
+	public void setEventDAO(EventDAO eventDAO) {
 		this.eventDAO = eventDAO;
 	}
 }
