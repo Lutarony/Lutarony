@@ -1,6 +1,6 @@
 package fr.lutarony.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "USER")
+@Table(name = "wrestler")
 public class Wrestler {
 
 	private int id;
@@ -56,7 +56,7 @@ public class Wrestler {
 		this.sex = sex;
 	}
 
-	@Column(name = "BIRTH_NAME", nullable = false)
+	@Column(name = "BIRTH_DATE", nullable = false)
 	public Date getBirthDate() {
 		return birthDate;
 	}

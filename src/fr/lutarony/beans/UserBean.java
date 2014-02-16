@@ -110,6 +110,10 @@ public class UserBean implements Serializable {
 			return "Welcome " + name;
 		}
 	}
+	
+	public int getTotalUsers(){
+		return getUserList().size();
+	}
 
 	public void checkName(AjaxBehaviorEvent event) {
 

@@ -2,12 +2,11 @@ package fr.lutarony.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.sql.Date;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.event.AjaxBehaviorEvent;
 
 import org.springframework.dao.DataAccessException;
@@ -16,7 +15,6 @@ import fr.lutarony.business.definition.IWrestlerBO;
 import fr.lutarony.model.Wrestler;
 
 @ManagedBean(name = "wrestlerBean")
-@RequestScoped
 public class WrestlerBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -35,6 +33,7 @@ public class WrestlerBean implements Serializable {
 	private Date birthDate;
 	private int teamId;
 	private int categoryId;
+
 
 	public String addWrestler() {
 		try {
@@ -149,6 +148,10 @@ public class WrestlerBean implements Serializable {
 	public void clear() {
 		this.name = "";
 		this.surname = "";
+	}
+
+	public int getTotalWrestlers() {
+		return getWrestlerList().size();
 	}
 
 }
