@@ -73,6 +73,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 			<list>
 				<value>fr.lutarony.model.User</value>
 				<value>fr.lutarony.model.Wrestler</value>
+				<value>fr.lutarony.model.Team</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

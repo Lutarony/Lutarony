@@ -10,6 +10,10 @@
 
 	<ui:composition template="/template/master.xhtml">
 
+		<ui:define name="breadcrumb">
+			<li class="active">#{msg["admin.title"]}</li>
+		</ui:define>
+
 		<ui:define name="title">
 			#{msg["admin.title"]}
 		</ui:define>
@@ -17,14 +21,16 @@
 		<ui:define name="subtitle">
 			#{msg["admin.subtitle"]}
 		</ui:define>
-
-		<ui:define name="breadcrumb">
-			<li class="active">#{msg["admin.title"]}</li>
-		</ui:define>
-
+<!--
 		<ui:define name="content">
 
 			<ui:include src="admin-users.xhtml" />
+
+		</ui:define>
+-->
+		<ui:define name="content">
+
+			<ui:include src="admin-content.xhtml" />
 
 		</ui:define>
 

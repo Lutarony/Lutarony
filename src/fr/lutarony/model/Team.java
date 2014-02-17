@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TEAM")
+@Table(name = "team")
 public class Team {
 
 	private int id;
@@ -46,7 +46,7 @@ public class Team {
 		this.coachId = coachId;
 	}
 
-	@Column(name = "ADRESS", unique = true, nullable = false)
+	@Column(name = "ADRESS")
 	public String getAdress() {
 		return adress;
 	}
@@ -55,7 +55,7 @@ public class Team {
 		this.adress = adress;
 	}
 
-	@Column(name = "CITY", nullable = false)
+	@Column(name = "CITY")
 	public String getCity() {
 		return city;
 	}
@@ -64,7 +64,7 @@ public class Team {
 		this.city = city;
 	}
 
-	@Column(name = "CODE", nullable = false)
+	@Column(name = "CODE")
 	public String getCode() {
 		return code;
 	}
@@ -73,7 +73,7 @@ public class Team {
 		this.code = code;
 	}
 
-	@Column(name = "COUNTRY", nullable = false)
+	@Column(name = "COUNTRY")
 	public String getCountry() {
 		return country;
 	}
@@ -82,7 +82,7 @@ public class Team {
 		this.country = country;
 	}
 
-	@Column(name = "PHONE", nullable = false)
+	@Column(name = "PHONE")
 	public String getPhone() {
 		return phone;
 	}
