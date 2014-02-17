@@ -18,8 +18,8 @@ import fr.lutarony.model.Team;
 public class TeamBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private static final String SUCCESS = "admin";
-	private static final String ERROR = "error";
+	private static final String SUCCESS = "#";
+	private static final String ERROR = "#";
 
 	@ManagedProperty(value = "#{TeamBO}")
 	ITeamBO teamBO;
@@ -28,7 +28,7 @@ public class TeamBean implements Serializable {
 
 	private int id;
 	private String name;
-	private int coachId;
+	private String coach;
 	private String adress;
 	private String city;
 	private String code;
@@ -84,12 +84,12 @@ public class TeamBean implements Serializable {
 		this.name = name;
 	}
 
-	public int getCoachId() {
-		return coachId;
+	public String getCoach() {
+		return coach;
 	}
 
-	public void setCoachId(int coachId) {
-		this.coachId = coachId;
+	public void setCoach(String coach) {
+		this.coach = coach;
 	}
 
 	public String getAdress() {

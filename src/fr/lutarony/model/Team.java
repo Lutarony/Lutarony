@@ -2,23 +2,27 @@ package fr.lutarony.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TEAM")
+@Table(name = "team")
 public class Team {
 
+	@Id
+	@GeneratedValue
 	private int id;
 	private String name;
-	private int coachId;
+	private String coach;
 	private String adress;
 	private String city;
 	private String code;
 	private String country;
 	private String phone;
+	
+	// List of WRESTLERS
 
-	@Id
 	@Column(name = "ID", unique = true, nullable = false)
 	public int getId() {
 		return id;
@@ -37,16 +41,16 @@ public class Team {
 		this.name = name;
 	}
 
-	@Column(name = "COACH_ID", unique = true, nullable = false)
-	public int getCoachId() {
-		return coachId;
+	@Column(name = "COACH", unique = false, nullable = true)
+	public String getCoach() {
+		return coach;
 	}
 
-	public void setCoachId(int coachId) {
-		this.coachId = coachId;
+	public void setCoach(String coach) {
+		this.coach = coach;
 	}
 
-	@Column(name = "ADRESS", unique = true, nullable = false)
+	@Column(name = "ADRESS", unique = false, nullable = true)
 	public String getAdress() {
 		return adress;
 	}
@@ -55,7 +59,7 @@ public class Team {
 		this.adress = adress;
 	}
 
-	@Column(name = "CITY", nullable = false)
+	@Column(name = "CITY", unique = false, nullable = true)
 	public String getCity() {
 		return city;
 	}
@@ -64,7 +68,7 @@ public class Team {
 		this.city = city;
 	}
 
-	@Column(name = "CODE", nullable = false)
+	@Column(name = "CODE", unique = false, nullable = true)
 	public String getCode() {
 		return code;
 	}
@@ -73,7 +77,7 @@ public class Team {
 		this.code = code;
 	}
 
-	@Column(name = "COUNTRY", nullable = false)
+	@Column(name = "COUNTRY", unique = false, nullable = true)
 	public String getCountry() {
 		return country;
 	}
@@ -82,7 +86,7 @@ public class Team {
 		this.country = country;
 	}
 
-	@Column(name = "PHONE", nullable = false)
+	@Column(name = "PHONE", unique = false, nullable = true)
 	public String getPhone() {
 		return phone;
 	}
@@ -94,9 +98,10 @@ public class Team {
 	@Override
 	public String toString() {
 		StringBuffer strBuff = new StringBuffer();
+		strBuff.append("TEAM = ");
 		strBuff.append("id : ").append(getId());
 		strBuff.append(", name : ").append(getName());
-		strBuff.append(", coachId : ").append(getCoachId());
+		strBuff.append(", coach : ").append(getCoach());
 		strBuff.append(", adress : ").append(getAdress());
 		strBuff.append(", city : ").append(getCity());
 		strBuff.append(", code : ").append(getCode());

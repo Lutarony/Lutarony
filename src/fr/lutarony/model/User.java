@@ -1,31 +1,46 @@
 package fr.lutarony.model;
 
-import javax.persistence.CascadeType;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "USER")
+@Table(name = "USER", uniqueConstraints = { @UniqueConstraint(name = "USER_IDENTITY", columnNames = {
+		"NAME", "SURNAME" }) })
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue
 	private int id;
 	private String name;
 	private String surname;
 	private String email;
+	private String password;
 
-	@OneToOne
-	@JoinColumn(name = "ID", referencedColumnName = "LOGIN_ID", updatable = false)
-	private Login login;
+	// List of USER ? ADMIN ?
+	// List of EVENTS
 
-	@Id
+	@Transient
+	private Set<Event> events;
+
+	@OneToMany
+	@JoinColumn(name = "user_id", nullable = false)
+	public Set<Event> getEvents() {
+		return events;
+	}
+
+	public void setInvoices(Set<Event> events) {
+		this.events = events;
+	}
+
 	@Column(name = "ID", unique = true, nullable = false)
 	public int getId() {
 		return id;
@@ -35,7 +50,7 @@ public class User {
 		this.id = id;
 	}
 
-	@Column(name = "NAME", unique = true, nullable = false)
+	@Column(name = "NAME", unique = false, nullable = false)
 	public String getName() {
 		return name;
 	}
@@ -44,7 +59,7 @@ public class User {
 		this.name = name;
 	}
 
-	@Column(name = "SURNAME", unique = true, nullable = false)
+	@Column(name = "SURNAME", unique = false, nullable = false)
 	public String getSurname() {
 		return surname;
 	}
@@ -62,17 +77,23 @@ public class User {
 		this.email = email;
 	}
 
-	@OneToOne(cascade = CascadeType.PERSIST)
-	public void setLogin(Login login) {
-		this.login = login;
+	@Column(name = "PASSWORD", unique = false, nullable = false)
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	@Override
 	public String toString() {
 		StringBuffer strBuff = new StringBuffer();
+		strBuff.append("USER = ");
 		strBuff.append("id : ").append(getId());
 		strBuff.append(", name : ").append(getName());
 		strBuff.append(", surname : ").append(getSurname());
+		strBuff.append(", username : ").append(getEmail());
 		return strBuff.toString();
 	}
 }

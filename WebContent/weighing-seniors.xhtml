@@ -1,0 +1,44 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://xmlns.jcp.org/jsf/passthrough">
+
+	<div class="col-lg-10">
+
+
+		<h3 class="weighing-title">Seniors</h3>
+		<h:outputLabel value="wrestlers"></h:outputLabel>
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Surname</th>
+					<th>Team</th>
+					<th>Weight</th>
+					<th>Lot number</th>
+				</tr>
+			</thead>
+			<tbody>
+				<ui:repeat var="wrestler" value="#{wrestlerBean.wrestlerList}">
+					<tr>
+						<td>#{wrestler.name}</td>
+						<td>#{wrestler.surname}</td>
+						<td></td>
+						<td></td>
+						<td><span class="badge"></span></td>
+					</tr>
+
+				</ui:repeat>
+
+
+			</tbody>
+		</table>
+
+	</div>
+
+
+</ui:composition>

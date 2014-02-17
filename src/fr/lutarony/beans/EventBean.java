@@ -18,8 +18,8 @@ import fr.lutarony.model.Event;
 public class EventBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private static final String SUCCESS = "admin";
-	private static final String ERROR = "error";
+	private static final String SUCCESS = "#";
+	private static final String ERROR = "#";
 
 	@ManagedProperty(value = "#{EventBO}")
 	IEventBO eventBO;
@@ -28,11 +28,14 @@ public class EventBean implements Serializable {
 
 	private int id;
 	private String name;
-	private int teamId;
+	private int userId;
 
 	public String addEvent() {
 		try {
-
+			Event event = new Event();
+			event.setName(getName());
+			event.setUserId(getUserId());
+			getEventBO().createEvent(event);
 			return SUCCESS;
 		} catch (DataAccessException e) {
 			e.printStackTrace();
@@ -75,12 +78,12 @@ public class EventBean implements Serializable {
 		this.name = name;
 	}
 
-	public int getTeamId() {
-		return teamId;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setTeamId(int teamId) {
-		this.teamId = teamId;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 }

@@ -11,56 +11,67 @@
 	<ui:composition template="/template/master.xhtml">
 
 		<ui:define name="title">
-			Weighing
+			#{msg['weighing.title']}
 		</ui:define>
-		
+
 		<ui:define name="subtitle">
-			Weighing area
+			#{msg['weighing.subtitle']}
 		</ui:define>
 
 		<ui:define name="breadcrumb">
-			<li class="active">Weighing</li>
+			<li class="active">#{msg['weighing.title']}</li>
 		</ui:define>
 
-		<ui:define name="sidebar">
 
-			<ul class="nav">
-				<li><a href="#" data-toggle="offcanvas"
-					class="visible-xs text-center"><i
-						class="glyphicon glyphicon-chevron-right"></i></a></li>
-			</ul>
-
-			<ul class="nav hidden-xs" id="lg-menu">
-				<li class="active"><a href="#featured"><i
-						class="glyphicon glyphicon-list-alt"></i>New wrestler</a></li>
-				<li><a href="#stories"><i class="glyphicon glyphicon-list"></i>
-						Stories</a></li>
-				<li><a href="#"><i class="glyphicon glyphicon-paperclip"></i>
-						Saved</a></li>
-				<li><a href="#"><i class="glyphicon glyphicon-refresh"></i>
-						Refresh</a></li>
-			</ul>
-	
-			<!-- tiny only nav-->
-			<ul class="nav visible-xs" id="xs-menu">
-				<li><a href="#featured" class="text-center"><i
-						class="glyphicon glyphicon-list-alt"></i></a></li>
-				<li><a href="#stories" class="text-center"><i
-						class="glyphicon glyphicon-list"></i></a></li>
-				<li><a href="#" class="text-center"><i
-						class="glyphicon glyphicon-paperclip"></i></a></li>
-				<li><a href="#" class="text-center"><i
-						class="glyphicon glyphicon-refresh"></i></a></li>
-			</ul>
-
-			
-
-		</ui:define>
 
 		<ui:define name="content">
-			This is weihging page :-)
-			
-		
+
+			<div class="panel panel-default">
+				<div class="panel-tab clearfix">
+					<ul class="tab-bar">
+						<li class="active"><a href="#weighing" data-toggle="tab"><i
+								class="glyphicon glyphicon-chevron-down"></i>WEIGHING</a></li>
+						<li class=""><a href="#poussins" data-toggle="tab"><i
+								class="glyphicon glyphicon-leaf"></i>POUSSINS</a></li>
+						<li class=""><a href="#benjamins" data-toggle="tab"><i
+								class="glyphicon glyphicon-leaf"></i>BENJAMINS</a></li>
+						<li class=""><a href="#minimes" data-toggle="tab"><i
+								class="glyphicon glyphicon-leaf"></i>MINIMES</a></li>
+						<li class=""><a href="#cadets" data-toggle="tab"><i
+								class="glyphicon glyphicon-leaf"></i>CADETS</a></li>
+						<li class=""><a href="#juniors" data-toggle="tab"><i
+								class="glyphicon glyphicon-leaf"></i>JUNIORS</a></li>
+						<li class=""><a href="#seniors" data-toggle="tab"><i
+								class="glyphicon glyphicon-leaf"></i>SENIORS</a></li>
+					</ul>
+				</div>
+				<div class="panel-body">
+					<div class="tab-content">
+						<div class="tab-pane fade active in" id="weighing">
+							<ui:include src="weighing-edit.xhtml" />
+						</div>
+						<div class="tab-pane fade" id="poussins">
+							<ui:include src="weighing-poussins.xhtml" />
+						</div>
+						<div class="tab-pane fade" id="benjamins">
+							<ui:include src="weighing-benjamins.xhtml" />
+						</div>
+						<div class="tab-pane fade" id="minimes">
+							<ui:include src="weighing-minimes.xhtml" />
+						</div>
+						<div class="tab-pane fade" id="cadets">
+							<ui:include src="weighing-cadets.xhtml" />
+						</div>
+						<div class="tab-pane fade" id="juniors">
+							<ui:include src="weighing-juniors.xhtml" />
+						</div>
+						<div class="tab-pane fade" id="seniors">
+							<ui:include src="weighing-seniors.xhtml" />
+						</div>
+					</div>
+				</div>
+			</div>
+
 		</ui:define>
 
 	</ui:composition>

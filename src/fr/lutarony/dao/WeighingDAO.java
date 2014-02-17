@@ -5,21 +5,21 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 
 import fr.lutarony.dao.definition.DAO;
-import fr.lutarony.model.Wrestler;
+import fr.lutarony.model.Weighing;
 import fr.lutarony.util.CategoryType;
 
-public class WrestlerDAO extends DAO<Wrestler> {
+public class WeighingDAO extends DAO<Weighing> {
 
-	public WrestlerDAO(SessionFactory sessionFactory) {
+	public WeighingDAO(SessionFactory sessionFactory) {
 		super(sessionFactory);
 	}
 
-	public WrestlerDAO() {
+	public WeighingDAO() {
 		super();
 	}
 
 	@Override
-	public boolean create(Wrestler obj) {
+	public boolean create(Weighing obj) {
 		try {
 			getSessionFactory().getCurrentSession().save(obj);
 			return true;
@@ -30,7 +30,7 @@ public class WrestlerDAO extends DAO<Wrestler> {
 	}
 
 	@Override
-	public boolean delete(Wrestler obj) {
+	public boolean delete(Weighing obj) {
 		try {
 			getSessionFactory().getCurrentSession().delete(obj);
 			return true;
@@ -40,7 +40,7 @@ public class WrestlerDAO extends DAO<Wrestler> {
 	}
 
 	@Override
-	public boolean update(Wrestler obj) {
+	public boolean update(Weighing obj) {
 		try {
 			getSessionFactory().getCurrentSession().update(obj);
 			return true;
@@ -50,23 +50,23 @@ public class WrestlerDAO extends DAO<Wrestler> {
 	}
 
 	@Override
-	public Wrestler find(int id) {
+	public Weighing find(int id) {
 		List list = getSessionFactory().getCurrentSession()
 				.createQuery("from Wrestler where id=?").setParameter(0, id)
 				.list();
-		return (Wrestler) list.get(0);
+		return (Weighing) list.get(0);
 	}
 
 	@Override
-	public List<Wrestler> getAll() {
+	public List<Weighing> getAll() {
 		List list = getSessionFactory().getCurrentSession()
-				.createQuery("from Wrestler").list();
+				.createQuery("from Weighing").list();
 		return list;
 	}
 
-	public List<Wrestler> getWrestlerByCategory(CategoryType category) {
+	public List<Weighing> getWeighingByCategory(CategoryType category) {
 		List list = getSessionFactory().getCurrentSession()
-				.createQuery("SELECT * FROM Wrestler WHERE category=?")
+				.createQuery("SELECT * FROM Weighing WHERE category=?")
 				.setParameter(0, category.toString()).list();
 		return list;
 	}

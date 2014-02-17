@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.bean.RequestScoped;
 
 import org.springframework.dao.DataAccessException;
 
@@ -14,11 +14,12 @@ import fr.lutarony.business.definition.IUserBO;
 import fr.lutarony.model.User;
 
 @ManagedBean(name = "userBean")
+@RequestScoped
 public class UserBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private static final String SUCCESS = "admin";
-	private static final String ERROR = "error";
+	private static final String SUCCESS = "#";
+	private static final String ERROR = "#";
 
 	@ManagedProperty(value = "#{UserBO}")
 	IUserBO userBO;
@@ -29,6 +30,7 @@ public class UserBean implements Serializable {
 	private String name;
 	private String surname;
 	private String email;
+	private String password;
 
 	public String addUser() {
 		try {
@@ -37,6 +39,7 @@ public class UserBean implements Serializable {
 			user.setName(getName());
 			user.setSurname(getSurname());
 			user.setEmail(getEmail());
+			user.setPassword(getPassword());
 			getUserBO().createUser(user);
 			clear();
 			return SUCCESS;
@@ -103,26 +106,23 @@ public class UserBean implements Serializable {
 		this.email = email;
 	}
 
-	public String getSayWelcome() {
-		if ("".equals(name) || name == null) {
-			return "";
-		} else {
-			return "Welcome " + name;
-		}
+	public String getPassword() {
+		return password;
 	}
-	
-	public int getTotalUsers(){
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public int getTotalUsers() {
 		return getUserList().size();
-	}
-
-	public void checkName(AjaxBehaviorEvent event) {
-
 	}
 
 	public void clear() {
 		this.name = "";
 		this.surname = "";
 		this.email = "";
+		this.password = "";
 	}
 
 }

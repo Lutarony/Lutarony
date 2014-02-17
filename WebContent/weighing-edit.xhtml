@@ -1,0 +1,146 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://xmlns.jcp.org/jsf/passthrough">
+
+	<div class="padding-md" style="text-align: left;">
+		<div class="padding-md">
+
+			<div class="row">
+				<div class="col-md-6">
+
+					<div class="panel panel-default">
+						<div class="panel-heading">Match Progress</div>
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Team</th>
+									<th>Weight</th>
+									<th>Category</th>
+									<th>Lot number</th>
+								</tr>
+							</thead>
+							<tbody>
+								<ui:repeat var="wrestler" value="#{wrestlerBean.wrestlerList}">
+									<tr>
+										<td>#{wrestler.name} #{wrestler.surname}</td>
+										<td></td>
+										<td></td>
+										<td>#{wrestler.category}</td>
+										<td><span class="badge">14</span></td>
+									</tr>
+
+								</ui:repeat>
+
+							</tbody>
+						</table>
+					</div>
+
+
+					<!--<div class="panel panel-default fadeInDown animation-delay2">
+								<div class="panel-heading">Wrestlers list</div>
+								<div class="panel-body">
+									<ul class="list-group">
+										<ui:repeat var="wrestler" value="#{wrestlerBean.wrestlerList}">
+											<li id="#{wrestler.id}" class="list-group-item"><span
+												class="badge">14</span> #{wrestler.name} #{wrestler.surname}</li>
+										</ui:repeat>
+									</ul>
+								</div>
+							</div>-->
+
+
+				</div>
+
+
+
+
+
+
+				<div class="col-md-6">
+					<div class="panel panel-default">
+						<form class="form-horizontal form-border">
+							<div class="panel-heading">Pesée</div>
+							<div class="panel-body">
+								<div class="form-group">
+									<label class="control-label col-md-2">Username</label>
+									<div class="col-md-10">
+										<input type="text" class="form-control input-sm"
+											placeholder="Username" value="John Doe" />
+									</div>
+									<!-- /.col -->
+								</div>
+								<!-- /form-group -->
+								<div class="form-group">
+									<label class="control-label col-md-2">Password</label>
+									<div class="col-md-10">
+										<input type="password" class="form-control input-sm"
+											value="Password" />
+									</div>
+									<!-- /.col -->
+								</div>
+								<!-- /form-group -->
+								<div class="form-group">
+									<label class="control-label col-md-2">Email</label>
+									<div class="col-md-10">
+										<input type="text" class="form-control input-sm"
+											value="john_doe@email.com" />
+									</div>
+									<!-- /.col -->
+								</div>
+								<!-- /form-group -->
+								<div class="form-group">
+									<label class="control-label col-md-2">Gender</label>
+									<div class="col-md-10">
+										<label class="label-radio inline"> <input type="radio"
+											name="inline-radio" /><span class="custom-radio"></span>
+											Male
+										</label> <label class="label-radio inline"> <input
+											type="radio" name="inline-radio" /><span
+											class="custom-radio"></span> Female
+										</label>
+									</div>
+									<!-- /.col -->
+								</div>
+								<!-- /form-group -->
+								<div class="form-group">
+									<label class="control-label col-md-2">Address</label>
+									<div class="col-md-10">
+										<textarea class="form-control" rows="3"></textarea>
+									</div>
+									<!-- /.col -->
+								</div>
+								<!-- /form-group -->
+								<div class="form-group">
+									<label class="control-label col-md-2">Phone</label>
+									<div class="col-md-10">
+										<input type="text" class="form-control input-sm" />
+									</div>
+									<!-- /.col -->
+								</div>
+								<!-- /form-group -->
+							</div>
+							<div class="panel-footer">
+								<div class="text-right">
+									<button class="btn btn-sm btn-primary">Update</button>
+									<button class="btn btn-sm btn-cancel" type="reset"
+										value="Reset"></button>
+								</div>
+							</div>
+						</form>
+					</div>
+
+
+				</div>
+				<!-- /.col -->
+			</div>
+		</div>
+	</div>
+
+
+
+</ui:composition>
