@@ -2,6 +2,7 @@ package fr.lutarony.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -9,16 +10,19 @@ import javax.persistence.Table;
 @Table(name = "team")
 public class Team {
 
+	@Id
+	@GeneratedValue
 	private int id;
 	private String name;
-	private int coachId;
+	private String coach;
 	private String adress;
 	private String city;
 	private String code;
 	private String country;
 	private String phone;
+	
+	// List of WRESTLERS
 
-	@Id
 	@Column(name = "ID", unique = true, nullable = false)
 	public int getId() {
 		return id;
@@ -37,13 +41,13 @@ public class Team {
 		this.name = name;
 	}
 
-	@Column(name = "COACH_ID", unique = true, nullable = false)
-	public int getCoachId() {
-		return coachId;
+	@Column(name = "COACH", unique = false, nullable = true)
+	public String getCoach() {
+		return coach;
 	}
 
-	public void setCoachId(int coachId) {
-		this.coachId = coachId;
+	public void setCoach(String coach) {
+		this.coach = coach;
 	}
 
 	@Column(name = "ADRESS")
@@ -94,9 +98,10 @@ public class Team {
 	@Override
 	public String toString() {
 		StringBuffer strBuff = new StringBuffer();
+		strBuff.append("TEAM = ");
 		strBuff.append("id : ").append(getId());
 		strBuff.append(", name : ").append(getName());
-		strBuff.append(", coachId : ").append(getCoachId());
+		strBuff.append(", coach : ").append(getCoach());
 		strBuff.append(", adress : ").append(getAdress());
 		strBuff.append(", city : ").append(getCity());
 		strBuff.append(", code : ").append(getCode());

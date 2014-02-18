@@ -1,25 +1,25 @@
 package fr.lutarony.beans;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Date;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.event.AjaxBehaviorEvent;
 
 import org.springframework.dao.DataAccessException;
 
 import fr.lutarony.business.definition.IWrestlerBO;
 import fr.lutarony.model.Wrestler;
+import fr.lutarony.util.CategoryType;
 
 @ManagedBean(name = "wrestlerBean")
 public class WrestlerBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private static final String SUCCESS = "admin";
-	private static final String ERROR = "error";
+	private static final String SUCCESS = "#";
+	private static final String ERROR = "#";
 
 	@ManagedProperty(value = "#{WrestlerBO}")
 	IWrestlerBO wrestlerBO;
@@ -32,8 +32,7 @@ public class WrestlerBean implements Serializable {
 	private String sex;
 	private Date birthDate;
 	private int teamId;
-	private int categoryId;
-
+	private CategoryType category;
 
 	public String addWrestler() {
 		try {
@@ -43,6 +42,8 @@ public class WrestlerBean implements Serializable {
 			wrestler.setSurname(getSurname());
 			wrestler.setSex(getSex());
 			wrestler.setBirthDate(getBirthDate());
+			wrestler.setTeamId(getTeamId());
+			wrestler.setCategory(getCategory());
 			getWrestlerBO().createWrestler(wrestler);
 			clear();
 			return SUCCESS;
@@ -125,12 +126,12 @@ public class WrestlerBean implements Serializable {
 		this.teamId = teamId;
 	}
 
-	public int getCategoryId() {
-		return categoryId;
+	public CategoryType getCategory() {
+		return category;
 	}
 
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
+	public void setCategory(CategoryType category) {
+		this.category = category;
 	}
 
 	public String getSayWelcome() {
@@ -139,10 +140,6 @@ public class WrestlerBean implements Serializable {
 		} else {
 			return "Welcome " + name;
 		}
-	}
-
-	public void checkName(AjaxBehaviorEvent event) {
-
 	}
 
 	public void clear() {

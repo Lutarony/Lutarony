@@ -96,4 +96,5 @@ public class WrestlerBO implements IWrestlerBO {
 	public void setWrestlerDAO(WrestlerDAO wrestlerDAO) {
 		this.wrestlerDAO = wrestlerDAO;
 	}
+	
 }

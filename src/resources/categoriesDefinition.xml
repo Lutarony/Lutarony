@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<categories>
+
+	<category name="poussin">
+		<min>2003</min>
+	</category>
+	
+	<category name="minime">
+		<min>2001</min>
+		<max>2002</max>
+		<weight>
+			<sex value="F">
+				37 - 40 - 43 - 46 - 50 - 54 - 58 - 63 - 69
+			</sex>
+			<sex value="M">
+				35 - 38 - 42 - 46 - 50 - 55 - 60 - 66 - 72 - 85
+			</sex>
+		</weight>
+	</category>
+	
+</categories>
