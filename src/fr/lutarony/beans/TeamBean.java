@@ -7,8 +7,9 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.event.ActionEvent;
 
-import org.springframework.dao.DataAccessException;
+import org.primefaces.context.RequestContext;
 
 import fr.lutarony.business.definition.ITeamBO;
 import fr.lutarony.model.Team;
@@ -35,19 +36,42 @@ public class TeamBean implements Serializable {
 	private String country;
 	private String phone;
 
-	public String addTeam() {
-		try {
-			Team team = new Team();
-			team.setId(getId());
-			team.setName(getName());
-			getTeamBO().createTeam(team);
-
-			return SUCCESS;
-		} catch (DataAccessException e) {
-			e.printStackTrace();
-		}
-
-		return ERROR;
+	public String addTeamBean() {
+		Team team = new Team();
+		team.setName(getName());
+		team.setCoach(getCoach());
+		
+		getTeamBO().createTeam(team);
+		
+		RequestContext.getCurrentInstance().closeDialog(team); 
+		/*
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Team created :", team.getName());  
+        FacesContext.getCurrentInstance().addMessage(null, message);  
+        */
+        return team.getName();
+	}
+	
+	public void openAddTeamView() {
+		RequestContext.getCurrentInstance().openDialog("add-team.xhtml"); 
+	}
+	
+	public String editTeamBean() {
+		Team team = new Team();
+		team.setName(getName());
+		team.setCoach(getCoach());
+		getTeamBO().updateTeam(team);
+		
+		RequestContext.getCurrentInstance().closeDialog(team); 
+		/*
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Team edited :", team.getName());  
+        FacesContext.getCurrentInstance().addMessage(null, message);
+        */
+		
+		return team.getName();
+	}
+	
+	public void openEditTeamView() {
+		RequestContext.getCurrentInstance().openDialog("edit-team"); 
 	}
 
 	public List<Team> getTeamList() {
