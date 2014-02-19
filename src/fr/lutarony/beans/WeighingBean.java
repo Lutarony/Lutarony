@@ -1,29 +1,17 @@
 package fr.lutarony.beans;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
+import javax.faces.bean.SessionScoped;
+import javax.faces.event.ActionEvent;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ComponentSystemEvent;
 
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-
-import org.apache.commons.io.IOUtils;
 import org.springframework.dao.DataAccessException;
 
 import fr.lutarony.business.definition.IWeighingBO;
@@ -51,15 +39,20 @@ public class WeighingBean implements Serializable {
 	private int lotNb;
 	private Timestamp date;
 
+	private int tolerance;
+	private Double finalWeight;
+
+	String action;
+
 	public String addWeighing() {
 		try {
-			Weighing weighing = new Weighing();
-			weighing.setId(getId());
-			weighing.setTournament(getTour());
-			weighing.setWrestler(getWrestler());
-			weighing.setWeight(getWeight());
-			weighing.setLotNb(getLotNb());
-			weighing.setDate(getDate());
+			/*
+			 * Weighing weighing = new Weighing(); weighing.setId(getId());
+			 * weighing.setTournament(getTour());
+			 * weighing.setWrestler(getWrestler());
+			 * weighing.setWeight(getWeight()); weighing.setLotNb(getLotNb());
+			 * weighing.setDate(getDate());
+			 */
 			// clear();
 			return SUCCESS;
 		} catch (DataAccessException e) {
@@ -67,9 +60,6 @@ public class WeighingBean implements Serializable {
 		}
 
 		return ERROR;
-	}
-
-	public void reset() {
 	}
 
 	public boolean getCategoryValue() {
@@ -129,6 +119,35 @@ public class WeighingBean implements Serializable {
 		weighingList.addAll(getWeighingBO().getWeighingsByCategory(
 				CategoryType.SENIOR));
 		return weighingList;
+	}
+
+	public void attrListener(ActionEvent event) {
+
+		this.id = (Integer) event.getComponent().getAttributes()
+				.get("selectedWeighingId");
+
+	}
+
+	public void reset(AjaxBehaviorEvent event) {
+		setWeight(0.0);
+		setTolerance(0);
+		setFinalWeight(0.0);
+	}
+
+	public void getSave() {
+		Weighing w = new Weighing(getId(), getFinalWeight(), getLotNb(),
+				getDate(), getTour(), getWrestler());
+		getWeighingBO().updateWeighing(w);
+	}
+
+	public String getLoadDetails() {
+		Weighing w = getWeighingBO().findWeighing(getId());
+		setTour(w.getTournament());
+		setWrestler(w.getWrestler());
+		setWeight(w.getWeight());
+		setLotNb(w.getLotNb());
+		setDate(w.getDate());
+		return "#";
 	}
 
 	/**** GETTERS AND SETTERS ****/
@@ -197,42 +216,20 @@ public class WeighingBean implements Serializable {
 		this.weighingList = weighingList;
 	}
 
-	public void printPdfDocument() {
-		System.out.println("Making pdf...");
+	public int getTolerance() {
+		return tolerance;
+	}
 
-		FacesContext fc = FacesContext.getCurrentInstance();
-		ExternalContext ec = fc.getExternalContext();
-		String tplPath = ec.getRealPath("testTemplate.jrxml");
+	public void setTolerance(int tolerance) {
+		this.tolerance = tolerance;
+	}
 
-		try {
-			JasperReport jasperReport = JasperCompileManager
-					.compileReport(tplPath);
-			JasperPrint jasperPrint = JasperFillManager.fillReport(
-					jasperReport, new HashMap<String, Object>());
+	public Double getFinalWeight() {
+		return finalWeight;
+	}
 
-			String pdfName = "/testReport.pdf";
-			String pdfPath = ec.getRealPath(pdfName);
-			JasperExportManager.exportReportToPdfFile(jasperPrint, pdfPath);
-
-			System.out.println("PDF ready!");
-
-			ec.responseReset();
-			ec.setResponseContentType(ec.getMimeType(pdfPath));
-			// ec.setResponseContentLength(contentLength);
-			ec.setResponseHeader("Content-Disposition",
-					"attachment; filename=\"" + pdfName + "\"");
-
-			InputStream input = new FileInputStream(pdfPath);
-			OutputStream output = ec.getResponseOutputStream();
-			IOUtils.copy(input, output);
-		} catch (JRException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		System.out.println("Sending to browser...");
-
-		fc.responseComplete();
+	public void setFinalWeight(Double finalWeight) {
+		this.finalWeight = finalWeight;
 	}
 
 }

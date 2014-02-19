@@ -38,6 +38,23 @@ public class Weighing {
 	@JoinColumn(name = "wrestler_id")
 	private Wrestler wrestler;
 
+	/**** CONSTRUCTOR ****/
+
+	public Weighing(){
+		
+	}
+	
+	public Weighing(int id, Double weight, int lotNb, Timestamp date,
+			Tournament tournament, Wrestler wrestler) {
+		super();
+		this.id = id;
+		this.weight = weight;
+		this.lotNb = lotNb;
+		this.date = date;
+		this.tournament = tournament;
+		this.wrestler = wrestler;
+	}
+
 	/**** GETTERS AND SETTERS ****/
 
 	public String getWeightValue() {
