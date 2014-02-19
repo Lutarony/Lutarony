@@ -16,6 +16,8 @@ public interface IWeighingBO {
 	public Weighing findWeighing(int id);
 	
 	public List<Weighing> getWeighingsByCategory(CategoryType cat);
+	
+	public List<Weighing> getAllOrderBySurname();
 
 	public List<Weighing> getAllWeighings();
 }

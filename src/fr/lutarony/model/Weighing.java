@@ -10,8 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "weighing")
@@ -23,13 +21,13 @@ public class Weighing {
 	private int id;
 
 	@Column(name = "weight", nullable = false)
-	private double weight;
+	private Double weight;
 
 	@Column(name = "lot_nb")
 	private int lotNb;
 
 	@Column(name = "date", nullable = false)
-	//@Temporal(TemporalType.TIMESTAMP)
+	// @Temporal(TemporalType.TIMESTAMP)
 	private Timestamp date;
 
 	@ManyToOne()
@@ -41,6 +39,14 @@ public class Weighing {
 	private Wrestler wrestler;
 
 	/**** GETTERS AND SETTERS ****/
+
+	public String getWeightValue() {
+		if (weight == null || weight == 0.0) {
+			return "- -";
+		}
+
+		return weight.toString();
+	}
 
 	public int getId() {
 		return id;
@@ -66,7 +72,7 @@ public class Weighing {
 		this.wrestler = wrestler;
 	}
 
-	public double getWeight() {
+	public Double getWeight() {
 		return weight;
 	}
 

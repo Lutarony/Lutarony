@@ -100,6 +100,9 @@ public class Wrestler {
 	}
 
 	public CategoryType getCategory() {
+		if (category == null) {
+			return CategoryType.NONE;
+		}
 		return category;
 	}
 

@@ -58,6 +58,11 @@ public class WeighingBO implements IWeighingBO {
 	public List<Weighing> getWeighingsByCategory(CategoryType cat) {
 		return getWeighingDAO().getWeighingByCategory(cat);
 	}
+	
+	@Override
+	public List<Weighing> getAllOrderBySurname() {
+		return getWeighingDAO().getAllOrderBySurname();
+	}
 
 
 	public WeighingDAO getWeighingDAO() {

@@ -10,6 +10,10 @@
 
 	<ui:composition template="/template/master.xhtml">
 
+		<ui:define name="page-title">
+			#{msg['lutarony']} - #{msg['weighing.title']}
+		</ui:define>
+
 		<ui:define name="title">
 			#{msg['weighing.title']}
 		</ui:define>
@@ -29,20 +33,20 @@
 			<div class="panel panel-default">
 				<div class="panel-tab clearfix">
 					<ul class="tab-bar">
-						<li class="active"><a href="#weighing" data-toggle="tab"><i
-								class="glyphicon glyphicon-chevron-down"></i>WEIGHING</a></li>
-						<li class=""><a href="#poussins" data-toggle="tab"><i
-								class="glyphicon glyphicon-leaf"></i>POUSSINS</a></li>
-						<li class=""><a href="#benjamins" data-toggle="tab"><i
-								class="glyphicon glyphicon-leaf"></i>BENJAMINS</a></li>
-						<li class=""><a href="#minimes" data-toggle="tab"><i
-								class="glyphicon glyphicon-leaf"></i>MINIMES</a></li>
-						<li class=""><a href="#cadets" data-toggle="tab"><i
-								class="glyphicon glyphicon-leaf"></i>CADETS</a></li>
-						<li class=""><a href="#juniors" data-toggle="tab"><i
-								class="glyphicon glyphicon-leaf"></i>JUNIORS</a></li>
-						<li class=""><a href="#seniors" data-toggle="tab"><i
-								class="glyphicon glyphicon-leaf"></i>SENIORS</a></li>
+						<li class="active"><a href="#weighing" class="category-title" data-toggle="tab"><i
+								class="glyphicon glyphicon-chevron-down"></i>#{msg["weighing.title"]}s</a></li>
+						<li class=""><a href="#poussins" class="category-title" data-toggle="tab"><i
+								class="glyphicon glyphicon-leaf"></i>#{msg["weighing.poussin"]}s</a></li>
+						<li class=""><a href="#benjamins" class="category-title" data-toggle="tab"><i
+								class="glyphicon glyphicon-leaf"></i>#{msg["weighing.benjamin"]}s</a></li>
+						<li class=""><a href="#minimes" class="category-title" data-toggle="tab"><i
+								class="glyphicon glyphicon-leaf"></i>#{msg["weighing.minime"]}s</a></li>
+						<li class=""><a href="#cadets" class="category-title" data-toggle="tab"><i
+								class="glyphicon glyphicon-leaf"></i>#{msg["weighing.cadet"]}s</a></li>
+						<li class=""><a href="#juniors" class="category-title" data-toggle="tab"><i
+								class="glyphicon glyphicon-leaf"></i>#{msg["weighing.junior"]}s</a></li>
+						<li class=""><a href="#seniors" class="category-title" data-toggle="tab"><i
+								class="glyphicon glyphicon-leaf"></i>#{msg["weighing.senior"]}s</a></li>
 					</ul>
 				</div>
 				<div class="panel-body">
