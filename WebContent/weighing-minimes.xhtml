@@ -6,7 +6,36 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:t="http://xmlns.jcp.org/jsf/passthrough">
 
-	Poussins
+	<div class="col-lg-10">
+
+
+		<h3 class="weighing-title">Minimes</h3>
+		<h:outputLabel value="wrestlers"></h:outputLabel>
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Surname</th>
+					<th>Team</th>
+					<th>Weight</th>
+					<th>Lot number</th>
+				</tr>
+			</thead>
+			<tbody>
+				<ui:repeat var="weighing" value="#{weighingBean.weighingsByMinime}">
+					<tr>
+						<td>#{weighing.wrestler.name}</td>
+						<td>#{weighing.wrestler.surname}</td>
+						<td>#{weighing.wrestler.team.name}</td>
+						<td>#{weighing.weight}</td>
+						<td><span class="badge">#{weighing.lotNb}</span></td>
+					</tr>
+				</ui:repeat>
+			</tbody>
+		</table>
+
+	</div>
 
 
 </ui:composition>

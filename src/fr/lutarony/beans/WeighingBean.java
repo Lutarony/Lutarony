@@ -14,6 +14,7 @@ import fr.lutarony.business.definition.IWeighingBO;
 import fr.lutarony.model.Tournament;
 import fr.lutarony.model.Weighing;
 import fr.lutarony.model.Wrestler;
+import fr.lutarony.util.CategoryType;
 
 @ManagedBean(name = "weighingBean")
 public class WeighingBean implements Serializable {
@@ -54,10 +55,50 @@ public class WeighingBean implements Serializable {
 
 	public void reset() {
 	}
+	
+	public boolean getCategoryValue(){
+		return CategoryType.isCategory("POUSin");
+	}
 
 	public List<Weighing> getWeighingsList() {
 		weighingList = new ArrayList<Weighing>();
 		weighingList.addAll(getWeighingBO().getAllWeighings());
+		return weighingList;
+	}
+	
+	public List<Weighing> getWeighingsByPoussin() {
+		weighingList = new ArrayList<Weighing>();
+		weighingList.addAll(getWeighingBO().getWeighingsByCategory(CategoryType.POUSSIN));
+		return weighingList;
+	}
+	
+	public List<Weighing> getWeighingsByMinime() {
+		weighingList = new ArrayList<Weighing>();
+		weighingList.addAll(getWeighingBO().getWeighingsByCategory(CategoryType.MINIME));
+		return weighingList;
+	}
+	
+	public List<Weighing> getWeighingsByBenjamin() {
+		weighingList = new ArrayList<Weighing>();
+		weighingList.addAll(getWeighingBO().getWeighingsByCategory(CategoryType.BENJAMIN));
+		return weighingList;
+	}
+	
+	public List<Weighing> getWeighingsByCadet() {
+		weighingList = new ArrayList<Weighing>();
+		weighingList.addAll(getWeighingBO().getWeighingsByCategory(CategoryType.CADET));
+		return weighingList;
+	}
+	
+	public List<Weighing> getWeighingsByJunior() {
+		weighingList = new ArrayList<Weighing>();
+		weighingList.addAll(getWeighingBO().getWeighingsByCategory(CategoryType.JUNIOR));
+		return weighingList;
+	}
+	
+	public List<Weighing> getWeighingsBySenior() {
+		weighingList = new ArrayList<Weighing>();
+		weighingList.addAll(getWeighingBO().getWeighingsByCategory(CategoryType.SENIOR));
 		return weighingList;
 	}
 

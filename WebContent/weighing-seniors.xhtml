@@ -23,7 +23,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<ui:repeat var="weighing" value="#{weighingBean.weighingsList}">
+				<ui:repeat var="weighing" value="#{weighingBean.weighingsBySenior}">
 					<tr>
 						<td>#{weighing.wrestler.name}</td>
 						<td>#{weighing.wrestler.surname}</td>
@@ -31,14 +31,10 @@
 						<td>#{weighing.weight}</td>
 						<td><span class="badge">#{weighing.lotNb}</span></td>
 					</tr>
-
 				</ui:repeat>
-
-
 			</tbody>
 		</table>
 
 	</div>
-
 
 </ui:composition>

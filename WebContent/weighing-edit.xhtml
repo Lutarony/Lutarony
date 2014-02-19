@@ -13,7 +13,7 @@
 				<div class="col-md-6">
 
 					<div class="panel panel-default">
-						<div class="panel-heading">Match Progress</div>
+						<div class="panel-heading">All wrestlers</div>
 						<table class="table table-striped">
 							<thead>
 								<tr>
@@ -25,19 +25,20 @@
 								</tr>
 							</thead>
 							<tbody>
-								<ui:repeat var="wrestler" value="#{wrestlerBean.wrestlerList}">
+								<ui:repeat var="weighing" value="#{weighingBean.weighingsList}">
 									<tr>
-										<td>#{wrestler.name} #{wrestler.surname}</td>
-										<td>#{wrestler.team.name}</td>
-										<td></td>
-										<td>#{wrestler.category}</td>
-										<td><span class="badge">14</span></td>
+										<td>#{weighing.wrestler.name} #{weighing.wrestler.surname}</td>
+										<td>#{weighing.wrestler.team.name}</td>
+										<td>#{weighing.weight}</td>
+										<td>#{weighing.wrestler.category}</td>
+										<td><span class="badge">#{weighing.lotNb}</span></td>
 									</tr>
 
 								</ui:repeat>
 
 							</tbody>
 						</table>
+						<h:outputLabel value="#{weighingBean.categoryValue}"></h:outputLabel>
 					</div>
 
 

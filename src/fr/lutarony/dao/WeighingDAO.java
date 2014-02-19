@@ -2,7 +2,10 @@ package fr.lutarony.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 
 import fr.lutarony.dao.definition.DAO;
 import fr.lutarony.model.Weighing;
@@ -58,17 +61,24 @@ public class WeighingDAO extends DAO<Weighing> {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<Weighing> getAll() {
-		List list = getSessionFactory().getCurrentSession()
-				.createCriteria(Weighing.class).list();
-		return list;
+		Criteria criteria = getSessionFactory().getCurrentSession()
+				.createCriteria(Weighing.class);
+		criteria.setFetchMode("tournament", FetchMode.JOIN);
+		criteria.setFetchMode("wrestler", FetchMode.JOIN);
+		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+
+		return (List<Weighing>) criteria.list();
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Weighing> getWeighingByCategory(CategoryType category) {
-		List list = getSessionFactory().getCurrentSession()
-				.createQuery("SELECT * FROM Weighing WHERE category=?")
-				.setParameter(0, category.toString()).list();
-		return list;
+		Criteria criteria = getSessionFactory().getCurrentSession()
+				.createCriteria(Weighing.class);
+		criteria.createAlias("wrestler", "w").add(
+				Restrictions.eq("w.category", category));
+		return (List<Weighing>) criteria.list();
 	}
 
 }
