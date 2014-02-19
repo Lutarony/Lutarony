@@ -486,7 +486,7 @@ a {
 }
 
 .padding-md {
-	padding: 20px !important;
+	padding: 5px !important;
 }
 
 .bg-danger {
@@ -638,6 +638,10 @@ a {
 }
 
 /*Weighing*/
+.tab-bar a.category-title  {
+	text-transform: uppercase;
+}
+
 .tab-bar.grey-tab {
 	background: #e6e6e6;
 }
@@ -707,4 +711,9 @@ ul {
 
 .weighing-title{
 	color :#394754
+}
+
+td{
+	height: 50px;
+	padding-top: 15px !important;
 }

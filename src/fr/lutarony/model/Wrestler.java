@@ -2,7 +2,6 @@ package fr.lutarony.model;
 
 import java.sql.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,8 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.SecondaryTable;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -25,18 +23,34 @@ public class Wrestler {
 
 	@Id
 	@GeneratedValue
+	@Column(name = "id")
 	private int id;
+
+	@Column(name = "name", unique = false, nullable = false)
 	private String name;
+
+	@Column(name = "surname", unique = false, nullable = false)
 	private String surname;
+
+	@Column(name = "sex", unique = false, nullable = false)
 	private String sex;
+
+	@Column(name = "birth_date", unique = false, nullable = false)
 	private Date birthDate;
-	private int teamId;
+
+	@Column(name = "category")
+	@Enumerated(EnumType.STRING)
 	private CategoryType category;
 
+	@ManyToOne()
+	@JoinColumn(name = "team_id")
 	private Team team;
 
-	@Id
-	@Column(name = "ID", unique = true, nullable = false)
+	@OneToOne(mappedBy = "wrestler")
+	private Weighing weighing;
+
+	/**** GETTERS AND SETTERS ****/
+
 	public int getId() {
 		return id;
 	}
@@ -45,7 +59,6 @@ public class Wrestler {
 		this.id = id;
 	}
 
-	@Column(name = "NAME", unique = false, nullable = false)
 	public String getName() {
 		return name;
 	}
@@ -54,7 +67,6 @@ public class Wrestler {
 		this.name = name;
 	}
 
-	@Column(name = "SURNAME", unique = false, nullable = false)
 	public String getSurname() {
 		return surname;
 	}
@@ -63,7 +75,6 @@ public class Wrestler {
 		this.surname = surname;
 	}
 
-	@Column(name = "SEX", unique = false, nullable = false)
 	public String getSex() {
 		return sex;
 	}
@@ -72,7 +83,6 @@ public class Wrestler {
 		this.sex = sex;
 	}
 
-	@Column(name = "BIRTH_DATE", unique = false, nullable = false)
 	public Date getBirthDate() {
 		return birthDate;
 	}
@@ -81,17 +91,6 @@ public class Wrestler {
 		this.birthDate = birthDate;
 	}
 
-	@Column(name = "TEAM_ID", nullable = false)
-	public int getTeamId() {
-		return teamId;
-	}
-
-	public void setTeamId(int teamId) {
-		this.teamId = teamId;
-	}
-
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "team_id")
 	public Team getTeam() {
 		return team;
 	}
@@ -100,14 +99,23 @@ public class Wrestler {
 		this.team = team;
 	}
 
-	@Column(name = "CATEGORY")
-	@Enumerated(EnumType.STRING)
 	public CategoryType getCategory() {
+		if (category == null) {
+			return CategoryType.NONE;
+		}
 		return category;
 	}
 
 	public void setCategory(CategoryType category) {
 		this.category = category;
+	}
+
+	public Weighing getWeighing() {
+		return weighing;
+	}
+
+	public void setWeighing(Weighing weighing) {
+		this.weighing = weighing;
 	}
 
 	@Override

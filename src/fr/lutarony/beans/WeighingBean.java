@@ -7,11 +7,18 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
+import javax.faces.event.ActionEvent;
+import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.event.ComponentSystemEvent;
 
 import org.springframework.dao.DataAccessException;
 
 import fr.lutarony.business.definition.IWeighingBO;
+import fr.lutarony.model.Tournament;
 import fr.lutarony.model.Weighing;
+import fr.lutarony.model.Wrestler;
+import fr.lutarony.util.CategoryType;
 
 @ManagedBean(name = "weighingBean")
 public class WeighingBean implements Serializable {
@@ -26,22 +33,27 @@ public class WeighingBean implements Serializable {
 	List<Weighing> weighingList;
 
 	private int id;
-	private int tourId;
-	private int wrestlerId;
-	private double weight;
+	private Tournament tour;
+	private Wrestler wrestler;
+	private Double weight;
 	private int lotNb;
 	private Timestamp date;
 
+	private int tolerance;
+	private Double finalWeight;
+
+	String action;
+
 	public String addWeighing() {
 		try {
-			Weighing weighing = new Weighing();
-			weighing.setId(getId());
-			weighing.setTourId(getTourId());
-			weighing.setWrestlerId(getWrestlerId());
-			weighing.setWeight(getWeight());
-			weighing.setLotNb(getLotNb());
-			weighing.setDate(getDate());
-			clear();
+			/*
+			 * Weighing weighing = new Weighing(); weighing.setId(getId());
+			 * weighing.setTournament(getTour());
+			 * weighing.setWrestler(getWrestler());
+			 * weighing.setWeight(getWeight()); weighing.setLotNb(getLotNb());
+			 * weighing.setDate(getDate());
+			 */
+			// clear();
 			return SUCCESS;
 		} catch (DataAccessException e) {
 			e.printStackTrace();
@@ -50,18 +62,95 @@ public class WeighingBean implements Serializable {
 		return ERROR;
 	}
 
-	public void reset() {
+	public boolean getCategoryValue() {
+		return CategoryType.isCategory("POUSin");
 	}
 
-	public List<Weighing> getWeighingList() {
+	public void loadDatas(ComponentSystemEvent event) {
+		Weighing w = getWeighingBO().findWeighing(getId());
+		setWrestler(w.getWrestler());
+		setWeight(w.getWeight());
+		setLotNb(w.getLotNb());
+	}
+
+	public List<Weighing> getWeighingsListOrderBySurname() {
 		weighingList = new ArrayList<Weighing>();
-		weighingList.addAll(getWeighingBO().getAllWeighings());
+		weighingList.addAll(getWeighingBO().getAllOrderBySurname());
 		return weighingList;
 	}
 
-	public void setWeighingsList(List<Weighing> weighingList) {
-		this.weighingList = weighingList;
+	public List<Weighing> getWeighingsByPoussin() {
+		weighingList = new ArrayList<Weighing>();
+		weighingList.addAll(getWeighingBO().getWeighingsByCategory(
+				CategoryType.POUSSIN));
+		return weighingList;
 	}
+
+	public List<Weighing> getWeighingsByMinime() {
+		weighingList = new ArrayList<Weighing>();
+		weighingList.addAll(getWeighingBO().getWeighingsByCategory(
+				CategoryType.MINIME));
+		return weighingList;
+	}
+
+	public List<Weighing> getWeighingsByBenjamin() {
+		weighingList = new ArrayList<Weighing>();
+		weighingList.addAll(getWeighingBO().getWeighingsByCategory(
+				CategoryType.BENJAMIN));
+		return weighingList;
+	}
+
+	public List<Weighing> getWeighingsByCadet() {
+		weighingList = new ArrayList<Weighing>();
+		weighingList.addAll(getWeighingBO().getWeighingsByCategory(
+				CategoryType.CADET));
+		return weighingList;
+	}
+
+	public List<Weighing> getWeighingsByJunior() {
+		weighingList = new ArrayList<Weighing>();
+		weighingList.addAll(getWeighingBO().getWeighingsByCategory(
+				CategoryType.JUNIOR));
+		return weighingList;
+	}
+
+	public List<Weighing> getWeighingsBySenior() {
+		weighingList = new ArrayList<Weighing>();
+		weighingList.addAll(getWeighingBO().getWeighingsByCategory(
+				CategoryType.SENIOR));
+		return weighingList;
+	}
+
+	public void attrListener(ActionEvent event) {
+
+		this.id = (Integer) event.getComponent().getAttributes()
+				.get("selectedWeighingId");
+
+	}
+
+	public void reset(AjaxBehaviorEvent event) {
+		setWeight(0.0);
+		setTolerance(0);
+		setFinalWeight(0.0);
+	}
+
+	public void getSave() {
+		Weighing w = new Weighing(getId(), getFinalWeight(), getLotNb(),
+				getDate(), getTour(), getWrestler());
+		getWeighingBO().updateWeighing(w);
+	}
+
+	public String getLoadDetails() {
+		Weighing w = getWeighingBO().findWeighing(getId());
+		setTour(w.getTournament());
+		setWrestler(w.getWrestler());
+		setWeight(w.getWeight());
+		setLotNb(w.getLotNb());
+		setDate(w.getDate());
+		return "#";
+	}
+
+	/**** GETTERS AND SETTERS ****/
 
 	public IWeighingBO getWeighingBO() {
 		return weighingBO;
@@ -79,27 +168,27 @@ public class WeighingBean implements Serializable {
 		this.id = id;
 	}
 
-	public int getTourId() {
-		return tourId;
+	public Tournament getTour() {
+		return tour;
 	}
 
-	public void setTourId(int tourId) {
-		this.tourId = tourId;
+	public void setTour(Tournament tour) {
+		this.tour = tour;
 	}
 
-	public int getWrestlerId() {
-		return wrestlerId;
+	public Wrestler getWrestler() {
+		return wrestler;
 	}
 
-	public void setWrestlerId(int wrestlerId) {
-		this.wrestlerId = wrestlerId;
+	public void setWrestler(Wrestler wrestler) {
+		this.wrestler = wrestler;
 	}
 
-	public double getWeight() {
+	public Double getWeight() {
 		return weight;
 	}
 
-	public void setWeight(double weight) {
+	public void setWeight(Double weight) {
 		this.weight = weight;
 	}
 
@@ -119,8 +208,28 @@ public class WeighingBean implements Serializable {
 		this.date = date;
 	}
 
-	public void clear() {
+	public List<Weighing> getWeighingList() {
+		return weighingList;
+	}
 
+	public void setWeighingList(List<Weighing> weighingList) {
+		this.weighingList = weighingList;
+	}
+
+	public int getTolerance() {
+		return tolerance;
+	}
+
+	public void setTolerance(int tolerance) {
+		this.tolerance = tolerance;
+	}
+
+	public Double getFinalWeight() {
+		return finalWeight;
+	}
+
+	public void setFinalWeight(Double finalWeight) {
+		this.finalWeight = finalWeight;
 	}
 
 }

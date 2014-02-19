@@ -1,15 +1,18 @@
 package fr.lutarony.model;
 
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import fr.lutarony.util.Wrestling;
@@ -18,17 +21,27 @@ import fr.lutarony.util.Wrestling;
 @Table(name = "tournament")
 public class Tournament {
 
+	@Id
+	@GeneratedValue
+	@Column(name = "id", unique = true, nullable = false)
 	private int id;
-	private int eventId;
+
+	@Column(name = "type")
+	@Enumerated(EnumType.STRING)
 	private Wrestling type;
+
+	@Column(name = "date", unique = false, nullable = false)
 	private Date date;
 
+	@ManyToOne()
+	@JoinColumn(name = "event_id")
 	private Event event;
 
-	// List of weighings
+	@OneToMany(mappedBy = "tournament")
+	private Set<Weighing> weighings = new HashSet<Weighing>();
 
-	@Id
-	@Column(name = "ID", unique = true, nullable = false)
+	/**** GETTERS AND SETTERS ****/
+
 	public int getId() {
 		return id;
 	}
@@ -37,17 +50,6 @@ public class Tournament {
 		this.id = id;
 	}
 
-	@Column(name = "EVENT_ID", unique = true, nullable = false)
-	public int getEventId() {
-		return eventId;
-	}
-
-	public void setEventId(int eventId) {
-		this.eventId = eventId;
-	}
-
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "event_id")
 	public Event getEvent() {
 		return event;
 	}
@@ -56,7 +58,6 @@ public class Tournament {
 		this.event = event;
 	}
 
-	@Column(name = "DATE", unique = false, nullable = false)
 	public Date getDate() {
 		return date;
 	}
@@ -65,14 +66,20 @@ public class Tournament {
 		this.date = date;
 	}
 
-	@Column(name = "TYPE")
-	@Enumerated(EnumType.STRING)
 	public Wrestling getType() {
 		return type;
 	}
 
 	public void setType(Wrestling type) {
 		this.type = type;
+	}
+
+	public Set<Weighing> getWeighings() {
+		return weighings;
+	}
+
+	public void setWeighings(Set<Weighing> weighings) {
+		this.weighings = weighings;
 	}
 
 	@Override

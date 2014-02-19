@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import fr.lutarony.business.definition.IWeighingBO;
 import fr.lutarony.dao.WeighingDAO;
 import fr.lutarony.model.Weighing;
+import fr.lutarony.util.CategoryType;
 
 /**
  * 
@@ -23,78 +24,53 @@ public class WeighingBO implements IWeighingBO {
 	// WeighingDAO is injected...
 	WeighingDAO weighingDAO;
 
-	/**
-	 * Add Weighing
-	 * 
-	 * @param Weighing
-	 *            Weighing
-	 */
+
 	@Transactional(readOnly = false)
 	@Override
 	public void createWeighing(Weighing Weighing) {
 		getWeighingDAO().create(Weighing);
 	}
 
-	/**
-	 * Delete Weighing
-	 * 
-	 * @param Weighing
-	 *            Weighing
-	 */
+
 	@Transactional(readOnly = false)
 	@Override
 	public void deleteWeighing(Weighing Weighing) {
 		getWeighingDAO().delete(Weighing);
 	}
 
-	/**
-	 * Update Weighing
-	 * 
-	 * @param Weighing
-	 *            Weighing
-	 */
 	@Transactional(readOnly = false)
 	@Override
 	public void updateWeighing(Weighing Weighing) {
 		getWeighingDAO().update(Weighing);
 	}
 
-	/**
-	 * Get Weighing
-	 * 
-	 * @param int Weighing Id
-	 */
 	@Override
 	public Weighing findWeighing(int id) {
 		return getWeighingDAO().find(id);
 	}
 
-	/**
-	 * Get Weighing List
-	 * 
-	 */
 	@Override
 	public List<Weighing> getAllWeighings() {
 		return getWeighingDAO().getAll();
 	}
 
-	/**
-	 * Get Weighing DAO
-	 * 
-	 * @return IWeighingDAO - Weighing DAO
-	 */
+	@Override
+	public List<Weighing> getWeighingsByCategory(CategoryType cat) {
+		return getWeighingDAO().getWeighingByCategory(cat);
+	}
+	
+	@Override
+	public List<Weighing> getAllOrderBySurname() {
+		return getWeighingDAO().getAllOrderBySurname();
+	}
+
+
 	public WeighingDAO getWeighingDAO() {
 		return weighingDAO;
 	}
 
-	/**
-	 * Set Weighing DAO
-	 * 
-	 * @param IWeighingDAO
-	 *            - Weighing DAO
-	 */
 	public void setWeighingDAO(WeighingDAO WeighingDAO) {
 		this.weighingDAO = WeighingDAO;
 	}
-	
+
 }

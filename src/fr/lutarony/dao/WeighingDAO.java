@@ -2,7 +2,11 @@ package fr.lutarony.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 import fr.lutarony.dao.definition.DAO;
 import fr.lutarony.model.Weighing;
@@ -52,23 +56,43 @@ public class WeighingDAO extends DAO<Weighing> {
 	@Override
 	public Weighing find(int id) {
 		List list = getSessionFactory().getCurrentSession()
-				.createQuery("from Wrestler where id=?").setParameter(0, id)
+				.createQuery("from Weighing where id=?").setParameter(0, id)
 				.list();
 		return (Weighing) list.get(0);
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<Weighing> getAll() {
-		List list = getSessionFactory().getCurrentSession()
-				.createQuery("from Weighing").list();
-		return list;
+		Criteria criteria = getSessionFactory().getCurrentSession()
+				.createCriteria(Weighing.class);
+		criteria.setFetchMode("tournament", FetchMode.JOIN);
+		criteria.setFetchMode("wrestler", FetchMode.JOIN);
+		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+
+		return (List<Weighing>) criteria.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Weighing> getAllOrderBySurname() {
+		Criteria criteria = getSessionFactory().getCurrentSession()
+				.createCriteria(Weighing.class);
+		criteria.setFetchMode("tournament", FetchMode.JOIN);
+		criteria.setFetchMode("wrestler", FetchMode.JOIN);
+		criteria.createAlias("wrestler", "w");
+		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		criteria.addOrder(Order.asc("w.surname"));
+
+		return (List<Weighing>) criteria.list();
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Weighing> getWeighingByCategory(CategoryType category) {
-		List list = getSessionFactory().getCurrentSession()
-				.createQuery("SELECT * FROM Weighing WHERE category=?")
-				.setParameter(0, category.toString()).list();
-		return list;
+		Criteria criteria = getSessionFactory().getCurrentSession()
+				.createCriteria(Weighing.class);
+		criteria.createAlias("wrestler", "w").add(
+				Restrictions.eq("w.category", category));
+		return (List<Weighing>) criteria.list();
 	}
 
 }

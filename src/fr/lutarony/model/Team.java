@@ -1,9 +1,13 @@
 package fr.lutarony.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -12,18 +16,36 @@ public class Team {
 
 	@Id
 	@GeneratedValue
+	@Column(name = "id", unique = true, nullable = false)
 	private int id;
-	private String name;
-	private String coach;
-	private String adress;
-	private String city;
-	private String code;
-	private String country;
-	private String phone;
-	
-	// List of WRESTLERS
 
-	@Column(name = "ID", unique = true, nullable = false)
+	@Column(name = "name", unique = true, nullable = false)
+	private String name;
+
+	@Column(name = "coach", unique = false, nullable = true)
+	private String coach;
+
+	@Column(name = "adress", unique = false, nullable = true)
+	private String adress;
+
+	@Column(name = "city", unique = false, nullable = true)
+	private String city;
+
+	@Column(name = "code", unique = false, nullable = true)
+	private String code;
+
+	@Column(name = "country", unique = false, nullable = true)
+	private String country;
+
+	@Column(name = "phone", unique = false, nullable = true)
+	private String phone;
+
+	// List of WRESTLERS
+	@OneToMany(mappedBy = "team")
+	private Set<Wrestler> wrestlers = new HashSet<Wrestler>();
+
+	/**** GETTERS AND SETTERS ****/
+
 	public int getId() {
 		return id;
 	}
@@ -32,7 +54,6 @@ public class Team {
 		this.id = id;
 	}
 
-	@Column(name = "NAME", unique = true, nullable = false)
 	public String getName() {
 		return name;
 	}
@@ -41,7 +62,6 @@ public class Team {
 		this.name = name;
 	}
 
-	@Column(name = "COACH", unique = false, nullable = true)
 	public String getCoach() {
 		return coach;
 	}
@@ -50,7 +70,10 @@ public class Team {
 		this.coach = coach;
 	}
 
+<<<<<<< HEAD
 	@Column(name = "ADRESS")
+=======
+>>>>>>> 37a10111e32a7553d23628c647d5b6147d284a90
 	public String getAdress() {
 		return adress;
 	}
@@ -59,7 +82,10 @@ public class Team {
 		this.adress = adress;
 	}
 
+<<<<<<< HEAD
 	@Column(name = "CITY")
+=======
+>>>>>>> 37a10111e32a7553d23628c647d5b6147d284a90
 	public String getCity() {
 		return city;
 	}
@@ -68,7 +94,10 @@ public class Team {
 		this.city = city;
 	}
 
+<<<<<<< HEAD
 	@Column(name = "CODE")
+=======
+>>>>>>> 37a10111e32a7553d23628c647d5b6147d284a90
 	public String getCode() {
 		return code;
 	}
@@ -77,7 +106,10 @@ public class Team {
 		this.code = code;
 	}
 
+<<<<<<< HEAD
 	@Column(name = "COUNTRY")
+=======
+>>>>>>> 37a10111e32a7553d23628c647d5b6147d284a90
 	public String getCountry() {
 		return country;
 	}
@@ -86,13 +118,24 @@ public class Team {
 		this.country = country;
 	}
 
+<<<<<<< HEAD
 	@Column(name = "PHONE")
+=======
+>>>>>>> 37a10111e32a7553d23628c647d5b6147d284a90
 	public String getPhone() {
 		return phone;
 	}
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public Set<Wrestler> getWrestlers() {
+		return wrestlers;
+	}
+
+	public void setWrestlers(Set<Wrestler> wrestlers) {
+		this.wrestlers = wrestlers;
 	}
 
 	@Override

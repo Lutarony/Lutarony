@@ -60,7 +60,7 @@ public class WrestlerDAO extends DAO<Wrestler> {
 	@Override
 	public List<Wrestler> getAll() {
 		List list = getSessionFactory().getCurrentSession()
-				.createQuery("from Wrestler").list();
+				.createCriteria(Wrestler.class).list();
 		return list;
 	}
 

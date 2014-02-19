@@ -9,7 +9,11 @@
 <h:body>
 
 	<ui:composition template="/template/master.xhtml">
-
+		
+		<ui:define name="page-title">
+			#{msg['lutarony']} - #{msg['dashboard.title']}
+		</ui:define>
+	
 		<ui:define name="title">
 			Rosny Cup 2014
 		</ui:define>
