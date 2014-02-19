@@ -1,14 +1,16 @@
 package fr.lutarony.model;
 
-import javax.persistence.CascadeType;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "event")
@@ -16,15 +18,24 @@ public class Event {
 
 	@Id
 	@GeneratedValue
+	@Column(name = "id", unique = true, nullable = false)
 	private int id;
+
+	@Column(name = "name", unique = false, nullable = false)
 	private String name;
-	private int userId;
 
-	@Transient
+	@ManyToOne()
+	@JoinColumn(name = "user_id")
 	private User user;
-	//List of tournaments
 
-	@Column(name = "ID", unique = true, nullable = false)
+	// List of TOURNAMENTS
+	@OneToMany(mappedBy = "event")
+	private Set<Tournament> tournaments = new HashSet<Tournament>();
+
+	
+	
+	/**** GETTERS AND SETTERS ****/
+
 	public int getId() {
 		return id;
 	}
@@ -33,7 +44,6 @@ public class Event {
 		this.id = id;
 	}
 
-	@Column(name = "NAME", unique = false, nullable = false)
 	public String getName() {
 		return name;
 	}
@@ -42,23 +52,20 @@ public class Event {
 		this.name = name;
 	}
 
-	@Column(name = "USER_ID", unique = false, nullable = false)
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int UserId) {
-		this.userId = UserId;
-	}
-
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id")
 	public User getUser() {
 		return user;
 	}
 
-	public void setUser(User User) {
-		this.user = User;
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Set<Tournament> getTournaments() {
+		return tournaments;
+	}
+
+	public void setTournaments(Set<Tournament> tournaments) {
+		this.tournaments = tournaments;
 	}
 
 	@Override

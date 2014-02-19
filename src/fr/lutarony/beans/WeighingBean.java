@@ -11,7 +11,9 @@ import javax.faces.bean.ManagedProperty;
 import org.springframework.dao.DataAccessException;
 
 import fr.lutarony.business.definition.IWeighingBO;
+import fr.lutarony.model.Tournament;
 import fr.lutarony.model.Weighing;
+import fr.lutarony.model.Wrestler;
 
 @ManagedBean(name = "weighingBean")
 public class WeighingBean implements Serializable {
@@ -26,8 +28,8 @@ public class WeighingBean implements Serializable {
 	List<Weighing> weighingList;
 
 	private int id;
-	private int tourId;
-	private int wrestlerId;
+	private Tournament tour;
+	private Wrestler wrestler;
 	private double weight;
 	private int lotNb;
 	private Timestamp date;
@@ -36,12 +38,12 @@ public class WeighingBean implements Serializable {
 		try {
 			Weighing weighing = new Weighing();
 			weighing.setId(getId());
-			weighing.setTourId(getTourId());
-			weighing.setWrestlerId(getWrestlerId());
+			weighing.setTournament(getTour());
+			weighing.setWrestler(getWrestler());
 			weighing.setWeight(getWeight());
 			weighing.setLotNb(getLotNb());
 			weighing.setDate(getDate());
-			clear();
+			//clear();
 			return SUCCESS;
 		} catch (DataAccessException e) {
 			e.printStackTrace();
@@ -53,7 +55,7 @@ public class WeighingBean implements Serializable {
 	public void reset() {
 	}
 
-	public List<Weighing> getWeighingList() {
+	public List<Weighing> getWeighingsList() {
 		weighingList = new ArrayList<Weighing>();
 		weighingList.addAll(getWeighingBO().getAllWeighings());
 		return weighingList;
@@ -79,20 +81,20 @@ public class WeighingBean implements Serializable {
 		this.id = id;
 	}
 
-	public int getTourId() {
-		return tourId;
+	public Tournament getTour() {
+		return tour;
 	}
 
-	public void setTourId(int tourId) {
-		this.tourId = tourId;
+	public void setTour(Tournament tour) {
+		this.tour = tour;
 	}
 
-	public int getWrestlerId() {
-		return wrestlerId;
+	public Wrestler getWrestler() {
+		return wrestler;
 	}
 
-	public void setWrestlerId(int wrestlerId) {
-		this.wrestlerId = wrestlerId;
+	public void setWrestler(Wrestler wrestler) {
+		this.wrestler = wrestler;
 	}
 
 	public double getWeight() {
@@ -119,8 +121,12 @@ public class WeighingBean implements Serializable {
 		this.date = date;
 	}
 
-	public void clear() {
+	public List<Weighing> getWeighingList() {
+		return weighingList;
+	}
 
+	public void setWeighingList(List<Weighing> weighingList) {
+		this.weighingList = weighingList;
 	}
 
 }

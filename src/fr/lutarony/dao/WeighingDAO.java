@@ -52,7 +52,7 @@ public class WeighingDAO extends DAO<Weighing> {
 	@Override
 	public Weighing find(int id) {
 		List list = getSessionFactory().getCurrentSession()
-				.createQuery("from Wrestler where id=?").setParameter(0, id)
+				.createQuery("from Weighing where id=?").setParameter(0, id)
 				.list();
 		return (Weighing) list.get(0);
 	}
@@ -60,7 +60,7 @@ public class WeighingDAO extends DAO<Weighing> {
 	@Override
 	public List<Weighing> getAll() {
 		List list = getSessionFactory().getCurrentSession()
-				.createQuery("from Weighing").list();
+				.createCriteria(Weighing.class).list();
 		return list;
 	}
 

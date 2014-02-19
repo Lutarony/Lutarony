@@ -11,6 +11,7 @@ import javax.faces.bean.ManagedProperty;
 import org.springframework.dao.DataAccessException;
 
 import fr.lutarony.business.definition.IWrestlerBO;
+import fr.lutarony.model.Team;
 import fr.lutarony.model.Wrestler;
 import fr.lutarony.util.CategoryType;
 
@@ -31,7 +32,7 @@ public class WrestlerBean implements Serializable {
 	private String surname;
 	private String sex;
 	private Date birthDate;
-	private int teamId;
+	private Team team;
 	private CategoryType category;
 
 	public String addWrestler() {
@@ -42,7 +43,7 @@ public class WrestlerBean implements Serializable {
 			wrestler.setSurname(getSurname());
 			wrestler.setSex(getSex());
 			wrestler.setBirthDate(getBirthDate());
-			wrestler.setTeamId(getTeamId());
+			wrestler.setTeam(getTeam());
 			wrestler.setCategory(getCategory());
 			getWrestlerBO().createWrestler(wrestler);
 			clear();
@@ -118,12 +119,12 @@ public class WrestlerBean implements Serializable {
 		this.birthDate = birthDate;
 	}
 
-	public int getTeamId() {
-		return teamId;
+	public Team getTeam() {
+		return team;
 	}
 
-	public void setTeamId(int teamId) {
-		this.teamId = teamId;
+	public void setTeam(Team team) {
+		this.team = team;
 	}
 
 	public CategoryType getCategory() {
@@ -132,14 +133,6 @@ public class WrestlerBean implements Serializable {
 
 	public void setCategory(CategoryType category) {
 		this.category = category;
-	}
-
-	public String getSayWelcome() {
-		if ("".equals(name) || name == null) {
-			return "";
-		} else {
-			return "Welcome " + name;
-		}
 	}
 
 	public void clear() {

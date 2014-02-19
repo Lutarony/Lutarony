@@ -1,47 +1,46 @@
 package fr.lutarony.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "USER", uniqueConstraints = { @UniqueConstraint(name = "USER_IDENTITY", columnNames = {
-		"NAME", "SURNAME" }) })
+		"name", "surname" }) })
 public class User {
 
 	@Id
 	@GeneratedValue
+	@Column(name = "id", unique = true, nullable = false)
 	private int id;
+
+	@Column(name = "name", unique = false, nullable = false)
 	private String name;
+
+	@Column(name = "surname", unique = false, nullable = false)
 	private String surname;
+
+	@Column(name = "email", unique = true, nullable = false)
 	private String email;
+
+	@Column(name = "password", unique = false, nullable = false)
 	private String password;
 
-	// List of USER ? ADMIN ?
 	// List of EVENTS
+	@OneToMany(mappedBy = "user")
+	private Set<Event> users = new HashSet<Event>();
 
-	@Transient
-	private Set<Event> events;
+	// List of USER for ADMIN ?
 
-	@OneToMany
-	@JoinColumn(name = "user_id", nullable = false)
-	public Set<Event> getEvents() {
-		return events;
-	}
+	/**** GETTERS AND SETTERS ****/
 
-	public void setInvoices(Set<Event> events) {
-		this.events = events;
-	}
-
-	@Column(name = "ID", unique = true, nullable = false)
 	public int getId() {
 		return id;
 	}
@@ -50,7 +49,6 @@ public class User {
 		this.id = id;
 	}
 
-	@Column(name = "NAME", unique = false, nullable = false)
 	public String getName() {
 		return name;
 	}
@@ -59,7 +57,6 @@ public class User {
 		this.name = name;
 	}
 
-	@Column(name = "SURNAME", unique = false, nullable = false)
 	public String getSurname() {
 		return surname;
 	}
@@ -68,7 +65,6 @@ public class User {
 		this.surname = surname;
 	}
 
-	@Column(name = "EMAIL", unique = true, nullable = false)
 	public String getEmail() {
 		return email;
 	}
@@ -77,13 +73,20 @@ public class User {
 		this.email = email;
 	}
 
-	@Column(name = "PASSWORD", unique = false, nullable = false)
 	public String getPassword() {
 		return password;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Set<Event> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<Event> users) {
+		this.users = users;
 	}
 
 	@Override

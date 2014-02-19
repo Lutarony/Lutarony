@@ -28,7 +28,7 @@
 								<ui:repeat var="wrestler" value="#{wrestlerBean.wrestlerList}">
 									<tr>
 										<td>#{wrestler.name} #{wrestler.surname}</td>
-										<td></td>
+										<td>#{wrestler.team.name}</td>
 										<td></td>
 										<td>#{wrestler.category}</td>
 										<td><span class="badge">14</span></td>

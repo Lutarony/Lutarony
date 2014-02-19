@@ -12,6 +12,7 @@ import org.springframework.dao.DataAccessException;
 
 import fr.lutarony.business.definition.IEventBO;
 import fr.lutarony.model.Event;
+import fr.lutarony.model.User;
 
 @ManagedBean(name = "eventBean")
 @RequestScoped
@@ -28,13 +29,13 @@ public class EventBean implements Serializable {
 
 	private int id;
 	private String name;
-	private int userId;
+	private User user;
 
 	public String addEvent() {
 		try {
 			Event event = new Event();
 			event.setName(getName());
-			event.setUserId(getUserId());
+			event.setUser(getUser());
 			getEventBO().createEvent(event);
 			return SUCCESS;
 		} catch (DataAccessException e) {
@@ -78,12 +79,12 @@ public class EventBean implements Serializable {
 		this.name = name;
 	}
 
-	public int getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }
