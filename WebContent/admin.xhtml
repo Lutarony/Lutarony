@@ -10,12 +10,12 @@
 
 	<ui:composition template="/template/master.xhtml">
 
-		<ui:define name="breadcrumb">
-			<li class="active">#{msg["admin.title"]}</li>
-		</ui:define>
-
 		<ui:define name="page-title">
 			#{msg['lutarony']} - #{msg['admin.title']}
+		</ui:define>
+
+		<ui:define name="breadcrumb">
+			<li class="active">#{msg["admin.title"]}</li>
 		</ui:define>
 
 		<ui:define name="title">
@@ -28,7 +28,50 @@
 
 		<ui:define name="content">
 
-			<ui:include src="admin-content.xhtml" />
+			<h:panelGroup layout="block" class="panel panel-default">
+				<h:panelGroup layout="block" class="panel-tab clearfix">
+					<ul class="tab-bar">
+						<li class="active"><a href="#admin" class="category-title"
+							data-toggle="tab"><i class="glyphicon glyphicon-chevron-down"></i>#{msg["admin.title"]}s</a></li>
+						<li class=""><a href="#events" class="category-title"
+							data-toggle="tab"><i class="glyphicon glyphicon-leaf"></i>#{msg["admin.events"]}s</a></li>
+						<li class=""><a href="#teams" class="category-title"
+							data-toggle="tab"><i class="glyphicon glyphicon-leaf"></i>#{msg["admin.teams"]}s</a></li>
+						<li class=""><a href="#tournaments" class="category-title"
+							data-toggle="tab"><i class="glyphicon glyphicon-leaf"></i>#{msg["admin.tournaments"]}s</a></li>
+						<li class=""><a href="#wrestlers" class="category-title"
+							data-toggle="tab"><i class="glyphicon glyphicon-leaf"></i>#{msg["admin.wrestlers"]}s</a></li>
+						<li class=""><a href="#users" class="category-title"
+							data-toggle="tab"><i class="glyphicon glyphicon-leaf"></i>#{msg["admin.users"]}s</a></li>
+					</ul>
+				</h:panelGroup>
+				<h:panelGroup layout="block" class="panel-body">
+					<h:panelGroup layout="block" class="tab-content" id="adminTabs">
+						<h:panelGroup layout="block" class="tab-pane fade active in"
+							id="admin">
+							<ui:include src="admin-content.xhtml" />
+						</h:panelGroup>
+
+						<h:panelGroup layout="block" class="tab-pane fade" id="events">
+							<ui:include src="admin-events.xhtml" />
+						</h:panelGroup>
+						<h:panelGroup layout="block" class="tab-pane fade" id="teams">
+							<ui:include src="admin-teams.xhtml" />
+						</h:panelGroup>
+						<h:panelGroup layout="block" class="tab-pane fade"
+							id="tournaments">
+							<ui:include src="content-user.xhtml" />
+						</h:panelGroup>
+						<h:panelGroup layout="block" class="tab-pane fade" id="wrestlers">
+							<ui:include src="admin-wrestlers.xhtml" />
+						</h:panelGroup>
+						<h:panelGroup layout="block" class="tab-pane fade" id="users">
+							<ui:include src="admin-users.xhtml" />
+						</h:panelGroup>
+
+					</h:panelGroup>
+				</h:panelGroup>
+			</h:panelGroup>
 
 		</ui:define>
 
