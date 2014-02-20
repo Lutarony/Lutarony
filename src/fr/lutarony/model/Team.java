@@ -70,10 +70,6 @@ public class Team {
 		this.coach = coach;
 	}
 
-<<<<<<< HEAD
-	@Column(name = "ADRESS")
-=======
->>>>>>> 37a10111e32a7553d23628c647d5b6147d284a90
 	public String getAdress() {
 		return adress;
 	}
@@ -82,10 +78,6 @@ public class Team {
 		this.adress = adress;
 	}
 
-<<<<<<< HEAD
-	@Column(name = "CITY")
-=======
->>>>>>> 37a10111e32a7553d23628c647d5b6147d284a90
 	public String getCity() {
 		return city;
 	}
@@ -94,10 +86,6 @@ public class Team {
 		this.city = city;
 	}
 
-<<<<<<< HEAD
-	@Column(name = "CODE")
-=======
->>>>>>> 37a10111e32a7553d23628c647d5b6147d284a90
 	public String getCode() {
 		return code;
 	}
@@ -106,10 +94,6 @@ public class Team {
 		this.code = code;
 	}
 
-<<<<<<< HEAD
-	@Column(name = "COUNTRY")
-=======
->>>>>>> 37a10111e32a7553d23628c647d5b6147d284a90
 	public String getCountry() {
 		return country;
 	}
@@ -118,10 +102,6 @@ public class Team {
 		this.country = country;
 	}
 
-<<<<<<< HEAD
-	@Column(name = "PHONE")
-=======
->>>>>>> 37a10111e32a7553d23628c647d5b6147d284a90
 	public String getPhone() {
 		return phone;
 	}
