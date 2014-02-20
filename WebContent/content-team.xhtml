@@ -1,0 +1,71 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://xmlns.jcp.org/jsf/passthrough">
+
+	<h:form>
+
+		<p:growl id="growl" showDetail="true" />
+
+		<p:fieldset legend="TEAM" toggleable="true" toggleSpeed="500">
+			<p:ajax event="toggle" update="growl" />
+
+			<h:dataTable value="#{teamBean.teamList}" var="team"
+				styleClass="order-table" headerClass="order-table-header"
+				rowClasses="order-table-odd-row,order-table-even-row">
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value='Team ID' />
+					</f:facet>
+					<h:outputText value='#{team.id}' />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value='Name' />
+					</f:facet>
+					<h:outputText value='#{team.name}' />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value='Coach' />
+					</f:facet>
+					<h:outputText value='#{team.coach}' />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value='Country' />
+					</f:facet>
+					<h:outputText value='#{team.country}' />
+				</h:column>
+
+				<h:column>
+					<p:commandButton icon="ui-icon-pencil"
+						actionListener="#{teamBean.openEditTeamView}">
+						<!-- <p:ajax event="dialogReturn" listener="#{teamBean}"
+							update="growl" /> -->
+					</p:commandButton>
+				</h:column>
+
+			</h:dataTable>
+
+
+			<div class="text-right">
+				<p:commandButton value=""
+					styleClass="btn btn-sm glyphicon glyphicon-plus"
+					actionListener="#{teamBean.openAddTeamView}">
+					<!-- 					<p:ajax event="dialogReturn" update="addEdit" />
+ -->
+				</p:commandButton>
+			</div>
+		</p:fieldset>
+
+	</h:form>
+
+</ui:composition>
