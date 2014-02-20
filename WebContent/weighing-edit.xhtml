@@ -92,21 +92,21 @@
 
 									</h:panelGroup>
 									<!-- /.col -->
-
+									<h:panelGroup layout="block" class="panel-footer">
+										<h:panelGroup layout="block" class="text-right">
+											<h:commandButton styleClass="btn btn-sm btn-primary"
+												value="Update">
+												<f:ajax listener="#{weighingBean.save}" execute="@form"
+													render=":weighingList @form" />
+											</h:commandButton>
+										</h:panelGroup>
+									</h:panelGroup>
 
 
 								</h:panelGroup>
 								<!-- /form-group -->
 
-								<h:panelGroup layout="block" class="panel-footer">
-									<h:panelGroup layout="block" class="text-right">
-										<h:commandButton styleClass="btn btn-sm btn-primary"
-											value="Update" >
-											<f:ajax listener="#{weighingBean.save}" execute="@form"
-												render=":weighingList @form" />
-										</h:commandButton>
-									</h:panelGroup>
-								</h:panelGroup>
+
 							</h:panelGroup>
 
 
