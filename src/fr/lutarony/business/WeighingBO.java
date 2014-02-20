@@ -46,8 +46,8 @@ public class WeighingBO implements IWeighingBO {
 	
 	@Transactional(readOnly = false)
 	@Override
-	public void updateWeight(int wrestlerId, Double weight, CategoryType cat){
-		getWeighingDAO().updateWeight(wrestlerId, weight, cat);
+	public void updateWeight(Weighing w){
+		getWeighingDAO().updateWeight(w);
 	}
 
 	@Override

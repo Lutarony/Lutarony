@@ -66,14 +66,19 @@
 							<h:panelGroup layout="block" class="panel-body">
 								<h:panelGroup layout="block" class="form-group">
 									<h:panelGroup layout="block" class="row">
+
 										<label class="control-label col-md-2">Weight</label>
-										<h:panelGroup layout="block" class="col-md-1">
-											<h:inputText class="form-control input-sm"
-												value="#{weighingBean.weight}" />
+										<h:panelGroup layout="block" class="col-md-2">
+
+											<h:inputText class="form-control input-sm" value="#{weighingBean.weight}">
+												<f:ajax listener="#{weighingBean.update}" event="keyup" render="finalWeight" />
+											</h:inputText>
+											
+
 										</h:panelGroup>
 
 										<label class="control-label col-md-2">Tolerance</label>
-										<h:panelGroup layout="block" class="col-md-1">
+										<h:panelGroup layout="block" class="col-md-2">
 											<h:inputText class="form-control input-sm" readonly="true"
 												value="#{weighingBean.tolerance}" />
 										</h:panelGroup>
@@ -82,14 +87,12 @@
 									<br />
 									<h:panelGroup layout="block" class="row">
 
-										<h:panelGroup layout="block" class="col-md-3" />
+										<h:panelGroup layout="block" class="col-md-4" />
 
 										<label class="control-label col-md-2">Final weighting</label>
-										<h:panelGroup layout="block" class="col-md-1">
-											<h:inputText class="form-control input-sm" readonly="true"
-												value="#{weighingBean.finalWeight}" />
+										<h:panelGroup layout="block" class="col-md-2">												
+											<h:inputText class="form-control input-sm" readonly="true" id="finalWeight" value="#{weighingBean.finalWeight}" />
 										</h:panelGroup>
-
 									</h:panelGroup>
 									<!-- /.col -->
 									<h:panelGroup layout="block" class="panel-footer">
@@ -102,21 +105,22 @@
 										</h:panelGroup>
 									</h:panelGroup>
 
-
 								</h:panelGroup>
 								<!-- /form-group -->
 
+								<h:panelGroup layout="block" class="panel-footer">
+									<h:panelGroup layout="block" class="text-right">
+										<h:commandButton styleClass="btn btn-sm btn-primary"
+											value="Update">
+											<f:ajax listener="#{weighingBean.save}" execute=""
+												render=":weighingList @form :benjamins" />
+										</h:commandButton>
+									</h:panelGroup>
+								</h:panelGroup>
 
 							</h:panelGroup>
-
-
-
-
 						</h:form>
-
 					</h:panelGroup>
-
-
 				</h:panelGroup>
 				<!-- /.col -->
 			</h:panelGroup>
