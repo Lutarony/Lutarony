@@ -11,7 +11,7 @@ public interface IWeighingBO {
 
 	public void updateWeighing(Weighing obj);
 	
-	public void updateWeight(int wrestlerId, Double weight, CategoryType cat);
+	public void updateWeight(Weighing w);
 
 	public void deleteWeighing(Weighing obj);
 

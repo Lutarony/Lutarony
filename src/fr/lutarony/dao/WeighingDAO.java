@@ -10,7 +10,6 @@ import org.hibernate.criterion.Restrictions;
 
 import fr.lutarony.dao.definition.DAO;
 import fr.lutarony.model.Weighing;
-import fr.lutarony.model.Wrestler;
 import fr.lutarony.util.CategoryType;
 
 public class WeighingDAO extends DAO<Weighing> {
@@ -96,16 +95,16 @@ public class WeighingDAO extends DAO<Weighing> {
 		return (List<Weighing>) criteria.list();
 	}
 
-	public void updateWeight(int weighingId, Double weight, CategoryType cat) {
-
-		Criteria criteria = getSessionFactory().getCurrentSession()
-				.createCriteria(Weighing.class);
-		criteria.setFetchMode("wrestler", FetchMode.JOIN);
-		criteria.add(Restrictions.eq("id", weighingId));
-		Weighing w = (Weighing) criteria.uniqueResult();
-		w.getWrestler().setCategory(cat);
-		w.setWeight(weight);
-		getSessionFactory().getCurrentSession().saveOrUpdate(w);
+	public void updateWeight(Weighing w) {
+		getSessionFactory().getCurrentSession().update(w);
+		/*
+		 * Criteria criteria = getSessionFactory().getCurrentSession()
+		 * .createCriteria(Weighing.class); criteria.setFetchMode("wrestler",
+		 * FetchMode.JOIN); criteria.add(Restrictions.eq("id", w.getId()));
+		 * Weighing = (Weighing) criteria.uniqueResult();
+		 * w.getWrestler().setCategory(cat); w.setWeight(finalWeight);
+		 * getSessionFactory().getCurrentSession().saveOrUpdate(w);
+		 */
 
 	}
 }
