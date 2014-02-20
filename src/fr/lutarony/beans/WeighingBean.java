@@ -8,7 +8,6 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.event.ActionEvent;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ComponentSystemEvent;
 
@@ -21,6 +20,7 @@ import fr.lutarony.model.Wrestler;
 import fr.lutarony.util.CategoryType;
 
 @ManagedBean(name = "weighingBean")
+@SessionScoped
 public class WeighingBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -35,7 +35,7 @@ public class WeighingBean implements Serializable {
 	private int id;
 	private Tournament tour;
 	private Wrestler wrestler;
-	private Double weight;
+	private String weight;
 	private int lotNb;
 	private Timestamp date;
 
@@ -69,7 +69,7 @@ public class WeighingBean implements Serializable {
 	public void loadDatas(ComponentSystemEvent event) {
 		Weighing w = getWeighingBO().findWeighing(getId());
 		setWrestler(w.getWrestler());
-		setWeight(w.getWeight());
+		setWeight(w.getWeight().toString());
 		setLotNb(w.getLotNb());
 	}
 
@@ -121,32 +121,37 @@ public class WeighingBean implements Serializable {
 		return weighingList;
 	}
 
-	public void attrListener(ActionEvent event) {
+	public void attrListener(AjaxBehaviorEvent event) {
 
 		this.id = (Integer) event.getComponent().getAttributes()
 				.get("selectedWeighingId");
-
-	}
-
-	public void reset(AjaxBehaviorEvent event) {
-		setWeight(0.0);
-		setTolerance(0);
-		setFinalWeight(0.0);
-	}
-
-	public void getSave() {
-		Weighing w = new Weighing(getId(), getFinalWeight(), getLotNb(),
-				getDate(), getTour(), getWrestler());
-		getWeighingBO().updateWeighing(w);
-	}
-
-	public String getLoadDetails() {
 		Weighing w = getWeighingBO().findWeighing(getId());
 		setTour(w.getTournament());
 		setWrestler(w.getWrestler());
-		setWeight(w.getWeight());
+		setWeight(w.getWeight().toString());
 		setLotNb(w.getLotNb());
 		setDate(w.getDate());
+	}
+
+	public void clear(AjaxBehaviorEvent event) {
+		this.tolerance = 0;
+		this.weight = "";
+		this.finalWeight = 0.0;
+	}
+
+	public void save(AjaxBehaviorEvent event) {
+		Weighing w = new Weighing(getId(), Double.valueOf(getWeight()),
+				getLotNb(), getDate(), getTour(), getWrestler());
+		getWeighingBO().updateWeight(w.getId(), w.getWeight(),
+				w.getWrestler().getCategory());
+	}
+
+	public String saver() {
+		return "#";
+	}
+
+	public String getLoadDetails() {
+
 		return "#";
 	}
 
@@ -184,11 +189,11 @@ public class WeighingBean implements Serializable {
 		this.wrestler = wrestler;
 	}
 
-	public Double getWeight() {
+	public String getWeight() {
 		return weight;
 	}
 
-	public void setWeight(Double weight) {
+	public void setWeight(String weight) {
 		this.weight = weight;
 	}
 
