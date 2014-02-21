@@ -6,66 +6,89 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:t="http://xmlns.jcp.org/jsf/passthrough">
 
-	<h:form>
+	<h:panelGroup layout="block" class="padding-md"
+		style="text-align: left;">
+		<h:panelGroup layout="block" class="padding-md">
 
-		<p:growl id="growl" showDetail="true" />
+			<h:panelGroup layout="block" class="row">
+				<h:panelGroup layout="block" class="col-md-5">
 
-		<p:fieldset legend="TEAM" toggleable="true" toggleSpeed="500">
-			<p:ajax event="toggle" update="growl" />
+					<h:panelGroup id="teamsList" layout="block"
+						class="panel panel-default">
+						<h:panelGroup layout="block" class="panel-heading">All events</h:panelGroup>
+						<h:form>
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th>id</th>
+										<th>Event</th>
+									</tr>
+								</thead>
+								<tbody>
+									<ui:repeat var="event" value="#{eventBean.eventsList}">
+										<tr>
+											<td>#{event.id}</td>
+											<td>#{event.name}</td>
+										</tr>
 
-			<h:dataTable value="#{teamBean.teamList}" var="team"
-				styleClass="order-table" headerClass="order-table-header"
-				rowClasses="order-table-odd-row,order-table-even-row">
+									</ui:repeat>
 
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value='Team ID' />
-					</f:facet>
-					<h:outputText value='#{team.id}' />
-				</h:column>
-
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value='Name' />
-					</f:facet>
-					<h:outputText value='#{team.name}' />
-				</h:column>
-
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value='Coach' />
-					</f:facet>
-					<h:outputText value='#{team.coach}' />
-				</h:column>
-
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value='Country' />
-					</f:facet>
-					<h:outputText value='#{team.country}' />
-				</h:column>
-
-				<h:column>
-					<p:commandButton icon="ui-icon-pencil"
-						actionListener="#{teamBean.openEditTeamView}">
-						<!-- <p:ajax event="dialogReturn" listener="#{teamBean}"
-							update="growl" /> -->
-					</p:commandButton>
-				</h:column>
-
-			</h:dataTable>
+								</tbody>
+							</table>
+						</h:form>
+					</h:panelGroup>
 
 
-			<div class="text-right">
-				<p:commandButton value=""
-					styleClass="btn btn-sm glyphicon glyphicon-plus"
-					actionListener="#{teamBean.openAddTeamView}">
-					<!-- 					<p:ajax event="dialogReturn" update="addEdit" />
- -->
-				</p:commandButton>
-			</div>
-		</p:fieldset>
+				</h:panelGroup>
 
-	</h:form>
+
+				<h:panelGroup layout="block" class="col-md-5">
+
+					<h:panelGroup layout="block" class="panel panel-default">
+						<h:form id ="teamForm" class="form-horizontal form-border">
+							<h:panelGroup layout="block" class="panel-heading">Create new event</h:panelGroup>
+
+							<h:panelGroup layout="block" class="panel-body">
+								<h:panelGroup layout="block" class="form-group">
+									<h:panelGroup layout="block" class="row">
+
+										<label class="control-label col-md-5">Name</label>
+										<h:panelGroup layout="block" class="col-md-5">
+
+											<h:inputText class="form-control input-sm"
+												value="#{eventBean.name}" />
+
+
+										</h:panelGroup>
+
+									</h:panelGroup>
+
+									<h:panelGroup layout="block" class="row">
+										<h:outputText value="#{eventBean.message}"></h:outputText>
+									</h:panelGroup>
+
+								</h:panelGroup>
+								<!-- /form-group -->
+
+								<h:panelGroup layout="block" class="panel-footer">
+									<h:panelGroup layout="block" class="text-right">
+										<h:commandButton styleClass="btn btn-sm btn-primary"
+											value="Update">
+											<f:ajax listener="#{eventBean.save}" execute="@form"
+												render=":eventsList" />
+										</h:commandButton>
+									</h:panelGroup>
+								</h:panelGroup>
+
+							</h:panelGroup>
+						</h:form>
+					</h:panelGroup>
+				</h:panelGroup>
+				<!-- /.col -->
+			</h:panelGroup>
+		</h:panelGroup>
+	</h:panelGroup>
+
+
 
 </ui:composition>

@@ -63,7 +63,7 @@
 
 									</h:panelGroup>
 
-									<h:panelGroup layout="block" class="row">
+									<h:panelGroup id="eventMessage" layout="block" class="row">
 										<h:outputText value="#{eventBean.message}"></h:outputText>
 									</h:panelGroup>
 
@@ -75,7 +75,7 @@
 										<h:commandButton styleClass="btn btn-sm btn-primary"
 											value="Update">
 											<f:ajax listener="#{eventBean.save}" execute="@form"
-												render=":eventsList" />
+												render=":eventsList eventMessage" />
 										</h:commandButton>
 									</h:panelGroup>
 								</h:panelGroup>

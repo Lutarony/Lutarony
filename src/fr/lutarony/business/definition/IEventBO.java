@@ -14,4 +14,6 @@ public interface IEventBO {
 	public Event findEvent(int id);
 
 	public List<Event> getAllEvents();
+	
+	public boolean eventAlreadyExists(String name);
 }

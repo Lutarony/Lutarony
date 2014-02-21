@@ -56,7 +56,12 @@ public class EventBean implements Serializable {
 		User u = getUserBO().findUser(1);
 
 		Event e = new Event(getName(), u);
-		getEventBO().createEvent(e);
+		if(!eventAlreadyExists()){
+			getEventBO().createEvent(e);
+		}
+		else{
+			setMessage("Event already exists");
+		}
 	}
 
 	public List<Event> getEventsList() {
@@ -64,6 +69,12 @@ public class EventBean implements Serializable {
 		eventList.addAll(getEventBO().getAllEvents());
 		return eventList;
 	}
+	
+	public boolean eventAlreadyExists(){
+		return getEventBO().eventAlreadyExists(getName());
+	}
+	
+	/** GETTERS ADN SETTERS **/
 
 	public IEventBO getEventBO() {
 		return eventBO;
