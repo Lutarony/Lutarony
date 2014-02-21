@@ -67,7 +67,7 @@
 								<h:panelGroup layout="block" class="form-group">
 									<h:panelGroup layout="block" class="row">
 
-										<label class="control-label col-md-2">Weight</label>
+										<label class="control-label col-md-3">Weight</label>
 										<h:panelGroup layout="block" class="col-md-2">
 
 											<h:inputText class="form-control input-sm"
@@ -79,7 +79,7 @@
 
 										</h:panelGroup>
 
-										<label class="control-label col-md-2">Tolerance</label>
+										<label class="control-label col-md-3">Tolerance</label>
 										<h:panelGroup layout="block" class="col-md-2">
 											<h:inputText class="form-control input-sm" readonly="true"
 												value="#{weighingBean.tolerance}" />
@@ -89,15 +89,26 @@
 									<br />
 									<h:panelGroup layout="block" class="row">
 
-										<h:panelGroup layout="block" class="col-md-4" />
+										<h:panelGroup layout="block" class="col-md-5" />
 
-										<label class="control-label col-md-2">Final weighting</label>
+										<label class="control-label col-md-3">Final weighting</label>
 										<h:panelGroup layout="block" class="col-md-2">
 											<h:inputText class="form-control input-sm" readonly="true"
 												id="finalWeight" value="#{weighingBean.finalWeight}" />
 										</h:panelGroup>
 									</h:panelGroup>
 									<!-- /.col -->
+
+									<br />
+									<h:panelGroup layout="block" class="row">
+
+										<label class="control-label col-md-3">Lot number</label>
+										<h:panelGroup layout="block" class="col-md-2">
+											<h:inputText class="form-control input-sm"
+												value="#{weighingBean.lotNb}" />
+										</h:panelGroup>
+										<h:panelGroup layout="block" class="col-md-4" />
+									</h:panelGroup>
 
 
 								</h:panelGroup>
