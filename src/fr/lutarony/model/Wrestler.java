@@ -139,6 +139,7 @@ public class Wrestler {
 		strBuff.append(", sex : ").append(getSex());
 		strBuff.append(", team : ").append(getTeam());
 		strBuff.append(", category : ").append(getCategory());
+		strBuff.append(", weighing : ").append(getWeighing());
 		return strBuff.toString();
 	}
 }

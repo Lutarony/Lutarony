@@ -97,4 +97,9 @@ public class WrestlerBO implements IWrestlerBO {
 		this.wrestlerDAO = wrestlerDAO;
 	}
 	
+	@Override
+	public List<Wrestler> getAllOrderBySurname() {
+		return wrestlerDAO.getAllOrderBySurname();
+	}
+	
 }

@@ -14,4 +14,6 @@ public interface IWrestlerBO {
 	public Wrestler findWrestler(int id);
 
 	public List<Wrestler> getAllWrestlers();
+	
+	public List<Wrestler> getAllOrderBySurname();
 }

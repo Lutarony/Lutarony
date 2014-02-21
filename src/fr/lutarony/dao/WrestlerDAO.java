@@ -2,9 +2,13 @@ package fr.lutarony.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 
 import fr.lutarony.dao.definition.DAO;
+import fr.lutarony.model.Wrestler;
 import fr.lutarony.model.Wrestler;
 import fr.lutarony.util.CategoryType;
 
@@ -69,6 +73,14 @@ public class WrestlerDAO extends DAO<Wrestler> {
 				.createQuery("SELECT * FROM Wrestler WHERE category=?")
 				.setParameter(0, category.toString()).list();
 		return list;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Wrestler> getAllOrderBySurname() {
+		Criteria criteria = getSessionFactory().getCurrentSession()
+				.createCriteria(Wrestler.class);
+		criteria.addOrder(Order.asc("surname"));
+		return (List<Wrestler>) criteria.list();
 	}
 
 }

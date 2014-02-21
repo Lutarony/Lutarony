@@ -26,12 +26,11 @@ public class Weighing {
 	@Column(name = "lot_nb")
 	private int lotNb;
 
-	@Column(name = "date", nullable = false)
-	// @Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "date", nullable = true)
 	private Timestamp date;
 
 	@ManyToOne()
-	@JoinColumn(name = "tour_id")
+	@JoinColumn(name = "tour_id", nullable = true)
 	private Tournament tournament;
 
 	@OneToOne()
@@ -44,14 +43,12 @@ public class Weighing {
 		
 	}
 	
-	public Weighing(int id, Double weight, int lotNb, Timestamp date,
-			Tournament tournament, Wrestler wrestler) {
+	public Weighing(Double weight, int lotNb, /*Timestamp date,Tournament tournament,*/ Wrestler wrestler) {
 		super();
-		this.id = id;
 		this.weight = weight;
 		this.lotNb = lotNb;
-		this.date = date;
-		this.tournament = tournament;
+		//this.date = date;
+		//this.tournament = tournament;
 		this.wrestler = wrestler;
 	}
 

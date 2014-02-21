@@ -121,7 +121,7 @@ public class WeighingBean implements Serializable {
 		return weighingList;
 	}
 
-	public void attrListener(AjaxBehaviorEvent event) {
+	/*public void attrListener(AjaxBehaviorEvent event) {
 
 		this.id = (Integer) event.getComponent().getAttributes()
 				.get("selectedWeighingId");
@@ -133,7 +133,7 @@ public class WeighingBean implements Serializable {
 		setDate(w.getDate());
 		setTolerance(CategoryType.getTolerance(w.getWrestler().getCategory()));
 		setFinalWeight(Double.valueOf(getWeight()) - getTolerance());
-	}
+	}*/
 
 	public void clear(AjaxBehaviorEvent event) {
 		this.tolerance = 0;
@@ -142,14 +142,14 @@ public class WeighingBean implements Serializable {
 		this.lotNb = "0";
 	}
 
-	public void save(AjaxBehaviorEvent event) {
+	/*public void save(AjaxBehaviorEvent event) {
 		// update wrestler category weight
 		Weighing w = new Weighing(getId(), Double.valueOf(getWeight()),
 				Integer.valueOf(getLotNb()), getDate(), getTour(), getWrestler());
 		getWeighingBO().updateWeight(w);
-	}
+	}*/
 
-	public void update(AjaxBehaviorEvent event) {
+	/*public void update(AjaxBehaviorEvent event) {
 		if (!getWeight().isEmpty()) {
 			Double weight = Double.valueOf(getWeight());
 			Double newFinalWeight = weight - getTolerance();
@@ -157,7 +157,7 @@ public class WeighingBean implements Serializable {
 		} else {
 			setFinalWeight(0.0);
 		}
-	}
+	}*/
 
 	public String saver() {
 		return "#";
