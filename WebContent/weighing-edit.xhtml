@@ -70,10 +70,12 @@
 										<label class="control-label col-md-2">Weight</label>
 										<h:panelGroup layout="block" class="col-md-2">
 
-											<h:inputText class="form-control input-sm" value="#{weighingBean.weight}">
-												<f:ajax listener="#{weighingBean.update}" event="keyup" render="finalWeight" />
+											<h:inputText class="form-control input-sm"
+												value="#{weighingBean.weight}">
+												<f:ajax listener="#{weighingBean.update}" event="keyup"
+													render="finalWeight" />
 											</h:inputText>
-											
+
 
 										</h:panelGroup>
 
@@ -90,8 +92,9 @@
 										<h:panelGroup layout="block" class="col-md-4" />
 
 										<label class="control-label col-md-2">Final weighting</label>
-										<h:panelGroup id="finalWei" layout="block" class="col-md-2">												
-											<h:inputText class="form-control input-sm" readonly="true" id="finalWeight" value="#{weighingBean.finalWeight}" />
+										<h:panelGroup layout="block" class="col-md-2">
+											<h:inputText class="form-control input-sm" readonly="true"
+												id="finalWeight" value="#{weighingBean.finalWeight}" />
 										</h:panelGroup>
 									</h:panelGroup>
 									<!-- /.col -->
@@ -105,10 +108,11 @@
 										<h:commandButton styleClass="btn btn-sm btn-primary"
 											value="Update">
 											<f:ajax listener="#{weighingBean.save}" execute=""
-												render=":weighingList @form :benjamins" />
+												render=":weighingList @form :weighingTabs" />
 										</h:commandButton>
 									</h:panelGroup>
 								</h:panelGroup>
+
 							</h:panelGroup>
 						</h:form>
 					</h:panelGroup>
