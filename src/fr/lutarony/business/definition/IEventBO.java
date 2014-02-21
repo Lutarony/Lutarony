@@ -5,7 +5,7 @@ import java.util.List;
 import fr.lutarony.model.Event;
 
 public interface IEventBO {
-	public void createEvent(Event obj);
+	public void createEvent(Event obj) throws Exception;
 
 	public void updateEvent(Event obj);
 
@@ -14,6 +14,5 @@ public interface IEventBO {
 	public Event findEvent(int id);
 
 	public List<Event> getAllEvents();
-	
-	public boolean eventAlreadyExists(String name);
+
 }

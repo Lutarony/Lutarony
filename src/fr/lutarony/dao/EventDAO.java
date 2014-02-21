@@ -6,6 +6,7 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
 import fr.lutarony.dao.definition.DAO;
+import fr.lutarony.exceptions.AlreadyExists;
 import fr.lutarony.model.Event;
 
 public class EventDAO extends DAO<Event> {
@@ -56,13 +57,23 @@ public class EventDAO extends DAO<Event> {
 		return list;
 	}
 
-	public void alreadyExists(String name) throws Exception {
+	public void add(Event obj) throws Exception {
 
 		Criteria criteria = getSessionFactory().getCurrentSession()
 				.createCriteria(Event.class);
-		criteria.createAlias("event", "e").add(Restrictions.eq("e.name", name));
-		Event e = (Event) criteria.uniqueResult();
-		if (e == null)
-			throw new Exception("erreur");
+		criteria.add(Restrictions.eq("name", obj.getName()));
+
+		try {
+			if (criteria.uniqueResult() == null) {
+				getSessionFactory().getCurrentSession().save(obj);
+			} else {
+				throw new AlreadyExists("Cannot create the event '"
+						+ obj.getName());
+			}
+		} catch (Exception ex) {
+			throw new AlreadyExists("Cannot create the event '" + obj.getName()
+					+ "', it already exists.");
+		}
 	}
+
 }

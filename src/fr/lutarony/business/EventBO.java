@@ -31,8 +31,13 @@ public class EventBO implements IEventBO {
 	 */
 	@Transactional(readOnly = false)
 	@Override
-	public void createEvent(Event event) {
-		getEventDAO().create(event);
+	public void createEvent(Event event) throws Exception {
+		try {
+			getEventDAO().add(event);
+		} catch (Exception e) {
+			throw e;
+		}
+
 	}
 
 	/**
@@ -77,16 +82,6 @@ public class EventBO implements IEventBO {
 	public List<Event> getAllEvents() {
 		return getEventDAO().getAll();
 	}
-	
-	public boolean eventAlreadyExists(String name){
-		try {
-			eventDAO.alreadyExists(name);
-			return true;
-		}
-		catch(Exception e){
-			return false;
-		}
-	}
 
 	/**
 	 * Get Event DAO
@@ -106,4 +101,5 @@ public class EventBO implements IEventBO {
 	public void setEventDAO(EventDAO eventDAO) {
 		this.eventDAO = eventDAO;
 	}
+
 }

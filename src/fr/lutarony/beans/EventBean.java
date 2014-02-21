@@ -4,12 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.AjaxBehaviorEvent;
-
-import org.springframework.dao.DataAccessException;
 
 import fr.lutarony.business.definition.IEventBO;
 import fr.lutarony.business.definition.IUserBO;
@@ -23,6 +22,7 @@ public class EventBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final String SUCCESS = "#";
 	private static final String ERROR = "#";
+	private static final String SUCCESS_CREATE = "The event '%s' has been created successfully.";
 
 	@ManagedProperty(value = "#{EventBO}")
 	IEventBO eventBO;
@@ -33,8 +33,18 @@ public class EventBean implements Serializable {
 
 	private int id;
 	private String name;
-	private User user;
+	private User currentUser;
 	private String message = "";
+
+	private boolean displayErrorMessage = false;
+	private boolean displaySuccessMessage = false;
+
+	@PostConstruct
+	public void initIt() throws Exception {
+		// default user 1 beacause there is no login feature... we consider the
+		// current session is the user 1
+		this.currentUser = getUserBO().findUser(1);
+	}
 
 	public String addEvent() {
 		try {
@@ -43,7 +53,7 @@ public class EventBean implements Serializable {
 			event.setUser(getUser());
 			getEventBO().createEvent(event);
 			return SUCCESS;
-		} catch (DataAccessException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
@@ -51,16 +61,17 @@ public class EventBean implements Serializable {
 	}
 
 	public void save(AjaxBehaviorEvent event) {
-		// default user 1 beacause there is no login feature... we consider the
-		// current session is the user 1
-		User u = getUserBO().findUser(1);
 
-		Event e = new Event(getName(), u);
-		if(!eventAlreadyExists()){
+		Event e = new Event(getName(), currentUser);
+		try {
 			getEventBO().createEvent(e);
-		}
-		else{
-			setMessage("Event already exists");
+			setMessage(SUCCESS_CREATE.replace("%s", getName()));
+			setDisplaySuccessMessage(true);
+			setDisplayErrorMessage(false);
+		} catch (Exception ex) {
+			setMessage(ex.getMessage());
+			setDisplaySuccessMessage(false);
+			setDisplayErrorMessage(true);
 		}
 	}
 
@@ -69,11 +80,11 @@ public class EventBean implements Serializable {
 		eventList.addAll(getEventBO().getAllEvents());
 		return eventList;
 	}
-	
-	public boolean eventAlreadyExists(){
-		return getEventBO().eventAlreadyExists(getName());
+
+	public void setEventList(List<Event> eventList) {
+		this.eventList = eventList;
 	}
-	
+
 	/** GETTERS ADN SETTERS **/
 
 	public IEventBO getEventBO() {
@@ -90,10 +101,6 @@ public class EventBean implements Serializable {
 
 	public void setUserBO(IUserBO userBO) {
 		this.userBO = userBO;
-	}
-
-	public void setEventList(List<Event> eventList) {
-		this.eventList = eventList;
 	}
 
 	public int getId() {
@@ -113,11 +120,11 @@ public class EventBean implements Serializable {
 	}
 
 	public User getUser() {
-		return user;
+		return currentUser;
 	}
 
 	public void setUser(User user) {
-		this.user = user;
+		this.currentUser = user;
 	}
 
 	public String getMessage() {
@@ -126,6 +133,22 @@ public class EventBean implements Serializable {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public boolean getDisplayErrorMessage() {
+		return displayErrorMessage;
+	}
+
+	public void setDisplayErrorMessage(boolean display) {
+		this.displayErrorMessage = display;
+	}
+
+	public boolean getDisplaySuccessMessage() {
+		return displaySuccessMessage;
+	}
+
+	public void setDisplaySuccessMessage(boolean display) {
+		this.displaySuccessMessage = display;
 	}
 
 }

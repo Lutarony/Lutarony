@@ -638,7 +638,7 @@ a {
 }
 
 /*Weighing*/
-.tab-bar a.category-title  {
+.tab-bar a.category-title {
 	text-transform: uppercase;
 }
 
@@ -693,10 +693,10 @@ ul {
 	display: block;
 	padding: 10px;
 	color: #777;
-	height : 50px;
-	width : 130px;
-	padding-top : 15px;
-	text-align : center;
+	height: 50px;
+	width: 130px;
+	padding-top: 15px;
+	text-align: center;
 	text-shadow: 0 1px #fff;
 	transition: color .2s ease;
 	-webkit-transition: color .2s ease;
@@ -705,15 +705,37 @@ ul {
 	-o-transition: color .2s ease;
 }
 
-.tab-bar>li i{
+.tab-bar>li i {
 	margin-right: 5px;
 }
 
-.weighing-title{
-	color :#394754
+.weighing-title {
+	color: #394754
 }
 
-td{
+td {
 	height: 50px;
 	padding-top: 15px !important;
 }
+
+/* MESSAGES ERROR/SUCCESS DATAS CREATION */
+
+.alert-msg {
+	color: #8B6420;
+	background: #ffe5ab;
+	border: 1px solid #ffc545;
+	padding: 10px;
+}
+
+.alert-msg.alert-msg-success {
+	color: #1b601c;
+	background: #cfe9b7;
+	border: 1px solid #9ad268;
+}
+
+.alert-msg.alert-msg-danger {
+	color: #691715;
+	background: #fe9b91;
+	border: 1px solid #fe402b;
+}
+
