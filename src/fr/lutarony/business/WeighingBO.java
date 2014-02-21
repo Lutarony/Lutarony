@@ -47,7 +47,7 @@ public class WeighingBO implements IWeighingBO {
 	@Transactional(readOnly = false)
 	@Override
 	public void updateWeight(Weighing w){
-		getWeighingDAO().updateWeight(w);
+		getWeighingDAO().update(w);
 	}
 
 	@Override

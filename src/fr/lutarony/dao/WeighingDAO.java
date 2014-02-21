@@ -95,16 +95,4 @@ public class WeighingDAO extends DAO<Weighing> {
 		return (List<Weighing>) criteria.list();
 	}
 
-	public void updateWeight(Weighing w) {
-		getSessionFactory().getCurrentSession().update(w);
-		/*
-		 * Criteria criteria = getSessionFactory().getCurrentSession()
-		 * .createCriteria(Weighing.class); criteria.setFetchMode("wrestler",
-		 * FetchMode.JOIN); criteria.add(Restrictions.eq("id", w.getId()));
-		 * Weighing = (Weighing) criteria.uniqueResult();
-		 * w.getWrestler().setCategory(cat); w.setWeight(finalWeight);
-		 * getSessionFactory().getCurrentSession().saveOrUpdate(w);
-		 */
-
-	}
 }

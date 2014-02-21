@@ -142,26 +142,18 @@ public class WeighingBean implements Serializable {
 	}
 
 	public void save(AjaxBehaviorEvent event) {
+		// update wrestler category weight
 		Weighing w = new Weighing(getId(), Double.valueOf(getWeight()),
 				getLotNb(), getDate(), getTour(), getWrestler());
 		getWeighingBO().updateWeight(w);
 	}
 
 	public void update(AjaxBehaviorEvent event) {
-		calculate();
-		/*Weighing w = new Weighing(getId(), Double.valueOf(getWeight()),
-				getLotNb(), getDate(), getTour(), getWrestler());
-		getWeighingBO().updateWeight(w.getId(), w.getWeight(),
-				w.getWrestler().getCategory());*/
-	}
-	
-	public void calculate(){
-		if(!getWeight().isEmpty()){
+		if (!getWeight().isEmpty()) {
 			Double weight = Double.valueOf(getWeight());
 			Double newFinalWeight = weight - getTolerance();
 			setFinalWeight(newFinalWeight);
-		}
-		else{
+		} else {
 			setFinalWeight(0.0);
 		}
 	}

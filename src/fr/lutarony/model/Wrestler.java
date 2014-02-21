@@ -38,9 +38,12 @@ public class Wrestler {
 	@Column(name = "birth_date", unique = false, nullable = false)
 	private Date birthDate;
 
-	@Column(name = "category")
+	@Column(name = "category", unique = false, nullable = true)
 	@Enumerated(EnumType.STRING)
 	private CategoryType category;
+	
+	@Column(name = "category_weight", unique = false, nullable = true)
+	private CategoryType categoryWeight;
 
 	@ManyToOne()
 	@JoinColumn(name = "team_id")
