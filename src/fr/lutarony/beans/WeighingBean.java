@@ -36,7 +36,7 @@ public class WeighingBean implements Serializable {
 	private Tournament tour;
 	private Wrestler wrestler;
 	private String weight;
-	private int lotNb;
+	private String lotNb;
 	private Timestamp date;
 
 	private int tolerance;
@@ -70,7 +70,7 @@ public class WeighingBean implements Serializable {
 		Weighing w = getWeighingBO().findWeighing(getId());
 		setWrestler(w.getWrestler());
 		setWeight(w.getWeight().toString());
-		setLotNb(w.getLotNb());
+		setLotNb(String.valueOf(w.getLotNb()));
 	}
 
 	public List<Weighing> getWeighingsListOrderBySurname() {
@@ -129,7 +129,7 @@ public class WeighingBean implements Serializable {
 		setTour(w.getTournament());
 		setWrestler(w.getWrestler());
 		setWeight(w.getWeight().toString());
-		setLotNb(w.getLotNb());
+		setLotNb(String.valueOf(w.getLotNb()));
 		setDate(w.getDate());
 		setTolerance(CategoryType.getTolerance(w.getWrestler().getCategory()));
 		setFinalWeight(Double.valueOf(getWeight()) - getTolerance());
@@ -139,12 +139,13 @@ public class WeighingBean implements Serializable {
 		this.tolerance = 0;
 		this.weight = "0";
 		this.finalWeight = 0.0;
+		this.lotNb = "0";
 	}
 
 	public void save(AjaxBehaviorEvent event) {
 		// update wrestler category weight
 		Weighing w = new Weighing(getId(), Double.valueOf(getWeight()),
-				getLotNb(), getDate(), getTour(), getWrestler());
+				Integer.valueOf(getLotNb()), getDate(), getTour(), getWrestler());
 		getWeighingBO().updateWeight(w);
 	}
 
@@ -209,11 +210,11 @@ public class WeighingBean implements Serializable {
 		this.weight = weight;
 	}
 
-	public int getLotNb() {
+	public String getLotNb() {
 		return lotNb;
 	}
 
-	public void setLotNb(int lotNb) {
+	public void setLotNb(String lotNb) {
 		this.lotNb = lotNb;
 	}
 
