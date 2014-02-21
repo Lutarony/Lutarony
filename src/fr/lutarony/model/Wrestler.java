@@ -42,11 +42,11 @@ public class Wrestler {
 	@Enumerated(EnumType.STRING)
 	private CategoryType category;
 	
-	@Column(name = "category_weight", unique = false, nullable = true)
-	private CategoryType categoryWeight;
+	@Column(name = "category_weight", unique = false, nullable = true, columnDefinition = "int default 0")
+	private int categoryWeight;
 
 	@ManyToOne()
-	@JoinColumn(name = "team_id")
+	@JoinColumn(name = "team_id", unique = false, nullable = false)
 	private Team team;
 
 	@OneToOne(mappedBy = "wrestler")
@@ -111,6 +111,14 @@ public class Wrestler {
 
 	public void setCategory(CategoryType category) {
 		this.category = category;
+	}
+
+	public int getCategoryWeight() {
+		return categoryWeight;
+	}
+
+	public void setCategoryWeight(int categoryWeight) {
+		this.categoryWeight = categoryWeight;
 	}
 
 	public Weighing getWeighing() {
