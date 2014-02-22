@@ -14,4 +14,6 @@ public interface ITeamBO {
 	public Team findTeam(int id);
 
 	public List<Team> getAllTeams();
+	
+	public List<Team> getAllOrderByName();
 }

@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import fr.lutarony.business.definition.ITeamBO;
 import fr.lutarony.dao.TeamDAO;
 import fr.lutarony.model.Team;
+import fr.lutarony.model.Wrestler;
 
 @Transactional(readOnly = true)
 public class TeamBO implements ITeamBO {
@@ -87,4 +88,10 @@ public class TeamBO implements ITeamBO {
 	public void setTeamDAO(TeamDAO teamDAO) {
 		this.teamDAO = teamDAO;
 	}
+	
+	@Override
+	public List<Team> getAllOrderByName() {
+		return teamDAO.getAllOrderBySurname();
+	}
+	
 }

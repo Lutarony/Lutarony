@@ -3,7 +3,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
 	xmlns:t="http://xmlns.jcp.org/jsf/passthrough">
 
 	<h:panelGroup layout="block" class="padding-md"
@@ -15,15 +15,21 @@
 
 					<h:panelGroup id="tournamentsList" layout="block"
 						class="panel panel-default">
-						<h:panelGroup layout="block" class="panel-heading">All tournaments</h:panelGroup>
+						<h:panelGroup layout="block" class="panel-heading">
+							<h5>
+								<h:outputText
+									value="All tournaments for the event #{tournamentBean.currentEventName}" />
+							</h5>
+
+						</h:panelGroup>
 						<h:form>
 							<table class="table table-striped">
 								<thead>
 									<tr>
 										<th>id</th>
 										<th>Tournaments</th>
-										<td>Type</td>
-										<td>Date</td>
+										<th>Type</th>
+										<th>Date</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -49,7 +55,11 @@
 
 					<h:panelGroup layout="block" class="panel panel-default">
 						<h:form id="tournamentForm" class="form-horizontal form-border">
-							<h:panelGroup layout="block" class="panel-heading">Create new tournament for the evenement %e</h:panelGroup>
+							<h:panelGroup layout="block" class="panel-heading">
+								<h5>
+									<h:outputText value="Create new tournament for this event" />
+								</h5>
+							</h:panelGroup>
 
 							<h:panelGroup layout="block" class="panel-body">
 								<h:panelGroup layout="block" class="form-group">
@@ -58,48 +68,65 @@
 										<label class="control-label col-md-2">Name</label>
 										<h:panelGroup layout="block" class="col-md-5">
 											<h:inputText class="form-control input-sm"
-												value="#{tournamentBean.name}">
-											</h:inputText>
+												value="#{tournamentBean.name}" />
+
 										</h:panelGroup>
 
 									</h:panelGroup>
 
+									<br />
 									<h:panelGroup layout="block" class="row">
 										<h:outputText class="control-label col-md-2" value="Type" />
-										<p:selectOneMenu value="Select type">
-											<f:selectItems value="#{tournamentBean.typeList}" var="type"
-												itemValue="#{type}" itemLabel="#{type}" />
-										</p:selectOneMenu>
 
-										
+										<h:panelGroup layout="block" class="col-md-2">
+											<h:selectOneMenu class="form-control"
+												value="#{tournamentBean.type}">
+												<f:selectItems value="#{tournamentBean.typesList}" />
+											</h:selectOneMenu>
+										</h:panelGroup>
+
+
+									</h:panelGroup>
+									<br />
+									<h:panelGroup layout="block" class="row">
+
+										<label class="control-label col-md-2">Date</label>
+										<h:panelGroup layout="block" class="col-md-3">
+											<h:inputText class="form-control input-sm"
+												value="#{tournamentBean.dateValue}"
+												t:placeholder="dd/mm/yyyy" />
+
+										</h:panelGroup>
+
 									</h:panelGroup>
 
 								</h:panelGroup>
 								<!-- /form-group -->
 
-								<h:panelGroup layout="block" class="panel-footer">
-
-									<h:panelGroup layout="block" id="message">
-										<h:panelGroup layout="block"
-											rendered="#{tournamentBean.displayErrorMessage}"
-											class="alert-msg alert-msg-danger">
-											<h:outputText value="#{tournamentBean.message}"></h:outputText>
-										</h:panelGroup>
-
-										<h:panelGroup layout="block"
-											rendered="#{tournamentBean.displaySuccessMessage}"
-											class="alert-msg alert-msg-success">
-											<h:outputText value="#{tournamentBean.message}"></h:outputText>
-										</h:panelGroup>
+								<h:panelGroup layout="block" id="tourMessage">
+									<h:panelGroup layout="block"
+										rendered="#{tournamentBean.displayErrorMessage}"
+										class="alert-msg alert-msg-danger">
+										<h:outputText value="#{tournamentBean.message}" />
+										<br />
 									</h:panelGroup>
 
-									<br />
+									<h:panelGroup layout="block"
+										rendered="#{tournamentBean.displaySuccessMessage}"
+										class="alert-msg alert-msg-success">
+										<h:outputText value="#{tournamentBean.message}" />
+										<br />
+									</h:panelGroup>
+								</h:panelGroup>
+
+								<br />
+								<h:panelGroup layout="block" class="panel-footer">
 
 									<h:panelGroup layout="block" class="text-right">
 										<h:commandButton styleClass="btn btn-sm btn-primary"
-											value="Update">
+											value="Create">
 											<f:ajax listener="#{tournamentBean.save}" execute="@form"
-												render=":tournamentsList message @this" />
+												render=":tournamentsList tourMessage @this" />
 										</h:commandButton>
 									</h:panelGroup>
 								</h:panelGroup>

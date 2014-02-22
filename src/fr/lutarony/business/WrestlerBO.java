@@ -31,8 +31,12 @@ public class WrestlerBO implements IWrestlerBO {
 	 */
 	@Transactional(readOnly = false)
 	@Override
-	public void createWrestler(Wrestler wrestler) {
-		getWrestlerDAO().create(wrestler);
+	public void createWrestler(Wrestler wrestler) throws Exception {
+		try {
+			getWrestlerDAO().add(wrestler);
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
@@ -96,10 +100,10 @@ public class WrestlerBO implements IWrestlerBO {
 	public void setWrestlerDAO(WrestlerDAO wrestlerDAO) {
 		this.wrestlerDAO = wrestlerDAO;
 	}
-	
+
 	@Override
 	public List<Wrestler> getAllOrderBySurname() {
 		return wrestlerDAO.getAllOrderBySurname();
 	}
-	
+
 }

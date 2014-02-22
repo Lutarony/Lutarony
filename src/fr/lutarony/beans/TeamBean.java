@@ -2,29 +2,31 @@ package fr.lutarony.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
-
-import org.primefaces.context.RequestContext;
+import javax.faces.bean.SessionScoped;
+import javax.faces.event.AjaxBehaviorEvent;
 
 import fr.lutarony.business.definition.ITeamBO;
 import fr.lutarony.model.Team;
 
 @ManagedBean(name = "teamBean")
-@RequestScoped
+@SessionScoped
 public class TeamBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private static final String SUCCESS = "#";
-	private static final String ERROR = "#";
+
+	private static final String SUCCESS_CREATE = "The team '%s' has been created successfully.";
+	private static final String EMPTY_FIELD = "A name is required";
 
 	@ManagedProperty(value = "#{TeamBO}")
 	ITeamBO teamBO;
 
-	List<Team> teamList;
+	List<Team> teamsList;
 
 	private int id;
 	private String name;
@@ -35,50 +37,72 @@ public class TeamBean implements Serializable {
 	private String country;
 	private String phone;
 
-	public String addTeamBean() {
-		Team team = new Team();
-		team.setName(getName());
-		team.setCoach(getCoach());
+	// Messages
+	private String message = "";
+	private boolean displayErrorMessage = false;
+	private boolean displaySuccessMessage = false;
 
-		getTeamBO().createTeam(team);
+	
 
-		RequestContext.getCurrentInstance().closeDialog(team);
-		/*
-		 * FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
-		 * "Team created :", team.getName());
-		 * FacesContext.getCurrentInstance().addMessage(null, message);
-		 */
-		return team.getName();
+	// save the tournament
+	public void save(AjaxBehaviorEvent event) {
+
+		if (getName().isEmpty()) {
+			setMessage(EMPTY_FIELD);
+			setDisplaySuccessMessage(false);
+			setDisplayErrorMessage(true);
+			return;
+		}
+
+		try {
+			Team newTeam = new Team(getName(), getCoach(), getAdress(),
+					getCity(), getCode(), getCountry(), getPhone());
+			getTeamBO().createTeam(newTeam);
+			setMessage(SUCCESS_CREATE.replace("%s", getName()));
+			setDisplaySuccessMessage(true);
+			setDisplayErrorMessage(false);
+
+		} catch (Exception ex) {
+			setMessage(ex.getMessage());
+			setDisplaySuccessMessage(false);
+			setDisplayErrorMessage(true);
+		}
 	}
 
-	public void openAddTeamView() {
-		RequestContext.getCurrentInstance().openDialog("add-team.xhtml");
+	public void clear() {
+		setName("");
+		setAdress("");
+		setCoach("");
+		setCode("");
+		setCountry("");
+		setPhone("");
+		setDisplayErrorMessage(false);
+		setDisplaySuccessMessage(false);
 	}
 
-	public String editTeamBean() {
-		Team team = new Team();
-		team.setName(getName());
-		team.setCoach(getCoach());
-		getTeamBO().updateTeam(team);
-
-		RequestContext.getCurrentInstance().closeDialog(team);
-		/*
-		 * FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
-		 * "Team edited :", team.getName());
-		 * FacesContext.getCurrentInstance().addMessage(null, message);
-		 */
-
-		return team.getName();
+	public List<Team> getTeamsListOrderByName() {
+		teamsList = new ArrayList<Team>();
+		teamsList.addAll(getTeamBO().getAllOrderByName());
+		return teamsList;
 	}
 
-	public void openEditTeamView() {
-		RequestContext.getCurrentInstance().openDialog("edit-team");
+	
+
+	/** GETTERS AND SETTERS **/
+
+	public int getNbWrestler(int teamId) {
+		Team t = getTeamBO().findTeam(teamId);
+		if (t != null) {
+			return t.getWrestlers().size();
+		} else {
+			return 0;
+		}
 	}
 
-	public List<Team> getTeamList() {
-		teamList = new ArrayList<Team>();
-		teamList.addAll(getTeamBO().getAllTeams());
-		return teamList;
+	public List<Team> getTeamsList() {
+		teamsList = new ArrayList<Team>();
+		teamsList.addAll(getTeamBO().getAllTeams());
+		return teamsList;
 	}
 
 	public ITeamBO getTeamBO() {
@@ -89,8 +113,8 @@ public class TeamBean implements Serializable {
 		this.teamBO = teamBO;
 	}
 
-	public void setTeamList(List<Team> teamList) {
-		this.teamList = teamList;
+	public void setTeamsList(List<Team> teamList) {
+		this.teamsList = teamList;
 	}
 
 	public int getId() {
@@ -156,4 +180,29 @@ public class TeamBean implements Serializable {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public boolean getDisplayErrorMessage() {
+		return displayErrorMessage;
+	}
+
+	public void setDisplayErrorMessage(boolean display) {
+		this.displayErrorMessage = display;
+	}
+
+	public boolean getDisplaySuccessMessage() {
+		return displaySuccessMessage;
+	}
+
+	public void setDisplaySuccessMessage(boolean display) {
+		this.displaySuccessMessage = display;
+	}
+
 }

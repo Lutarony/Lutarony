@@ -3,12 +3,12 @@ package fr.lutarony.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 import fr.lutarony.dao.definition.DAO;
-import fr.lutarony.model.Wrestler;
+import fr.lutarony.exceptions.AlreadyExists;
 import fr.lutarony.model.Wrestler;
 import fr.lutarony.util.CategoryType;
 
@@ -74,13 +74,39 @@ public class WrestlerDAO extends DAO<Wrestler> {
 				.setParameter(0, category.toString()).list();
 		return list;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Wrestler> getAllOrderBySurname() {
 		Criteria criteria = getSessionFactory().getCurrentSession()
 				.createCriteria(Wrestler.class);
 		criteria.addOrder(Order.asc("surname"));
 		return (List<Wrestler>) criteria.list();
+	}
+
+	public void add(Wrestler obj) throws Exception {
+
+		Criteria criteria = getSessionFactory().getCurrentSession()
+				.createCriteria(Wrestler.class);
+		criteria.add(Restrictions.eq("name", obj.getName()));
+		criteria.add(Restrictions.and(Restrictions.eq("surname",
+				obj.getSurname())));
+
+		try {
+			if (criteria.uniqueResult() == null) {
+				getSessionFactory().getCurrentSession().save(obj);
+			} else {
+				throw new AlreadyExists("Cannot create the wrestler '"
+						+ obj.getName() + " " + obj.getSurname()
+						+ "', he already exists.");
+			}
+		} catch (AlreadyExists ex) {
+			throw new AlreadyExists("Cannot create the wrestler '"
+					+ obj.getName() + " " + obj.getSurname()
+					+ "', he already exists.");
+		}
+		catch (Exception e) {
+			throw e;
+		}
 	}
 
 }

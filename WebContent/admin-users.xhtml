@@ -15,48 +15,6 @@
 
 		<h:panelGroup layout="block" class="panel-body">
 
-
-			<p:dataList id="usersList" styleClass="sidebar-nav"
-				value="#{userBean.userList}" var="user" layout="simple">
-				<h:link value="#{user.name} #{user.surname}" outcome="#"></h:link>
-			</p:dataList>
-
-
-
-			<h:form class="uk-form" id="form">
-
-				<fieldset>
-
-					<h:outputLabel value="#{msg['admin.user.name']} :" for="name" />
-					<h:inputText id="name" value="#{userBean.name}"
-						class="form-control" />
-
-					<br />
-
-					<h:outputLabel value="#{msg['admin.user.surname']} :" for="surname"></h:outputLabel>
-					<h:inputText id="surname" value="#{userBean.surname}"
-						class="form-control" />
-
-					<br />
-
-					<h:outputLabel value="#{msg['admin.user.email']} :" for="email"></h:outputLabel>
-					<div class="input-group">
-						<span class="input-group-addon">@</span>
-						<h:inputText id="email" value="#{userBean.email}"
-							class="form-control" />
-					</div>
-
-					<br />
-
-					<h:commandButton value="#{msg['admin.user.create']}"
-						action="#{userBean.addUser}" styleClass="btn btn-info">
-						<!--  <f:ajax execute="@form" render=":usersList @form" />-->
-					</h:commandButton>
-
-				</fieldset>
-
-			</h:form>
-
 		</h:panelGroup>
 	</h:panelGroup>
 

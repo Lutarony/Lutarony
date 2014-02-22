@@ -15,14 +15,7 @@
 		</ui:define>
 
 		<ui:define name="content">
-			<h:dataTable value="#{userBean.userList}" var="user">
-				<h:column>
-					<h:link value="#{user.name} #{user.surname}" outcome="">
-						<f:param name="id" value="#{user.id}" />
-					</h:link>
-				</h:column>
-			</h:dataTable>
-			<h:outputLabel value="#{userBean.totalUsers}"></h:outputLabel>
+			
 		</ui:define>
 
 	</ui:composition>

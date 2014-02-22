@@ -12,7 +12,7 @@
 
 			<h:panelGroup layout="block" class="row">
 				<h:panelGroup layout="block" class="col-md-5">
-
+					<h6>Click on one wrestler name to edit his weigh </h6>
 					<h:panelGroup id="wrestlersList" layout="block"
 						class="panel panel-default">
 						<h:panelGroup layout="block" class="panel-heading">All wrestlers</h:panelGroup>
@@ -71,14 +71,11 @@
 
 										<label class="control-label col-md-3">Weight</label>
 										<h:panelGroup layout="block" class="col-md-2">
-
 											<h:inputText class="form-control input-sm"
 												value="#{wrestlerBean.weight}">
-												<f:ajax listener="#{wrestlerBean.update}" event="keyup"
+												<f:ajax listener="#{wrestlerBean.updateFinalWeight}" event="keyup"
 													render="finalWeight" />
 											</h:inputText>
-
-
 										</h:panelGroup>
 
 										<label class="control-label col-md-3">Tolerance</label>
@@ -120,7 +117,7 @@
 									<h:panelGroup layout="block" class="text-right">
 										<h:commandButton styleClass="btn btn-sm btn-primary"
 											value="Update">
-											<f:ajax listener="#{wrestlerBean.save}" execute=""
+											<f:ajax listener="#{wrestlerBean.saveWeighing}" execute=""
 												render=":wrestlersList @form :weighingTabs" />
 										</h:commandButton>
 									</h:panelGroup>
@@ -130,6 +127,8 @@
 						</h:form>
 					</h:panelGroup>
 				</h:panelGroup>
+				
+				
 				<!-- /.col -->
 			</h:panelGroup>
 		</h:panelGroup>

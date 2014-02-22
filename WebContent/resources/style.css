@@ -570,7 +570,7 @@ a {
 
 .panel.panel-default .panel-heading {
 	background: #fff;
-	color: #777777;
+	color: #1A5FA1;
 	border-color: #f1f5fc;
 }
 
@@ -719,7 +719,6 @@ td {
 }
 
 /* MESSAGES ERROR/SUCCESS DATAS CREATION */
-
 .alert-msg {
 	color: #8B6420;
 	background: #ffe5ab;
@@ -739,3 +738,18 @@ td {
 	border: 1px solid #fe402b;
 }
 
+/********************  SUB MENU **********************/
+.portlet .portlet-body {
+	padding: 15px;
+	background: #fff;
+}
+
+.nav-tabs,.nav-pills {
+	margin-bottom: 10px;
+}
+
+a.list-group-item.active,a.list-group-item.active:hover,a.list-group-item.active:focus,.nav-pills>li.active>a,.nav-pills>li.active>a:hover,.nav-pills>li.active>a:focus,.pagination>.active>a,.pagination>.active>span,.pagination>.active>a:hover,.pagination>.active>span:hover,.pagination>.active>a:focus,.pagination>.active>span:focus
+	{
+	border-color: #495B6C;
+	background-color: #495B6C;
+}

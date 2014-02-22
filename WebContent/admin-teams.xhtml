@@ -15,20 +15,31 @@
 
 					<h:panelGroup id="teamsList" layout="block"
 						class="panel panel-default">
-						<h:panelGroup layout="block" class="panel-heading">All events</h:panelGroup>
+						<h:panelGroup layout="block" class="panel-heading">
+							<h5>
+								<h:outputText value="All teams" />
+							</h5>
+						</h:panelGroup>
 						<h:form>
 							<table class="table table-striped">
 								<thead>
 									<tr>
 										<th>id</th>
-										<th>Event</th>
+										<th>Team</th>
+										<th>Coach</th>
+										<th>Adress</th>
+										<th>Nb wrestlers</th>
 									</tr>
 								</thead>
 								<tbody>
-									<ui:repeat var="event" value="#{eventBean.eventsList}">
+									<ui:repeat var="team" value="#{teamBean.teamsList}">
 										<tr>
-											<td>#{event.id}</td>
-											<td>#{event.name}</td>
+											<td>#{team.id}</td>
+											<td>#{team.name}</td>
+											<td>#{team.coach}</td>
+											<td>#{team.adress}<br />#{team.code} #{team.country}
+											</td>
+											<td><span class="badge">#{teamBean.getNbWrestler(team.id)}</span></td>
 										</tr>
 
 									</ui:repeat>
@@ -45,37 +56,96 @@
 				<h:panelGroup layout="block" class="col-md-5">
 
 					<h:panelGroup layout="block" class="panel panel-default">
-						<h:form id ="teamForm" class="form-horizontal form-border">
-							<h:panelGroup layout="block" class="panel-heading">Create new event</h:panelGroup>
+						<h:form id="teamForm" class="form-horizontal form-border">
+							<h:panelGroup layout="block" class="panel-heading">
+								<h5>
+									<h:outputText value="Create new team" />
+								</h5>
+							</h:panelGroup>
 
 							<h:panelGroup layout="block" class="panel-body">
 								<h:panelGroup layout="block" class="form-group">
-									<h:panelGroup layout="block" class="row">
 
-										<label class="control-label col-md-5">Name</label>
+									<h:panelGroup layout="block" class="row">
+										<label class="control-label col-md-3">Name</label>
 										<h:panelGroup layout="block" class="col-md-5">
-
 											<h:inputText class="form-control input-sm"
-												value="#{eventBean.name}" />
-
-
+												value="#{teamBean.name}" />
 										</h:panelGroup>
-
 									</h:panelGroup>
+
+									<br />
 
 									<h:panelGroup layout="block" class="row">
-										<h:outputText value="#{eventBean.message}"></h:outputText>
+										<label class="control-label col-md-3">Coach</label>
+										<h:panelGroup layout="block" class="col-md-5">
+											<h:inputText class="form-control input-sm"
+												value="#{teamBean.coach}" />
+										</h:panelGroup>
 									</h:panelGroup>
+
+									<br />
+
+									<h:panelGroup layout="block" class="row">
+										<label class="control-label col-md-3">Adress</label>
+										<h:panelGroup layout="block" class="col-md-5">
+											<h:inputText class="form-control input-sm"
+												value="#{teamBean.adress}" />
+										</h:panelGroup>
+									</h:panelGroup>
+
+									<br />
+
+									<h:panelGroup layout="block" class="row">
+										<label class="control-label col-md-3">Code</label>
+										<h:panelGroup layout="block" class="col-md-3">
+											<h:inputText class="form-control input-sm"
+												value="#{teamBean.code}" />
+										</h:panelGroup>
+										<label class="control-label col-md-2">Country</label>
+										<h:panelGroup layout="block" class="col-md-3">
+											<h:inputText class="form-control input-sm"
+												value="#{teamBean.country}" />
+										</h:panelGroup>
+									</h:panelGroup>
+
+									<br />
+
+									<h:panelGroup layout="block" class="row">
+										<label class="control-label col-md-3">Phone</label>
+										<h:panelGroup layout="block" class="col-md-5">
+											<h:inputText class="form-control input-sm"
+												value="#{teamBean.phone}" />
+										</h:panelGroup>
+									</h:panelGroup>
+
 
 								</h:panelGroup>
 								<!-- /form-group -->
+								<h:panelGroup layout="block" id="teamMessage">
+									<h:panelGroup layout="block"
+										rendered="#{teamBean.displayErrorMessage}"
+										class="alert-msg alert-msg-danger">
+										<h:outputText value="#{teamBean.message}" />
+										<br />
+									</h:panelGroup>
+
+									<h:panelGroup layout="block"
+										rendered="#{teamBean.displaySuccessMessage}"
+										class="alert-msg alert-msg-success">
+										<h:outputText value="#{teamBean.message}" />
+										<br />
+									</h:panelGroup>
+								</h:panelGroup>
+								<br />
 
 								<h:panelGroup layout="block" class="panel-footer">
+
 									<h:panelGroup layout="block" class="text-right">
 										<h:commandButton styleClass="btn btn-sm btn-primary"
-											value="Update">
-											<f:ajax listener="#{eventBean.save}" execute="@form"
-												render=":eventsList" />
+											value="Create">
+											<f:ajax listener="#{teamBean.save}" execute="@form"
+												render=":teamsList teamMessage @this" />
 										</h:commandButton>
 									</h:panelGroup>
 								</h:panelGroup>

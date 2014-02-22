@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -20,8 +19,7 @@ import fr.lutarony.model.User;
 public class EventBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private static final String SUCCESS = "#";
-	private static final String ERROR = "#";
+
 	private static final String SUCCESS_CREATE = "The event '%s' has been created successfully.";
 
 	@ManagedProperty(value = "#{EventBO}")
@@ -33,22 +31,22 @@ public class EventBean implements Serializable {
 
 	private int id;
 	private String name;
-	private User currentUser;
-	private String message = "";
 
+	private User user;
+
+	private String message = "";
 	private boolean displayErrorMessage = false;
 	private boolean displaySuccessMessage = false;
 
-	@PostConstruct
-	public void initIt() throws Exception {
-		// default user 1 beacause there is no login feature... we consider the
-		// current session is the user 1
-		this.currentUser = getUserBO().findUser(1);
-	}
+	// default user 1 beacause there is no login feature... we consider the
+	// current session is the user 1
+	private static int CURRENT_SESSION_USER_ID = 1;
 
 	public void save(AjaxBehaviorEvent event) {
 
-		Event e = new Event(getName(), currentUser);
+		setUser(getUserBO().findUser(CURRENT_SESSION_USER_ID));
+
+		Event e = new Event(getName(), user);
 		try {
 			getEventBO().createEvent(e);
 			setMessage(SUCCESS_CREATE.replace("%s", getName()));
@@ -106,11 +104,11 @@ public class EventBean implements Serializable {
 	}
 
 	public User getUser() {
-		return currentUser;
+		return user;
 	}
 
 	public void setUser(User user) {
-		this.currentUser = user;
+		this.user = user;
 	}
 
 	public String getMessage() {

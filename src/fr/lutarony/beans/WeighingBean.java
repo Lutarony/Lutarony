@@ -24,8 +24,6 @@ import fr.lutarony.util.CategoryType;
 public class WeighingBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private static final String SUCCESS = "#";
-	private static final String ERROR = "#";
 
 	@ManagedProperty(value = "#{WeighingBO}")
 	IWeighingBO weighingBO;
@@ -103,51 +101,13 @@ public class WeighingBean implements Serializable {
 		return weighingList;
 	}
 
-	/*public void attrListener(AjaxBehaviorEvent event) {
-
-		this.id = (Integer) event.getComponent().getAttributes()
-				.get("selectedWeighingId");
-		Weighing w = getWeighingBO().findWeighing(getId());
-		setTour(w.getTournament());
-		setWrestler(w.getWrestler());
-		setWeight(w.getWeight().toString());
-		setLotNb(String.valueOf(w.getLotNb()));
-		setDate(w.getDate());
-		setTolerance(CategoryType.getTolerance(w.getWrestler().getCategory()));
-		setFinalWeight(Double.valueOf(getWeight()) - getTolerance());
-	}*/
+	
 
 	public void clear(AjaxBehaviorEvent event) {
 		this.tolerance = 0;
 		this.weight = "0";
 		this.finalWeight = 0.0;
 		this.lotNb = "0";
-	}
-
-	/*public void save(AjaxBehaviorEvent event) {
-		// update wrestler category weight
-		Weighing w = new Weighing(getId(), Double.valueOf(getWeight()),
-				Integer.valueOf(getLotNb()), getDate(), getTour(), getWrestler());
-		getWeighingBO().updateWeight(w);
-	}*/
-
-	/*public void update(AjaxBehaviorEvent event) {
-		if (!getWeight().isEmpty()) {
-			Double weight = Double.valueOf(getWeight());
-			Double newFinalWeight = weight - getTolerance();
-			setFinalWeight(newFinalWeight);
-		} else {
-			setFinalWeight(0.0);
-		}
-	}*/
-
-	public String saver() {
-		return "#";
-	}
-
-	public String getLoadDetails() {
-
-		return "#";
 	}
 
 	/**** GETTERS AND SETTERS ****/

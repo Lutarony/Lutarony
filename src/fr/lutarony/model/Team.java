@@ -3,12 +3,16 @@ package fr.lutarony.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.springframework.transaction.annotation.Transactional;
 
 @Entity
 @Table(name = "team")
@@ -41,8 +45,24 @@ public class Team {
 	private String phone;
 
 	// List of WRESTLERS
-	@OneToMany(mappedBy = "team")
+	@OneToMany(mappedBy = "team",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<Wrestler> wrestlers = new HashSet<Wrestler>();
+
+	/**** CONSTRUCTORS ****/
+	public Team() {
+	}
+
+	public Team(String name, String coach, String adress, String city,
+			String code, String country, String phone) {
+		super();
+		this.name = name;
+		this.coach = coach;
+		this.adress = adress;
+		this.city = city;
+		this.code = code;
+		this.country = country;
+		this.phone = phone;
+	}
 
 	/**** GETTERS AND SETTERS ****/
 
@@ -63,7 +83,10 @@ public class Team {
 	}
 
 	public String getCoach() {
-		return coach;
+		if (coach == null || coach.isEmpty())
+			return "- -";
+		else
+			return coach;
 	}
 
 	public void setCoach(String coach) {
@@ -71,7 +94,10 @@ public class Team {
 	}
 
 	public String getAdress() {
-		return adress;
+		if (adress == null || adress.isEmpty())
+			return "- -";
+		else
+			return adress;
 	}
 
 	public void setAdress(String adress) {
@@ -79,6 +105,7 @@ public class Team {
 	}
 
 	public String getCity() {
+
 		return city;
 	}
 
@@ -87,6 +114,7 @@ public class Team {
 	}
 
 	public String getCode() {
+
 		return code;
 	}
 
@@ -95,6 +123,7 @@ public class Team {
 	}
 
 	public String getCountry() {
+
 		return country;
 	}
 
@@ -103,7 +132,10 @@ public class Team {
 	}
 
 	public String getPhone() {
-		return phone;
+		if (phone == null || phone.isEmpty())
+			return "- -";
+		else
+			return phone;
 	}
 
 	public void setPhone(String phone) {

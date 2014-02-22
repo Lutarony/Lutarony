@@ -1,7 +1,6 @@
 package fr.lutarony.util;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -80,7 +79,7 @@ public enum CategoryType {
 		this(minYear, maxYear, weightCategories);
 		this.tolerance = tolerance;
 	}
-					
+
 	/** GETTERS AND SETTERS **/
 
 	public int getMaxYear() {
@@ -128,32 +127,41 @@ public enum CategoryType {
 				|| cat.toUpperCase().equals(SENIOR.toString());
 		// || cat.toUpperCase().equals(SENIOR_F.toString());
 	}
-	
-	public static int getCategory(Date date, int weight) {
+
+	public static int getCategory(Date date, double weight) {
 		int min = 0;
 		int max = 0;
-		
+
 		Calendar myCalendar = GregorianCalendar.getInstance();
 		myCalendar.setTime(date);
 		int dateYear = myCalendar.get(Calendar.YEAR);
 
 		for (CategoryType c : CategoryType.values()) {
-		    min = c.minYear;
-		    max = c.maxYear;
-		    if (dateYear <= max && dateYear >= min) {
-		        for (int i = 0; i < c.getWeightList().size(); i++) {
-		            if (weight <= c.getWeightList().get(i)) {
-		                return c.getWeightList().get(i);
-		            }
-		            
-		            // test de securite
-		            if (i == (c.getWeightList().size() - 1)) {
-		                return (-1);
-		            }
-		        }
-		    }
+			min = c.minYear;
+			max = c.maxYear;
+			if (dateYear <= max && dateYear >= min) {
+				for (int i = 0; i < c.getWeightList().size(); i++) {
+					if (weight <= c.getWeightList().get(i)) {
+						return c.getWeightList().get(i);
+					}
+
+					// test de securite
+					if (i == (c.getWeightList().size() - 1)) {
+						return (-1);
+					}
+				}
+			}
 		}
-		
+
 		return (-1);
+	}
+
+	public static CategoryType getCategory(int year) {
+		for (CategoryType c : CategoryType.values()) {
+			if (year >= c.getMinYear() && year <= c.getMaxYear()) {
+				return c;
+			}
+		}
+		return CategoryType.NONE;
 	}
 }

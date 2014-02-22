@@ -11,99 +11,143 @@
 		<h:panelGroup layout="block" class="padding-md">
 
 			<h:panelGroup layout="block" class="row">
-				<h:panelGroup layout="block" class="col-md-5">
 
-					<h:panelGroup id="eventsList" layout="block"
-						class="panel panel-default">
-						<h:panelGroup layout="block" class="panel-heading">All events</h:panelGroup>
-						<h:form>
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<th>id</th>
-										<th>Event</th>
-									</tr>
-								</thead>
-								<tbody>
-									<ui:repeat var="event" value="#{eventBean.eventsList}">
-										<tr>
-											<td>#{event.id}</td>
-											<td>#{event.name}</td>
-										</tr>
+				<h:panelGroup layout="block" class="portlet-body">
+					<h:panelGroup layout="block" class="row">
+						<h:panelGroup layout="block" class="col-sm-1">
+							<ul class="nav nav-pills nav-stacked">
+								<li class="active"><a href="#admin-events-view"
+									data-toggle="tab">View all</a></li>
+								<li><a href="#admin-events-create" data-toggle="tab">Create</a>
+								</li>
+								<li><a href="#admin-events-update" data-toggle="tab">Update</a></li>
+							</ul>
+						</h:panelGroup>
+						<h:panelGroup layout="block" class="col-sm-9">
+							<h:panelGroup layout="block" id="viewContent" class="tab-content">
 
-									</ui:repeat>
+								<!-- 1st tab -->
+								<h:panelGroup layout="block" class="tab-pane fade active in"
+									id="admin-events-view">
 
-								</tbody>
-							</table>
-						</h:form>
-					</h:panelGroup>
-
-
-				</h:panelGroup>
-
-
-				<h:panelGroup layout="block" class="col-md-5">
-
-					<h:panelGroup layout="block" class="panel panel-default">
-						<h:form id="eventForm" class="form-horizontal form-border">
-							<h:panelGroup layout="block" class="panel-heading">Create new event</h:panelGroup>
-
-							<h:panelGroup layout="block" class="panel-body">
-								<h:panelGroup layout="block" class="form-group">
 									<h:panelGroup layout="block" class="row">
+										<h:panelGroup layout="block" class="col-md-5">
+											<h:panelGroup id="eventsList" layout="block"
+												class="panel panel-default">
 
-										<label class="control-label col-md-2">Name</label>
+
+												<h:panelGroup layout="block" class="panel-heading">
+													<h5>
+														<h:outputText value="All events" />
+													</h5>
+
+												</h:panelGroup>
+												<h:form>
+													<table class="table table-striped">
+														<thead>
+															<tr>
+																<th>id</th>
+																<th>Event</th>
+															</tr>
+														</thead>
+														<tbody>
+															<ui:repeat var="event" value="#{eventBean.eventsList}">
+																<tr>
+																	<td>#{event.id}</td>
+																	<td>#{event.name}</td>
+																</tr>
+
+															</ui:repeat>
+
+														</tbody>
+													</table>
+												</h:form>
+											</h:panelGroup>
+										</h:panelGroup>
+
 										<h:panelGroup layout="block" class="col-md-5">
 
-											<h:inputText class="form-control input-sm"
-												value="#{eventBean.name}">
-											</h:inputText>
+											<h:panelGroup layout="block" class="panel panel-default">
+												<h:form id="eventForm" class="form-horizontal form-border">
+													<h:panelGroup layout="block" class="panel-heading">
+														<h5>
+															<h:outputText value="Create new event" />
+														</h5>
+													</h:panelGroup>
+
+													<h:panelGroup layout="block" class="panel-body">
+														<h:panelGroup layout="block" class="form-group">
+															<h:panelGroup layout="block" class="row">
+
+																<h:outputLabel class="control-label col-md-2"
+																	value="Name" />
+																<h:panelGroup layout="block" class="col-md-5">
+
+																	<h:inputText class="form-control input-sm"
+																		value="#{eventBean.name}">
+																	</h:inputText>
 
 
+																</h:panelGroup>
+
+															</h:panelGroup>
+
+
+														</h:panelGroup>
+														<!-- /form-group -->
+
+														<h:panelGroup layout="block" id="eventMessage">
+															<h:panelGroup layout="block"
+																rendered="#{eventBean.displayErrorMessage}"
+																class="alert-msg alert-msg-danger">
+																<h:outputText value="#{eventBean.message}" />
+																<br />
+															</h:panelGroup>
+
+															<h:panelGroup layout="block"
+																rendered="#{eventBean.displaySuccessMessage}"
+																class="alert-msg alert-msg-success">
+																<h:outputText value="#{eventBean.message}" />
+																<br />
+															</h:panelGroup>
+														</h:panelGroup>
+														<br />
+
+														<h:panelGroup layout="block" class="panel-footer">
+															<h:panelGroup layout="block" class="text-right">
+																<h:commandButton styleClass="btn btn-sm btn-primary"
+																	value="Create">
+																	<f:ajax listener="#{eventBean.save}" execute="@form"
+																		render=":eventsList eventMessage @this" />
+																</h:commandButton>
+															</h:panelGroup>
+														</h:panelGroup>
+
+													</h:panelGroup>
+												</h:form>
+											</h:panelGroup>
 										</h:panelGroup>
-
 									</h:panelGroup>
-
-
 								</h:panelGroup>
-								<!-- /form-group -->
 
-								<h:panelGroup layout="block" class="panel-footer">
 
-									<h:panelGroup layout="block" id="eventMessage">
-										<h:panelGroup layout="block"
-											rendered="#{eventBean.displayErrorMessage}"
-											class="alert-msg alert-msg-danger">
-											<h:outputText value="#{eventBean.message}"></h:outputText>
-										</h:panelGroup>
+								<!-- 2nd tab -->
+								<h:panelGroup layout="block" class="tab-pane fade"
+									id="admin-events-create"></h:panelGroup>
 
-										<h:panelGroup layout="block"
-											rendered="#{eventBean.displaySuccessMessage}"
-											class="alert-msg alert-msg-success">
-											<h:outputText value="#{eventBean.message}"></h:outputText>
-										</h:panelGroup>
-									</h:panelGroup>
-									
-									<br />
+								<!-- 3rd tab -->
+								<h:panelGroup layout="block" class="tab-pane fade"
+									id="admin-events-update">
 
-									<h:panelGroup layout="block" class="text-right">
-										<h:commandButton styleClass="btn btn-sm btn-primary"
-											value="Update">
-											<f:ajax listener="#{eventBean.save}" execute="@form"
-												render=":eventsList eventMessage @this" />
-										</h:commandButton>
-									</h:panelGroup>
+
 								</h:panelGroup>
 
 							</h:panelGroup>
-						</h:form>
+						</h:panelGroup>
 					</h:panelGroup>
 				</h:panelGroup>
-				<!-- /.col -->
 			</h:panelGroup>
 		</h:panelGroup>
 	</h:panelGroup>
-
-
 
 </ui:composition>

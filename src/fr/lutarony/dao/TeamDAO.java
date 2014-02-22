@@ -2,6 +2,9 @@ package fr.lutarony.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
+
 import fr.lutarony.dao.definition.DAO;
 import fr.lutarony.model.Team;
 
@@ -52,4 +55,11 @@ public class TeamDAO extends DAO<Team> {
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Team> getAllOrderBySurname() {
+		Criteria criteria = getSessionFactory().getCurrentSession()
+				.createCriteria(Team.class);
+		criteria.addOrder(Order.asc("name"));
+		return (List<Team>) criteria.list();
+	}
 }

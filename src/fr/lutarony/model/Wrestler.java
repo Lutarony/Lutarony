@@ -41,7 +41,7 @@ public class Wrestler {
 	@Column(name = "category", unique = false, nullable = true)
 	@Enumerated(EnumType.STRING)
 	private CategoryType category;
-	
+
 	@Column(name = "category_weight", unique = false, nullable = true, columnDefinition = "int default 0")
 	private int categoryWeight;
 
@@ -51,6 +51,23 @@ public class Wrestler {
 
 	@OneToOne(mappedBy = "wrestler")
 	private Weighing weighing;
+
+	/**** CONSTRUCTORS ****/
+
+	public Wrestler() {
+
+	}
+
+	public Wrestler(String name, String surname, String sex, Date birthDate,
+			CategoryType category, Team team) {
+		super();
+		this.name = name;
+		this.surname = surname;
+		this.sex = sex;
+		this.birthDate = birthDate;
+		this.category = category;
+		this.team = team;
+	}
 
 	/**** GETTERS AND SETTERS ****/
 

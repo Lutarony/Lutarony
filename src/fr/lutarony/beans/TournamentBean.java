@@ -3,18 +3,20 @@ package fr.lutarony.beans;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.AjaxBehaviorEvent;
 
+import fr.lutarony.business.definition.IEventBO;
 import fr.lutarony.business.definition.ITournamentBO;
 import fr.lutarony.model.Event;
 import fr.lutarony.model.Tournament;
+import fr.lutarony.util.DateUtils;
 import fr.lutarony.util.Wrestling;
 
 @ManagedBean(name = "tournamentBean")
@@ -24,36 +26,71 @@ public class TournamentBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private static final String SUCCESS_CREATE = "The tournament '%s' has been created successfully.";
+	private static final String NAME_MISSING = "The name is required";
+	private static final String INVALID_DATE = "The date is not valid";
+	private static final String DATE_FORMAT = "dd/MM/yyyy";
 
 	@ManagedProperty(value = "#{TournamentBO}")
 	ITournamentBO tournamentBO;
+
+	@ManagedProperty(value = "#{EventBO}")
+	IEventBO eventBO;
 
 	List<Tournament> tournamentsList;
 
 	private int id;
 	private String name;
 	private Event event;
-	private Wrestling type;
+	private String type;
 	private Date date;
 
-	private String message = "";
+	// simple inputtext from user, to replace calendar/DateType bug
+	private String dateValue;
 
+	// Messages
+	private String message = "";
 	private boolean displayErrorMessage = false;
 	private boolean displaySuccessMessage = false;
-	
-	private List<Wrestling> typeList;
-	
-	
-	@PostConstruct
-	public void initIt() throws Exception {
-		setTypeList(Arrays.asList(Wrestling.values()));
+
+	// default event 1 because there is no session feature... we consider the
+	// current event is the event 1
+	private static int CURRENT_SESSION_EVENT_ID = 1;
+
+	// List of wrestling types
+	private static Map<String, Wrestling> typesList;
+	static {
+		typesList = new LinkedHashMap<String, Wrestling>();
+		typesList.put(Wrestling.FREE.toString(), Wrestling.FREE);
+		typesList.put(Wrestling.WOMEN.toString(), Wrestling.WOMEN);
+		typesList
+				.put(Wrestling.GRECO_ROMANE.toString(), Wrestling.GRECO_ROMANE);
 	}
 
+	// save the tournament
 	public void save(AjaxBehaviorEvent event) {
-		
-		Tournament newTournament = new Tournament(getName(), getType(), getDate(),
-				getEvent());
+
+		if (getName().isEmpty()) {
+			setMessage(NAME_MISSING);
+			setDisplaySuccessMessage(false);
+			setDisplayErrorMessage(true);
+			return;
+		}
+
+		if (getDateValue().isEmpty()
+				|| !DateUtils.isValid(getDateValue(), DATE_FORMAT)) {
+			setMessage(INVALID_DATE);
+			setDisplaySuccessMessage(false);
+			setDisplayErrorMessage(true);
+			return;
+		}
 		try {
+
+			setEvent(getEventBO().findEvent(CURRENT_SESSION_EVENT_ID));
+			setDate(new Date(DateUtils.getDate(getDateValue(), DATE_FORMAT)
+					.getTime()));
+
+			Tournament newTournament = new Tournament(getName(),
+					Wrestling.valueOf(getType()), getDate(), getEvent());
 			getTournamentBO().createTournament(newTournament);
 			setMessage(SUCCESS_CREATE.replace("%s", getName()));
 			setDisplaySuccessMessage(true);
@@ -65,6 +102,22 @@ public class TournamentBean implements Serializable {
 		}
 	}
 
+	public void clear() {
+		setName("");
+		setDateValue("");
+		setType(Wrestling.FREE.toString());
+		setDisplayErrorMessage(false);
+		setDisplaySuccessMessage(false);
+	}
+	
+	public String getCurrentEventName(){
+		// we suppose this current event, which has id 1
+		Event currentEvent = getEventBO().findEvent(CURRENT_SESSION_EVENT_ID);
+		return currentEvent.getName();
+	}
+
+	/** GETTERS ADN SETTERS **/
+
 	public List<Tournament> getTournamentsList() {
 		tournamentsList = new ArrayList<Tournament>();
 		tournamentsList.addAll(getTournamentBO().getAllTournaments());
@@ -75,14 +128,20 @@ public class TournamentBean implements Serializable {
 		this.tournamentsList = tournamentsList;
 	}
 
-	/** GETTERS ADN SETTERS **/
-
 	public ITournamentBO getTournamentBO() {
 		return tournamentBO;
 	}
 
 	public void setTournamentBO(ITournamentBO tournamentBO) {
 		this.tournamentBO = tournamentBO;
+	}
+
+	public IEventBO getEventBO() {
+		return eventBO;
+	}
+
+	public void setEventBO(IEventBO eventBO) {
+		this.eventBO = eventBO;
 	}
 
 	public int getId() {
@@ -117,11 +176,11 @@ public class TournamentBean implements Serializable {
 		this.event = event;
 	}
 
-	public Wrestling getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(Wrestling type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
@@ -157,14 +216,16 @@ public class TournamentBean implements Serializable {
 		this.displaySuccessMessage = display;
 	}
 
-	public List<Wrestling> getTypeList() {
-		return typeList;
+	public Map<String, Wrestling> getTypesList() {
+		return typesList;
 	}
 
-	public void setTypeList(List<Wrestling> typeList) {
-		this.typeList = typeList;
+	public String getDateValue() {
+		return dateValue;
 	}
-	
-	
+
+	public void setDateValue(String dateValue) {
+		this.dateValue = dateValue;
+	}
 
 }

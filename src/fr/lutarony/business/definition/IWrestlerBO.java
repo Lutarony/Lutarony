@@ -5,7 +5,7 @@ import java.util.List;
 import fr.lutarony.model.Wrestler;
 
 public interface IWrestlerBO {
-	public void createWrestler(Wrestler obj);
+	public void createWrestler(Wrestler obj) throws Exception;
 
 	public void updateWrestler(Wrestler obj);
 
