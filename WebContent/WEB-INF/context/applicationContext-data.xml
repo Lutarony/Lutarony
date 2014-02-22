@@ -33,9 +33,9 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<bean id="WeighingBO" class="fr.lutarony.business.WeighingBO">
 		<property name="weighingDAO" ref="WeighingDAO" />
 	</bean>
-	<!--  <bean id="TournamentBO" class="fr.lutarony.business.TournamentBO">
+	<bean id="TournamentBO" class="fr.lutarony.business.TournamentBO">
 		<property name="tournamentDAO" ref="TournamentDAO" />
-	</bean>-->
+	</bean>
 
 	<!-- DAO declarations -->
 	<bean id="UserDAO" class="fr.lutarony.dao.UserDAO">
@@ -53,9 +53,9 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<bean id="WeighingDAO" class="fr.lutarony.dao.WeighingDAO">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	<!-- <bean id="TournamanentDAO" class="fr.lutarony.dao.TournamentDAO">
+	<bean id="TournamentDAO" class="fr.lutarony.dao.TournamentDAO">
 		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>-->
+	</bean>
 
 
 
@@ -101,40 +101,6 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
 </beans>
-
-
-<!-- <?xml version="1.0" encoding="UTF-8"?> <beans xmlns="http://www.springframework.org/schema/beans" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" 
-	xmlns:tx="http://www.springframework.org/schema/tx" xsi:schemaLocation="http://www.springframework.org/schema/beans 
-	http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context 
-	http://www.springframework.org/schema/context/spring-context-3.1.xsd http://www.springframework.org/schema/tx 
-	http://www.springframework.org/schema/tx/spring-tx-3.1.xsd"> -->
-
-<!-- bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
-	<property name="driverClassName" value="com.mysql.jdbc.Driver" /> <property 
-	name="url" value="jdbc:mysql://localhost:3306/lutarony" /> <property name="username" 
-	value="root" /> <property name="password" value="root" /> </bean> -->
-
-
-<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
-	<property name="driverClassName"> <value>com.mysql.jdbc.Driver</value> </property> 
-	<property name="url"> <value>jdbc:mysql://localhost:3306/lutarony</value> 
-	</property> <property name="username"> <value>root</value> </property> <property 
-	name="password"> <value>root</value> </property> </bean> <bean id="sessionFactory" 
-	class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"> <property 
-	name="dataSource" ref="dataSource" /> <property name="packagesToScan"> <list> 
-	<value>fr.lutarony.model</value> </list> </property> <property name="hibernateProperties"> 
-	<props> <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop> 
-	<prop key="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider 
-	</prop> <prop key="hibernate.show_sql">true</prop> </props> </property> </bean> 
-	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" 
-	> <property name="dataSource" ref="dataSource" /> </bean> <bean id="transactionManager" 
-	class="org.springframework.orm.hibernate4.HibernateTransactionManager"> <property 
-	name="sessionFactory" ref="sessionFactory"></property> </bean> <tx:annotation-driven 
-	transaction-manager="transactionManager" /> <context:annotation-config></context:annotation-config> 
-	<context:component-scan base-package="fr.lutarony"></context:component-scan> 
-	</beans> -->
-
 
 
 

@@ -44,24 +44,6 @@ public class WeighingBean implements Serializable {
 
 	String action;
 
-	public String addWeighing() {
-		try {
-			/*
-			 * Weighing weighing = new Weighing(); weighing.setId(getId());
-			 * weighing.setTournament(getTour());
-			 * weighing.setWrestler(getWrestler());
-			 * weighing.setWeight(getWeight()); weighing.setLotNb(getLotNb());
-			 * weighing.setDate(getDate());
-			 */
-			// clear();
-			return SUCCESS;
-		} catch (DataAccessException e) {
-			e.printStackTrace();
-		}
-
-		return ERROR;
-	}
-
 	public boolean getCategoryValue() {
 		return CategoryType.isCategory("POUSin");
 	}

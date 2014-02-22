@@ -26,7 +26,10 @@ public class Tournament {
 	@Column(name = "id", unique = true, nullable = false)
 	private int id;
 
-	@Column(name = "type")
+	@Column(name = "name", unique = false, nullable = false)
+	private String name;
+
+	@Column(name = "type", unique = false, nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Wrestling type;
 
@@ -40,6 +43,20 @@ public class Tournament {
 	@OneToMany(mappedBy = "tournament")
 	private Set<Weighing> weighings = new HashSet<Weighing>();
 
+	/** CONSTRUCTOR **/
+	
+	public Tournament (){
+		
+	}
+
+	public Tournament(String name, Wrestling type, Date date, Event event) {
+		super();
+		this.name = name;
+		this.type = type;
+		this.date = date;
+		this.event = event;
+	}
+
 	/**** GETTERS AND SETTERS ****/
 
 	public int getId() {
@@ -48,6 +65,14 @@ public class Tournament {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Event getEvent() {

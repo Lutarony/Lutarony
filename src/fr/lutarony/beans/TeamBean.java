@@ -7,7 +7,6 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.event.ActionEvent;
 
 import org.primefaces.context.RequestContext;
 
@@ -40,38 +39,40 @@ public class TeamBean implements Serializable {
 		Team team = new Team();
 		team.setName(getName());
 		team.setCoach(getCoach());
-		
+
 		getTeamBO().createTeam(team);
-		
-		RequestContext.getCurrentInstance().closeDialog(team); 
+
+		RequestContext.getCurrentInstance().closeDialog(team);
 		/*
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Team created :", team.getName());  
-        FacesContext.getCurrentInstance().addMessage(null, message);  
-        */
-        return team.getName();
+		 * FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+		 * "Team created :", team.getName());
+		 * FacesContext.getCurrentInstance().addMessage(null, message);
+		 */
+		return team.getName();
 	}
-	
+
 	public void openAddTeamView() {
-		RequestContext.getCurrentInstance().openDialog("add-team.xhtml"); 
+		RequestContext.getCurrentInstance().openDialog("add-team.xhtml");
 	}
-	
+
 	public String editTeamBean() {
 		Team team = new Team();
 		team.setName(getName());
 		team.setCoach(getCoach());
 		getTeamBO().updateTeam(team);
-		
-		RequestContext.getCurrentInstance().closeDialog(team); 
+
+		RequestContext.getCurrentInstance().closeDialog(team);
 		/*
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Team edited :", team.getName());  
-        FacesContext.getCurrentInstance().addMessage(null, message);
-        */
-		
+		 * FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+		 * "Team edited :", team.getName());
+		 * FacesContext.getCurrentInstance().addMessage(null, message);
+		 */
+
 		return team.getName();
 	}
-	
+
 	public void openEditTeamView() {
-		RequestContext.getCurrentInstance().openDialog("edit-team"); 
+		RequestContext.getCurrentInstance().openDialog("edit-team");
 	}
 
 	public List<Team> getTeamList() {

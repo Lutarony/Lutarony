@@ -46,20 +46,6 @@ public class EventBean implements Serializable {
 		this.currentUser = getUserBO().findUser(1);
 	}
 
-	public String addEvent() {
-		try {
-			Event event = new Event();
-			event.setName(getName());
-			event.setUser(getUser());
-			getEventBO().createEvent(event);
-			return SUCCESS;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return ERROR;
-	}
-
 	public void save(AjaxBehaviorEvent event) {
 
 		Event e = new Event(getName(), currentUser);
